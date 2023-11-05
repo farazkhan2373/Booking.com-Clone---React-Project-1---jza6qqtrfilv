@@ -1,0 +1,66 @@
+.flight-search-bar{
+    background-color: #febb02;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    height: auto;
+    padding: 4px 0px;
+
+}
+
+.flight-searchBar-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    /* border: 1px solid red; */
+}
+
+
+.flight-searchItem{
+    background-color: white;
+    height: 44px;
+    padding: 0px 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    
+}
+
+.flight-departure-input-div{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.flight-input-bar{
+    width: 265px;
+    height: 28px;
+    outline: none;
+    border: none;
+}
+
+.flight-exchange-div{
+    width: 24px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#flight-date-div{
+    width: 226px;
+    display: flex;
+    align-items: center;
+}
+
+.flight-landing-input-div{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+
+

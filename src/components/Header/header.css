@@ -1,0 +1,115 @@
+.header-container{
+    /* border: 2px solid black; */
+    color: white;
+    background-color: #003580;
+    
+}
+.header-content{
+    /* border: 2px solid green; */
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 200px;
+    
+    
+}
+
+.header-content h1{
+    font-size: 2.4em;
+}
+
+/* SEARCH BOX CONTAINER */
+#header-SearchContainer{
+    background-color: #febb02;
+    border-radius: 5px;
+    height: 54px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: -25px;
+    width: 100%;
+}
+
+/* ICONS IN SEARCH CONTAINERS */
+.header-icon{
+    color: gray;
+}
+
+/* SEARCH ELEMENTS */
+.headerSearchItem{
+    border-radius: 4px;
+    width: 277px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    color: grey;
+    gap: 12px;
+    padding: 4px 12px;
+    background-color: white; 
+    cursor: pointer;
+    /* border: 2px solid black; */
+   
+}
+
+/* INPUT DIV */
+#inputtext-div{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px;
+    width: 100%;
+    
+}
+
+/* INPUT BAR */
+#input-text-bar{
+    height: 24px;
+    width: 100%;
+    border: none;
+    padding: 2px;
+   
+    
+}
+
+/* input div -> x icon */
+#crossX-icon{
+    color: black;
+}
+
+/* DATE SECTION */
+
+.date{
+    position: absolute;
+    top: 50px;
+    z-index: 2;
+}
+
+
+
+
+/* SEARCH BUTTON */
+.same-btn{
+    background-color: #006CE4;
+    color: white;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100px;
+    height: 44px;
+   
+} 
+
+#search-button:hover{
+  background-color: #003580;
+}
+
+.colors{
+    color: #febb02;
+    color: #003580;
+    color: #006CE4;
+}

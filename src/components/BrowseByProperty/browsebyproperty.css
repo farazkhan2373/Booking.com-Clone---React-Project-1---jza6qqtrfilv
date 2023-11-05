@@ -1,0 +1,20 @@
+.browse-property-container{
+ /* border: 2px solid black; */
+ margin-top: 60px;
+ display: flex;
+ flex-direction: column;
+ gap: 16px;
+}
+
+.browse-property-content{
+   /* border: 2px solid red; */
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+}
+
+.browse-property-content img{
+    border-radius: 8px;
+    width: 244px;
+    height: 196px;
+}
