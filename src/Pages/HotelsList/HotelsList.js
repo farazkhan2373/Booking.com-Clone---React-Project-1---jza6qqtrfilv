@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './hotelslist.css'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { format, max } from 'date-fns';
 import { HotelsListSearchBox } from '../../components/HotelsListComponents/HotelsListSearchBox/HotelsListSearchBox';
 import axios from 'axios';
@@ -15,6 +15,8 @@ export const HotelsList = () => {
   const [personCountInfo, setPersonCountInfo] = useState(location.state.personCountInfo);
 
   const [hotelsData, setHotelsData] = useState([]);
+
+  const navigateTo = useNavigate()
 
   const fetchHotelsData = async (location)=>{
     const config = {
@@ -32,23 +34,8 @@ export const HotelsList = () => {
   }
 
   useEffect(() => {
-
     fetchHotelsData(destination)
-    // const config = {
-    //   headers: {
-    //     projectID: "jza6qqtrfilv"
-    //   }
-    // }
-
-    // axios.get(`https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${destination}"}`, config)
-    //   .then((response) => {
-    //     console.log(response.data.data.hotels);
-    //     setHotelsData(response.data.data.hotels);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error)
-    //   })
-
+   
   }, [])
 
 
@@ -101,14 +88,16 @@ export const HotelsList = () => {
                   <div className='hotels-price'>
                     <h2>rs {hotel.rooms[0].price}</h2>
                     <p>include Taxes and fees</p>
-                    <button>See Availability</button>
+                    <button onClick={()=>{
+                        navigateTo(`/hotels/${hotel._id}`)
+                    }}>See Availability</button>
                   </div>
                 </div>
 
               </div>
 
             </div> 
-            )) : <h1>No Results Found!</h1>
+            )) : <h1>Loading...</h1>
             }
 
 

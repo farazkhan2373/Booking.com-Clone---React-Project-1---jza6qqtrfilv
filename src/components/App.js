@@ -11,6 +11,7 @@ import { Login } from "../Pages/Login/Login";
 import { createContext, useState } from "react";
 import { Profile } from "../Pages/Profile/Profile";
 import { HotelsList } from "../Pages/HotelsList/HotelsList";
+import { SelectedHotel } from "../Pages/SelectedHotel/SelectedHotel";
 
 export const AuthContext = createContext();
 
@@ -32,14 +33,14 @@ function App() {
      <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/flights" element={<Flights />}/>
-      {/* <Route path="/flightsHotel" element={<ComingSoon />}/> */}
       <Route path="/carrentals" element={<ComingSoon />}/>
       <Route path="/attractions" element={<ComingSoon/>}/>
       <Route path="/airporttaxis" element={<ComingSoon />}/>
       <Route path='/register' element={<Register/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/profile' element={<Profile/>}/>
-      <Route path='/hotelslist' element={<HotelsList />} />
+      <Route path='/hotelslist' element={<HotelsList />}/>
+      <Route path='/hotels/:hotelId' element={<SelectedHotel />}/>
      </Routes>
      <Footer/>
      </AuthContext.Provider>
