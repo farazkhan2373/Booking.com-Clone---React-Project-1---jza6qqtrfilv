@@ -73,6 +73,45 @@
     border: 1px solid white;
 }
 
+.profile-icon-container{
+    /* border: 2px solid red; */
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
+
+#user-icon{
+    /* border: 2px solid black; */
+    color: #003580;
+    background-color: white;
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+
+
+.profile-modal{
+    position: absolute;
+    z-index: 4; 
+    right: 0px;
+    top: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100px;
+    background-color: white;
+    padding: 10px 5px;
+    box-shadow: 0px 2px 8px 0px grey;
+    border-radius: 8px;
+}
+
+
 
 
 

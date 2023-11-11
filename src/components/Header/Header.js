@@ -7,10 +7,13 @@ import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { format } from "date-fns";
 import { Personmodal } from './PersonModal/Personmodal';
+import { useNavigate } from 'react-router-dom';
 
 
 
 export const Header = () => {
+
+    const [destination, setDestination] = useState('');
 
     const [date, setDate] = useState([
         {
@@ -29,7 +32,11 @@ export const Header = () => {
     const [showCalender, setShowCalender] = useState(false);
     const [showPersonModal, setPersonModal] = useState(false);
 
+    const navigateTo = useNavigate();
 
+    function handleHotelSearch(){
+       navigateTo('/hotelslist', {state: {destination, date, personCountInfo}})
+    }
 
     return (
         <header className='header-container parent-container'>
@@ -51,6 +58,8 @@ export const Header = () => {
                                 type="text"
                                 placeholder='Where are you going?'
                                 id='input-text-bar'
+                                value={destination}
+                                onChange={(e)=>setDestination(e.target.value)}
                             />
                             <FontAwesomeIcon icon={faX} className='header-icon' id='crossX-icon' />
                         </div>
@@ -90,7 +99,7 @@ export const Header = () => {
 
                     {/* SEARCH BUTTON */}
                  
-                        <button id='search-button' className='same-btn'>Search</button>
+                        <button id='search-button' className='same-btn' onClick={handleHotelSearch} >Search</button>
                  
 
                 </div>

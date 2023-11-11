@@ -83,7 +83,7 @@ function updatePersonInfo(name, operation){
 
             {/* DONE BUTTON */}
             <div>
-                <button id='done-btn' onClick={()=> setPersonModal(false)}>Done</button>
+                <button className='white-btn' onClick={()=> setPersonModal(false)}>Done</button>
             </div>
         </div>
 

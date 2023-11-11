@@ -69,7 +69,7 @@
 }
 
 /* person modal -> done button */
-#done-btn{
+.white-btn{
   width: 100%;  
   height: 32px;
   background-color: white;
@@ -81,6 +81,6 @@
 
 }
 
-#done-btn:hover{
+.white-btn:hover{
     background-color: #ddedff;
 }

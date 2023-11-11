@@ -1,6 +1,6 @@
 .register-section{
-    position: fixed;
     /* border: 2px solid red; */
+    position: fixed;
     top: 0;
     left: 0;
     height: 100%;
@@ -8,17 +8,3 @@
     background-color: white;
 }
 
-.register-header{
-    background-color: #003B95;
-}
-
-.register-header-content{
-    /* border: 2px solid black; */
-    padding: 20px 0px;
-
-}
-
-.register-header-content a{
-    text-decoration: none;
-    color: white;
-}
