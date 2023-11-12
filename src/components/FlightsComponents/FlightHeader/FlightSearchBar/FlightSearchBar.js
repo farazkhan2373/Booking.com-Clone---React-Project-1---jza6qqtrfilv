@@ -12,6 +12,7 @@ export const FlightSearchBar = () => {
     const [departure, setDeparture] = useState('');
     const [arrival, setArrival] = useState('');
     const [startDate, setStartDate] = useState(new Date());
+   
 
 
 

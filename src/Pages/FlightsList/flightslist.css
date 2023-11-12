@@ -41,6 +41,9 @@
 
 .flight-results-div{
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .flight-cards{
