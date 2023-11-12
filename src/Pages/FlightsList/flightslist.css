@@ -1,0 +1,105 @@
+.flights-list-page{
+    /* background-color: green; */
+}
+
+.flights-list-container{
+   
+}
+
+.flights-list-content{
+    /* border: 2px solid black; */
+    padding: 5px;
+}
+
+.flight-sorting-btn-container{
+    border: 1px solid grey;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-radius: 4px;
+    overflow: hidden;
+    
+}
+
+.flight-sorting-btn{
+   font-size: 16px;
+   height: 40px;
+   background-color: white;
+   border: none;
+   cursor: pointer;
+  
+}
+
+.flight-sorting-btn:hover{
+    background-color: rgb(237, 237, 237);
+}
+
+.add-bottom-border{
+    border-bottom: 2px solid #006CE4;
+    color: #006CE4;
+
+}
+
+.flight-results-div{
+  margin-top: 20px;
+}
+
+.flight-cards{
+    border: 1px solid grey;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.flight-timing-div{
+    /* border: 1px solid red; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0px 8px;
+    align-items: center;
+}
+
+.left-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+
+}
+
+.center-div{
+    text-align: center;
+}
+
+.right-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+}
+
+
+.flight-price-div{
+    /* border: 1px solid blue; */
+    text-align: right;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    border-left: 1px solid grey;
+}
+
+.flight-price-div p{
+    font-size: 13px;
+    font-weight: bold;
+    color: #595959;
+}
+
+
+
+.bag-icon{
+    font-size: 16px;
+}
+
