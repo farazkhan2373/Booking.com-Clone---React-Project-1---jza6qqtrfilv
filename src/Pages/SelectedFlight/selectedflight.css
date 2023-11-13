@@ -1,0 +1,75 @@
+.selected-flight-content{
+    /* border: 2px solid yellow; */
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+
+
+.summary-header-div{
+    /* border: 2px solid blue; */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.traveller-count{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.circle-icon{
+    font-size: 6px;
+}
+.summary-header-div>div>li{
+    list-style: none;
+}
+
+.summary-heading{
+    display: flex;
+    justify-content: space-between;
+}
+
+.summary-heading>h1{
+    font-size: 24px;
+}
+
+
+
+.summary-main{
+    /* border: 2px solid red; */
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.summary-main>h4{
+   font-size: 18px;
+}
+
+.ticket-summary-box{
+    border: 1px solid grey;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+}
+
+.fare-summary-box{
+    border: 1px solid grey;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+  
+}
+
+.fare-summary-box p{
+    font-size: 14px;
+    color: grey;
+}

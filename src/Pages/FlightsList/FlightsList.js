@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import './flightslist.css'
-import { useLocation } from 'react-router-dom'
-import { faPersonWalkingLuggage, faPlane, faPlaneArrival, faPlaneDeparture, faSuitcaseRolling, fas } from '@fortawesome/free-solid-svg-icons';
+import { useLocation, useNavigate } from 'react-router-dom'
+import { faPersonWalkingLuggage, faPlane, faPlaneArrival, faPlaneDeparture, faSuitcaseRolling } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
+
 export const FlightsList = () => {
 
   const location = useLocation();
+  const navigateTo = useNavigate();
 
 
   const departure = location.state.departure;
@@ -139,7 +141,7 @@ export const FlightsList = () => {
                   <div><FontAwesomeIcon icon={faPlaneDeparture} /></div>
                   <div>
                     <p>{flight.departureTime}</p>
-                    <span>{flight.source}. {startDate.getDate()} {startDate.toLocaleString('default', {month: 'short'})}</span>
+                    <span>{departure}. {startDate.getDate()} {startDate.toLocaleString('default', {month: 'short'})}</span>
                   </div>
                 </div>
 
@@ -153,7 +155,7 @@ export const FlightsList = () => {
                   <div><FontAwesomeIcon icon={faPlaneArrival} /></div>
                   <div>
                     <p>{flight.arrivalTime}</p>
-                    <span>{flight.destination}. {startDate.getDate()} {startDate.toLocaleString('default', {month: 'short'})}</span>
+                    <span>{arrival}. {startDate.getDate()} {startDate.toLocaleString('default', {month: 'short'})}</span>
                   </div>
                 </div>
               </div>
@@ -169,7 +171,7 @@ export const FlightsList = () => {
                   <p>Total price for all travellers</p>
                 </div>
 
-                <button className='white-btn'>See flight</button>
+                <button className='white-btn' onClick={()=> navigateTo(`/flights/${flight._id}`, {state: {departure, arrival, startDate, daysOfWeek}}) }>See flight</button>
               </div>
 
             </article> )): <h2>Loading...</h2> 
@@ -178,6 +180,8 @@ export const FlightsList = () => {
 
         </div>
       </div>
+
+     
     </section>
   )
 }
