@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './selectedflight.css';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCircle } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +12,8 @@ export const SelectedFlight = () => {
   const startDate = location.state.startDate;
   const daysOfWeek = location.state.daysOfWeek;
   console.log(departure, arrival, startDate);
+
+ const navigateTo = useNavigate();
 
   const { flightId } = useParams();
 
@@ -40,7 +42,13 @@ export const SelectedFlight = () => {
 
   function calculateTax(number) {
     return ((5 / 100) * number).toFixed(2);
-}
+
+  }
+
+  function handleFlightBookBtn(){
+      navigateTo('/flights/flightbooking');
+  }
+
   return (
     <section className='selected-flight-page parent-container'>
       <div className='child-container'>
@@ -56,14 +64,14 @@ export const SelectedFlight = () => {
             </div>
             <div className='summary-heading'>
               <h1>{departure} to {arrival}</h1>
-              <button className='same-btn'>Book Ticket</button>
+              <button className='same-btn' onClick={handleFlightBookBtn}>Book Ticket</button>
             </div>
           </div>
 
           <div className='summary-main'>
             <h4>Ticket Summary</h4>
 
-            <div className='ticket-summary-box'>
+            <section className='ticket-summary-box'>
               <h5>{departure} - {arrival}</h5>
               <p>Flight Departure Time: <b>{selectedFlight.departureTime}</b> from {departure}</p>
               <p>Flight Arrival Time: <b>{selectedFlight.arrivalTime}</b> at {arrival}</p>
@@ -73,10 +81,10 @@ export const SelectedFlight = () => {
                 <span key={index}>{facility} </span>
               ))}</p>
               <p>Flight-ID: {selectedFlight.flightID}</p>
-            </div>
+            </section>
 
             <h4>Fare Summary</h4>
-            <div className='fare-summary-box'>
+            <section className='fare-summary-box'>
 
               <div>
                 <h5>Ticket(1 traveller)</h5>
@@ -94,10 +102,10 @@ export const SelectedFlight = () => {
               </div>
 
               <div>
-                <button className='same-btn'>Book Ticket</button>
+                <button className='same-btn' onClick={handleFlightBookBtn}>Book Ticket</button>
               </div>
 
-            </div>
+            </section>
 
           </div>
 

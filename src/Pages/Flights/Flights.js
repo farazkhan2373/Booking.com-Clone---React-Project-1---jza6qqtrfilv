@@ -5,6 +5,7 @@ import { Information } from '../../components/FlightsComponents/Information/Info
 import { Route, Routes } from 'react-router-dom'
 import { FlightsList } from '../FlightsList/FlightsList'
 import { SelectedFlight } from '../SelectedFlight/SelectedFlight'
+import { FlightBooking } from '../FlightBooking/FlightBooking'
 
 export const Flights = () => {
   return (
@@ -23,6 +24,7 @@ export const Flights = () => {
 
           <Route path='flightslist' element={<FlightsList/>}/>
           <Route path=':flightId' element={<SelectedFlight/>}/>
+          <Route path='flightbooking' element={<FlightBooking/>}/>
           
 
 
