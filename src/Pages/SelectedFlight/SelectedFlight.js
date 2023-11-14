@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './selectedflight.css';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCircle } from '@fortawesome/free-solid-svg-icons';
+import { AuthContext } from '../../components/App';
 
 export const SelectedFlight = () => {
   const location = useLocation();
+  
+  
   const departure = location.state.departure;
   const arrival = location.state.arrival;
   const startDate = location.state.startDate;
   const daysOfWeek = location.state.daysOfWeek;
+  const flightIdPathname = location.pathname;
+
+  console.log("selectedFlight location object", location);
   console.log(departure, arrival, startDate);
 
  const navigateTo = useNavigate();
@@ -46,7 +52,7 @@ export const SelectedFlight = () => {
   }
 
   function handleFlightBookBtn(){
-      navigateTo('/flights/flightbooking');
+      navigateTo('/flights/flightbooking', {state: {flightId, flightIdPathname, departure, arrival, startDate, daysOfWeek}});
   }
 
   return (

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import './login.css'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { RegisterLoginHeader } from '../../components/RegisterLoginHeader/RegisterLoginHeader'
 import axios from 'axios'
 import { AuthContext } from '../../components/App'
@@ -17,6 +17,11 @@ export const Login = () => {
   })
 
   const navigateTo = useNavigate();
+  const location = useLocation();
+  console.log(location);
+  const {state} = useLocation();
+ 
+ 
 
   const createUser = async (user) =>{
     const config = {
@@ -28,11 +33,26 @@ export const Login = () => {
       const res = await axios.post('https://academics.newtonschool.co/api/v1/bookingportals/login', user, config)
       console.log(res);
       const token = res.data.token;
+      console.log(token);
       if(token){
         sessionStorage.setItem("userToken", token);
         sessionStorage.setItem('loginUserDetails', JSON.stringify(res.data.data));
         setIsLoggedIn(true);
-        navigateTo('/')
+
+        if(state){
+          navigateTo(state.prevPath, {state:
+            {
+              departure: state.departure,
+               arrival: state.arrival,
+                startDate: state.startDate,
+                 daysOfWeek: state.daysOfWeek,
+                }});
+        }else{
+
+          navigateTo('/')
+        }
+
+        
 
         
       }

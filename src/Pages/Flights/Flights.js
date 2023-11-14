@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom'
 import { FlightsList } from '../FlightsList/FlightsList'
 import { SelectedFlight } from '../SelectedFlight/SelectedFlight'
 import { FlightBooking } from '../FlightBooking/FlightBooking'
+import { FlightBookingAuth } from '../../components/AuthNavigator/FlightBookingAuth'
 
 export const Flights = () => {
   return (
@@ -24,7 +25,7 @@ export const Flights = () => {
 
           <Route path='flightslist' element={<FlightsList/>}/>
           <Route path=':flightId' element={<SelectedFlight/>}/>
-          <Route path='flightbooking' element={<FlightBooking/>}/>
+          <Route path='flightbooking' element={<FlightBookingAuth><FlightBooking/> </FlightBookingAuth> }/>
           
 
 
