@@ -102,9 +102,13 @@
 
 .rating-para{
     background-color: #006CE4;
-    padding: 4px;
+    width: 30px;
+    height: 30px;
     color: white;
     border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* RATING-PRICE-DIV -> HOTELS-PRICE */
