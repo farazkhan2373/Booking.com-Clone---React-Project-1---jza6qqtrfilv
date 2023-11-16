@@ -89,7 +89,7 @@ export const HotelsList = () => {
                     <h2>&#8377; {hotel.rooms[0].price}</h2>
                     <p>include Taxes and fees</p>
                     <button onClick={()=>{
-                        navigateTo(`/hotels/${hotel._id}`)
+                        navigateTo(`/hotels/${hotel._id}`, {state:{destination, date, personCountInfo}})
                     }}>See Availability</button>
                   </div>
                 </div>

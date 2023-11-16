@@ -12,6 +12,7 @@ import { createContext, useState } from "react";
 import { Profile } from "../Pages/Profile/Profile";
 import { HotelsList } from "../Pages/HotelsList/HotelsList";
 import { SelectedHotel } from "../Pages/SelectedHotel/SelectedHotel";
+import { SelectRooms } from "../Pages/SelectRoom/SelectRooms";
 
 export const AuthContext = createContext();
 
@@ -41,6 +42,7 @@ function App() {
       <Route path='/profile' element={<Profile/>}/>
       <Route path='/hotelslist' element={<HotelsList />}/>
       <Route path='/hotels/:hotelId' element={<SelectedHotel />}/>
+      <Route path='/hotels/rooms' element={<SelectRooms/>}/>
      </Routes>
      <Footer/>
      </AuthContext.Provider>

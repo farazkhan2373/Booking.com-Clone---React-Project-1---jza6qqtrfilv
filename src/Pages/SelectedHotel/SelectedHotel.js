@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './selectedhotel.css'
-import { NavLink, useParams } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios';
 import { AuthContext } from '../../components/App';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,6 +12,11 @@ export const SelectedHotel = () => {
     const { isLoggedIn } = useContext(AuthContext)
     const { hotelId } = useParams();
     console.log("hotelId", hotelId);
+
+    const navigateTo = useNavigate();
+
+    const location = useLocation();
+    console.log(location);
 
     const getSelectedHotelData = async () => {
         const config = {
@@ -32,6 +37,10 @@ export const SelectedHotel = () => {
     useEffect(() => {
         getSelectedHotelData()
     }, [])
+
+    function handleReserveButton(){
+         navigateTo('/hotels/rooms', {state: {userDate: location.state, hotelData, hotelId}})
+    }
     return (
         <div className='selected-hotel-page parent-container'>
             <div className='selected-hotel-container child-container'>
@@ -40,7 +49,7 @@ export const SelectedHotel = () => {
 
                     <div className='hotel-name-reservebtn-div'>
                         <h1>{hotelData.name}</h1>
-                        <button className='same-btn reserve-btn' >Reserve</button>
+                        <button className='same-btn reserve-btn' onClick={handleReserveButton} >Reserve</button>
                     </div>
 
                     <div>
@@ -66,28 +75,30 @@ export const SelectedHotel = () => {
 
                             <p>All rooms at the hotel are fitted with a seating area. The private bathroom is fitted with a shower, free toiletries and slippers. At Hotel {hotelData.name} the room have bed linen and towels</p>
 
-                            
+
                         </div>
 
                         <div className='property-highlight-box'>
 
-                           <h3>Property highlights</h3>
+                            <h3>Property highlights</h3>
 
-                           <div>
-                           {hotelData.amenities.map((facility, index)=>(
-                            <li key={index}>{facility}</li>
-                           ))}
-                           </div>
+                            <div>
+                                {hotelData.amenities.map((facility, index) => (
+                                    <li key={index}>{facility}</li>
+                                ))}
+                            </div>
 
-                           <p><FontAwesomeIcon icon={faSquareParking}/> Free private parking available</p>
+                            <p><FontAwesomeIcon icon={faSquareParking} /> Free private parking available</p>
 
-                        
-                          
-                          <button className='same-btn' id='reserve-now-btn'>Reserve Now</button>
+
+
+                            <button className='same-btn' id='reserve-now-btn' onClick={handleReserveButton}>Reserve Now</button>
 
                         </div>
 
                     </div>
+
+                   
                 </div> : <h3>Loading...</h3>
                 }
             </div>

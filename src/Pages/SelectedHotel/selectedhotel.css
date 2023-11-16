@@ -1,12 +1,13 @@
 .selected-hotel-page{
-    /* background-color: green; */
+    border: 2px solid green;
 }
 
 .selected-hotel-container{
+    /* border: 2px solid red; */
 }
 
 .selected-hotel-content{
-    /* border: 2px solid red; */
+    border: 2px solid red;
     margin-top: 20px;
     display: flex;
     flex-direction: column;
@@ -74,3 +75,4 @@
 #reserve-now-btn:hover{
     background-color: #003580;
 }
+
