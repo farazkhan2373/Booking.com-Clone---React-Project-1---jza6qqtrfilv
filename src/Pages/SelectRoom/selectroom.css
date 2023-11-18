@@ -1,5 +1,5 @@
 .select-room-content{
-    border: 2px solid black;
+    /* border: 2px solid black; */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -7,10 +7,10 @@
 }
 
 .room-inputBox-container{
-    border: 2px solid green;
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
+    /* border: 2px solid green; */
+    margin-top: 70px;
+    position: relative;
+    
 }
 
 .select-room-input-box{
@@ -23,6 +23,9 @@
     gap: 12px;
     padding: 8px;
     border-radius: 4px;
+    position: sticky;
+    top: 4px;
+    left: 0;
 }
 
 .select-room-input-box>div{
@@ -37,7 +40,7 @@
     padding: 0px 2px;
 }
 .room-details{
-    border: 2px solid red;
+    /* border: 2px solid red; */
     margin-top: 20px;
     width: 648px;
 }
@@ -59,4 +62,8 @@
     border: 1px solid grey;
     padding: 16px;
     border-radius: 8px;
+}
+
+.total-ammount{
+    font-weight: bold;
 }

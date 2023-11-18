@@ -52,7 +52,12 @@ export const HotelsListSearchBox = ({destination, setDestination, date, setDate,
               <div className='person-items'>
                 <p>Rooms</p>
                 <input type="number" value={personCountInfo.room}
-                  onChange={(e) => setPersonCountInfo({ ...personCountInfo, room: e.target.value })}
+                  onChange={(e) => {
+                    if(e.target.value >= 6){
+                      return;
+                    }
+                    setPersonCountInfo({ ...personCountInfo, room: e.target.value })
+                  }}
                   min="1" max="5" />
               </div>
             </div>

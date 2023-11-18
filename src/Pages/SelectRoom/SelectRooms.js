@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import './selectroom.css'
 import { useLocation } from 'react-router-dom'
-import { ComingSoon } from '../ComingSoon/ComingSoon'
+import { HotelPaymentModal } from '../../components/HotelPaymentModal/HotelPaymentModal'
+
 
 export const SelectRooms = () => {
 
@@ -13,16 +14,55 @@ export const SelectRooms = () => {
     
 
     const [roomValues, setRoomValues] = useState(Array(userData.personCountInfo.room).fill(''));
+    const [errorMsg, setErrorMsg] = useState(false);
+    const [totalAmmount, setTotalAmmount] = useState(false);
+    const [hotelPaymentModal, setHotelPaymentModal] = useState(true);
+
 
     const handleInputChange = (index, value) => {
         // Update the state with the new value
         const updatedValues = [...roomValues];
         updatedValues[index] = value;
         setRoomValues(updatedValues);
+        setErrorMsg(false)
+        setTotalAmmount(false);
     };
 
     function totalPrice(){
-        console.log(roomValues);
+
+        // check for empty fields of room number
+       for(let room of roomValues){
+        let RoomNum = parseInt(room);
+        if(room === ''){
+            setErrorMsg('choose room number!');
+            return;
+        }
+        else if(RoomNum > hotelData.rooms.length || RoomNum < 1){
+            setErrorMsg('Incorrect room number!');
+            return;
+        }
+       }
+      
+    //    check for same room selected
+       let roomNum = [...roomValues];
+       roomNum.sort();
+       for(let i = 1; i < roomNum.length; i++){
+            if(roomNum[i-1] === roomNum[i]){
+                 setErrorMsg('choose different rooms');
+                 return;
+            }
+
+       }
+
+    //    calculating total price
+       let totalSum = 0;
+       for(let rNum of roomValues){
+          totalSum = totalSum + hotelData.rooms[rNum-1].price;
+       }
+
+       setTotalAmmount(totalSum);
+       
+       console.log("still running")
     }
 
 
@@ -42,11 +82,17 @@ export const SelectRooms = () => {
                         min="1"
                         max={hotelData.rooms.length}
                         value={room}
-                        onChange={(e) => handleInputChange(index, e.target.value)}/>
+                        onChange={(e) => handleInputChange(index, e.target.value)}
+                        />
                     </div>
                  ))}
 
+                 {errorMsg && <span className='error-message'>{errorMsg}</span>}
+                 {totalAmmount && <span className='total-ammount'>&#8377; {totalAmmount.toLocaleString('en-IN')}</span>
+}
                  <button className='white-btn' onClick={totalPrice}>Get Total Price</button>
+
+                {totalAmmount && <button className='white-btn'>Proceed to Pay</button>}
               </div>
               </div>
 
@@ -62,7 +108,7 @@ export const SelectRooms = () => {
                                     <p>Room Type: {room.roomType}</p>
                                     <p>Bed details: {room.bedDetail}</p>
                                     <p>Room Size: {room.roomSize}</p>
-                                    <h4>&#8377; {room.price}</h4>
+                                    <h4>&#8377; {room.price.toLocaleString('en-IN')}</h4>
                                 </article>
                             ))
                         }
@@ -72,6 +118,8 @@ export const SelectRooms = () => {
 
 
             </div>
+
+            {hotelPaymentModal && <HotelPaymentModal/>}
         </div>
     )
 }

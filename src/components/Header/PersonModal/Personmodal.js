@@ -4,6 +4,7 @@ import './personmodal.css';
 export const Personmodal = ({ personCountInfo, setPersonCountInfo, setPersonModal }) => {
 
 function updatePersonInfo(name, operation){
+    
     setPersonCountInfo((oldState)=>{
         return {...oldState, [name]: operation === "i" ? personCountInfo[name] + 1 : personCountInfo[name] - 1}
     })
@@ -76,6 +77,7 @@ function updatePersonInfo(name, operation){
                       {/* INCREMENT BTN */}
                     <button className='counter-btn'
                         onClick={() => updatePersonInfo("room", "i") }
+                        disabled={personCountInfo.room >= 5}
                     >+</button>
                 </div>
 

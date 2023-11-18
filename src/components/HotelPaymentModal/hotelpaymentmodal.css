@@ -1,0 +1,79 @@
+.hotel-payment-modal{
+    /* border: 2px solid red; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+}
+
+.hotel-payment-box{
+  /* border: 2px solid red; */
+
+  padding: 12px;
+  background-color: white;
+}
+
+.hotel-payment-content{
+  border: 2px solid blue;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.atm-img-container{
+    display: flex;
+    gap: 8px;
+}
+
+.atm-img-container > img{
+    width: 30px;
+    height: 18px;
+}
+
+.hotel-payment-form{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.hotel-payment-form>div{
+   display: flex;
+   flex-direction: column;
+}
+
+.hotel-payment-form input{
+    height: 30px;
+    padding: 0px 4px;
+    border-radius: 4px;
+    border: 1px solid grey;
+}
+
+.hotel-payment-form>section{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.hotel-payment-form>section>div{
+    display: flex;
+    flex-direction: column;
+}
+
+.blue-btn{
+  background-color: #006CE4;
+  border: none;
+  color: white;
+  height: 44px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.blue-btn:hover{
+    background-color: #003580;
+}
