@@ -39,7 +39,7 @@ export const SelectedHotel = () => {
     }, [])
 
     function handleReserveButton(){
-         navigateTo('/hotels/rooms', {state: {userDate: location.state, hotelData, hotelId}})
+         navigateTo('/hotels/rooms', {state: {userData: location.state, hotelData, hotelId}})
     }
     return (
         <div className='selected-hotel-page parent-container'>

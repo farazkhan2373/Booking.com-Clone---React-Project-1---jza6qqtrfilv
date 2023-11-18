@@ -10,13 +10,13 @@ export const SelectRooms = () => {
     console.log(location);
 
     const hotelData = location.state.hotelData;
-    const userData = location.state.userDate;
+    const userData = location.state.userData;
     
 
     const [roomValues, setRoomValues] = useState(Array(userData.personCountInfo.room).fill(''));
     const [errorMsg, setErrorMsg] = useState(false);
     const [totalAmmount, setTotalAmmount] = useState(false);
-    const [hotelPaymentModal, setHotelPaymentModal] = useState(true);
+    const [hotelPaymentModal, setHotelPaymentModal] = useState(false);
 
 
     const handleInputChange = (index, value) => {
@@ -92,7 +92,8 @@ export const SelectRooms = () => {
 }
                  <button className='white-btn' onClick={totalPrice}>Get Total Price</button>
 
-                {totalAmmount && <button className='white-btn'>Proceed to Pay</button>}
+                {totalAmmount && <button className='white-btn'
+                onClick={()=> setHotelPaymentModal(true)}>Proceed to Pay</button>}
               </div>
               </div>
 
@@ -119,7 +120,10 @@ export const SelectRooms = () => {
 
             </div>
 
-            {hotelPaymentModal && <HotelPaymentModal/>}
+            {hotelPaymentModal && 
+            <HotelPaymentModal setHotelPaymentModal={setHotelPaymentModal}
+            userData={userData} hotelData={hotelData} 
+            roomValues={roomValues} totalAmmount={totalAmmount} />}
         </div>
     )
 }
