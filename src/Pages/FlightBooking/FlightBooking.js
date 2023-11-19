@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './FlightBooking.css'
 import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { BookingSuccessModal } from '../../components/BookingSuccessModal/BookingSuccessModal'
 
 export const FlightBooking = () => {
 
@@ -146,16 +147,7 @@ export const FlightBooking = () => {
                 </section>
             </div>
 
-            {isBookingSuccessful && <div className='bookingSuccessful-modal'>
-                <div className='child-container successful-content'>
-                    <div className='successfull-message-div'>
-                        <h2 className='green-para'>Booking Successful!</h2>
-                        <button className='white-btn' onClick={()=>{
-                           navigateTo('/')
-                        }}>Go back to home  page</button>
-                    </div>
-                </div>
-            </div>}
+            {isBookingSuccessful && <BookingSuccessModal/>}
         </section>
     )
 }

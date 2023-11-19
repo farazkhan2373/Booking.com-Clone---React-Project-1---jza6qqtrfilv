@@ -1,19 +1,52 @@
 import React from 'react'
 import './hotelpaymentmodal.css'
+import axios from 'axios';
 
 
 
 
-export const HotelPaymentModal = ({ setHotelPaymentModal, userData, hotelData, roomValues, totalAmmount }) => {
+export const HotelPaymentModal = ({ setHotelPaymentModal, userData, hotelData, roomValues, totalAmmount, setBookingSuccessModal }) => {
 
     console.log("userData", userData);
     console.log("hotelData", hotelData);
     console.log("roomValues", roomValues);
     console.log("totalAmmount", totalAmmount);
 
+    const userBearerToken = sessionStorage.getItem('userToken');
+   
+
+    const bookHotel = async (hotelBookingDetails)=>{
+        
+        const config ={
+            headers:{
+                Authorization: `Bearer ${userBearerToken}`,
+                projectID: "jza6qqtrfilv"
+            }
+        }
+
+        try{
+            const response = await axios.post('https://academics.newtonschool.co/api/v1/bookingportals/booking', hotelBookingDetails, config);
+            console.log(response);
+            setBookingSuccessModal(true);
+            setHotelPaymentModal(false);
+        }
+        catch(error){
+            console.log('Error in booking hotel', error);
+        }
+    }
 
     function handleHotelPayment(e) {
         e.preventDefault();
+       const hotelBookingDetails = {
+        bookingType: "hotel",
+        bookingDetails:{
+            hotelId: hotelData._id,
+            startDate: userData.date[0].startDate,
+            endDate: userData.date[0].endDate
+        }
+       }
+       bookHotel(hotelBookingDetails);
+
 
     }
 

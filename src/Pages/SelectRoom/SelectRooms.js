@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './selectroom.css'
 import { useLocation } from 'react-router-dom'
 import { HotelPaymentModal } from '../../components/HotelPaymentModal/HotelPaymentModal'
+import { BookingSuccessModal } from '../../components/BookingSuccessModal/BookingSuccessModal'
 
 
 export const SelectRooms = () => {
@@ -17,6 +18,7 @@ export const SelectRooms = () => {
     const [errorMsg, setErrorMsg] = useState(false);
     const [totalAmmount, setTotalAmmount] = useState(false);
     const [hotelPaymentModal, setHotelPaymentModal] = useState(false);
+    const [bookingSuccessModal, setBookingSuccessModal] = useState(false);
 
 
     const handleInputChange = (index, value) => {
@@ -123,7 +125,10 @@ export const SelectRooms = () => {
             {hotelPaymentModal && 
             <HotelPaymentModal setHotelPaymentModal={setHotelPaymentModal}
             userData={userData} hotelData={hotelData} 
-            roomValues={roomValues} totalAmmount={totalAmmount} />}
+            roomValues={roomValues} totalAmmount={totalAmmount}
+            setBookingSuccessModal={setBookingSuccessModal} />}
+
+            {bookingSuccessModal && <BookingSuccessModal/>}
         </div>
     )
 }
