@@ -40,13 +40,7 @@ export const Login = () => {
         setIsLoggedIn(true);
 
         if(state){
-          navigateTo(state.prevPath, {state:
-            {
-              departure: state.departure,
-               arrival: state.arrival,
-                startDate: state.startDate,
-                 daysOfWeek: state.daysOfWeek,
-                }});
+          navigateTo(state.prevPath, {state:{...location.state}});
         }else{
 
           navigateTo('/')
@@ -59,7 +53,12 @@ export const Login = () => {
 
     } catch (error) {
       console.log("error", error);
+      try{
       setErrorMessage(error.response.data.message);
+      }
+      catch(error){
+        setErrorMessage(error.message);
+      }
     }
      
   }
@@ -79,7 +78,7 @@ export const Login = () => {
       password: userInfo.password,
       appType: "bookingportals",
     }
-    console.log("userDetails", userDetails);
+    // console.log("userDetails", userDetails);
     createUser(userDetails);
 
 

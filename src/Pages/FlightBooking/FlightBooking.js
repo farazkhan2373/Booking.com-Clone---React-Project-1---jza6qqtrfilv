@@ -138,6 +138,8 @@ export const FlightBooking = () => {
                                 </div>
                             </div>
 
+                        
+
                             <div>
                                 <input type="submit" value="Pay Now"/>
                             </div>

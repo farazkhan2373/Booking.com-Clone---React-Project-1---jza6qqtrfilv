@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './hotelpaymentmodal.css'
 import axios from 'axios';
 
@@ -13,6 +13,7 @@ export const HotelPaymentModal = ({ setHotelPaymentModal, userData, hotelData, r
     console.log("totalAmmount", totalAmmount);
 
     const userBearerToken = sessionStorage.getItem('userToken');
+    const [paymentFailMsg, setPaymentFailMsg] = useState(null);
    
 
     const bookHotel = async (hotelBookingDetails)=>{
@@ -32,11 +33,13 @@ export const HotelPaymentModal = ({ setHotelPaymentModal, userData, hotelData, r
         }
         catch(error){
             console.log('Error in booking hotel', error);
+            setPaymentFailMsg(true);
         }
     }
 
     function handleHotelPayment(e) {
         e.preventDefault();
+        setPaymentFailMsg(false);
        const hotelBookingDetails = {
         bookingType: "hotel",
         bookingDetails:{
@@ -133,6 +136,10 @@ export const HotelPaymentModal = ({ setHotelPaymentModal, userData, hotelData, r
                             </div>
 
                         </section>
+
+                       {paymentFailMsg &&  <div>
+                        <p className='error-message'>Something Went Wrong</ p>
+                       </div>}
 
                         <div>
                             <button className='blue-btn'>Pay Now</button>

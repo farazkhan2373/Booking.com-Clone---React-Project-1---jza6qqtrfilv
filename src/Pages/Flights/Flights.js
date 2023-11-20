@@ -25,7 +25,7 @@ export const Flights = () => {
 
           <Route path='flightslist' element={<FlightsList/>}/>
           <Route path=':flightId' element={<SelectedFlight/>}/>
-          <Route path='flightbooking' element={<FlightBookingAuth><FlightBooking/> </FlightBookingAuth> }/>
+          <Route path='flightbooking' element={<FlightBookingAuth><FlightBooking/></FlightBookingAuth> }/>
           
 
 

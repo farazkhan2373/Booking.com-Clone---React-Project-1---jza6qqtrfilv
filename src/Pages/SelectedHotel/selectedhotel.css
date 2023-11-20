@@ -1,5 +1,5 @@
 .selected-hotel-page{
-    border: 2px solid green;
+    /* border: 2px solid green; */
 }
 
 .selected-hotel-container{
@@ -7,7 +7,7 @@
 }
 
 .selected-hotel-content{
-    border: 2px solid red;
+    /* border: 2px solid red; */
     margin-top: 20px;
     display: flex;
     flex-direction: column;
