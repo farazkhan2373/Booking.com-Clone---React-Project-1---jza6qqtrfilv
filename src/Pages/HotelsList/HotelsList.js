@@ -14,7 +14,7 @@ export const HotelsList = () => {
   const [date, setDate] = useState(location.state.date);
   const [personCountInfo, setPersonCountInfo] = useState(location.state.personCountInfo);
 
-  const [hotelsData, setHotelsData] = useState([]);
+  const [hotelsData, setHotelsData] = useState(null);
 
   const navigateTo = useNavigate()
 
@@ -55,7 +55,7 @@ export const HotelsList = () => {
 
           <div className='hotels-list-div'>
             
-            {hotelsData.length > 0 ? hotelsData.map((hotel)=>(
+            {hotelsData ? hotelsData.length > 0 ? hotelsData.map((hotel)=>(
 
              <div className='hotel-list-cards' key={hotel._id}>
 
@@ -97,7 +97,7 @@ export const HotelsList = () => {
               </div>
 
             </div> 
-            )) : <h1>Loading...</h1>
+            )) : <h1>Try different Search</h1> : <h1>Loading...</h1>
             }
 
 

@@ -53,7 +53,8 @@ export const Navbar = () => {
 
           <button className='white-btn' onClick={()=>{
             setShowProfileModal(false);
-          }}>Trips</button>
+            navigate('/mytrips');
+          }}>My Trips</button>
 
           <button className='white-btn' onClick={handleLogout}>Logout</button>
 

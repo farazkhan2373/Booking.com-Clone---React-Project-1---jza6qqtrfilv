@@ -14,6 +14,7 @@ import { HotelsList } from "../Pages/HotelsList/HotelsList";
 import { SelectedHotel } from "../Pages/SelectedHotel/SelectedHotel";
 import { SelectRooms } from "../Pages/SelectRoom/SelectRooms";
 import { HotelBookingAuth } from "./AuthNavigator/HotelBookingAuth";
+import { MyTrips } from "../Pages/MyTrips/MyTrips";
 
 export const AuthContext = createContext();
 
@@ -44,6 +45,7 @@ function App() {
       <Route path='/hotelslist' element={<HotelsList />}/>
       <Route path='/hotels/:hotelId' element={<SelectedHotel />}/>
       <Route path='/hotels/rooms' element={<HotelBookingAuth><SelectRooms/></HotelBookingAuth>}/>
+      <Route path='/mytrips' element={<MyTrips />}/>
      </Routes>
      <Footer/>
      </AuthContext.Provider>

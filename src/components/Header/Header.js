@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHotel, faCalendarDays, faPerson, faX, faAngleDown } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +13,8 @@ import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
 
+    const [showCross, setShowCross] = useState(false);
+
     const [destination, setDestination] = useState('');
 
     const [date, setDate] = useState([
@@ -22,6 +24,8 @@ export const Header = () => {
             key: 'selection'
         }
     ]);
+
+    const destinationRef = useRef();
 
     const [personCountInfo, setPersonCountInfo] = useState({
         adult: 1,
@@ -35,8 +39,24 @@ export const Header = () => {
     const navigateTo = useNavigate();
 
     function handleHotelSearch(){
+        if(destination === ''){
+            destinationRef.current.focus();
+            return;
+        }
+
        navigateTo('/hotelslist', {state: {destination, date, personCountInfo}})
     }
+
+    useEffect(()=>{
+       if(destination === ''){
+        setShowCross(false);
+       }
+        else{
+            setShowCross(true);
+        }
+       
+
+    },[destination])
 
     return (
         <header className='header-container parent-container'>
@@ -59,9 +79,13 @@ export const Header = () => {
                                 placeholder='Where are you going?'
                                 id='input-text-bar'
                                 value={destination}
-                                onChange={(e)=>setDestination(e.target.value)}
+                                onChange={(e)=>{
+                                    setDestination(e.target.value)
+                                    
+                                }}
+                                ref={destinationRef}
                             />
-                            <FontAwesomeIcon icon={faX} className='header-icon' id='crossX-icon' />
+                           {showCross && <FontAwesomeIcon icon={faX} className='header-icon' id='crossX-icon' onClick={()=> setDestination('')} />}
                         </div>
                     </div>
 
