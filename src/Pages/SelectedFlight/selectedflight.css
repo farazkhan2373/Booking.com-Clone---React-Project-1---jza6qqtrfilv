@@ -48,6 +48,73 @@
     gap: 12px;
 }
 
+.select-seat-container{
+    position: relative;
+}
+
+.select-seat-box{
+    border: 1px solid grey;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 8px;
+    
+}
+
+.seat-details-box{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.dropdownArrow{
+    font-size: 24px;
+    color: grey;
+    margin-right: 20px;
+}
+
+.flight-seat-modal{
+    /* border: 1px solid red; */
+    background-color: white;
+    position: absolute;
+    z-index: 5;
+    top: 86px;
+    right: 0;
+    padding: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+    align-items: center;
+    width: 213px;
+    box-shadow: 0px 1px 7px -1px #888888;
+    border-radius: 4px;
+}
+
+.flight-seats{
+    border: 1px solid grey;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #006CE4;
+    
+    
+}
+
+.backgroundColor-seat{
+    background-color: #003580;
+    color: white;
+
+}
+
 .summary-main>h4{
    font-size: 18px;
 }
@@ -58,6 +125,7 @@
     flex-direction: column;
     gap: 4px;
     padding: 8px;
+    border-radius: 8px;
 }
 
 .fare-summary-box{
@@ -66,6 +134,7 @@
     flex-direction: column;
     gap: 8px;
     padding: 8px;
+    border-radius: 8px;
   
 }
 

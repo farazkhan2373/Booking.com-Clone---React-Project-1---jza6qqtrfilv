@@ -3,13 +3,13 @@ import './selectedflight.css';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faCircle, faCircleChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { AuthContext } from '../../components/App';
 
 export const SelectedFlight = () => {
   const location = useLocation();
-  
-  
+
+
   const departure = location.state.departure;
   const arrival = location.state.arrival;
   const startDate = location.state.startDate;
@@ -19,11 +19,18 @@ export const SelectedFlight = () => {
   console.log("selectedFlight location object", location);
   console.log(departure, arrival, startDate);
 
- const navigateTo = useNavigate();
+  const navigateTo = useNavigate();
 
   const { flightId } = useParams();
 
   const [selectedFlight, setSelectedFlight] = useState(null);
+
+  const [seatNo, setSeatNo] = useState('No seat selected');
+  const [showSeatModal, setShowSeatModal] = useState(false);
+  const [totalSeats, setTotalSeats] = useState(0);
+
+  const allSeats = Array.from({ length: totalSeats }, (_, index) => index + 1);
+
 
   const getSelectedFlightData = async () => {
 
@@ -36,6 +43,7 @@ export const SelectedFlight = () => {
       const response = await axios.get(`https://academics.newtonschool.co/api/v1/bookingportals/flight/${flightId}`, config)
       console.log(response.data.data);
       setSelectedFlight(response.data.data);
+      setTotalSeats(response.data.data.availableSeats);
     }
     catch (error) {
       console.log("selected flight api error", error)
@@ -51,9 +59,37 @@ export const SelectedFlight = () => {
 
   }
 
-  function handleFlightBookBtn(){
-      navigateTo('/flights/flightbooking', {state: {flightId, flightIdPathname, departure, arrival, startDate, daysOfWeek}});
+  function handleFlightBookBtn() {
+    if(seatNo === 'No seat selected'){
+      alert('Please Select Seat');
+      return;
+    }
+    navigateTo('/flights/flightbooking', { state: { flightId, flightIdPathname, departure, arrival, startDate, daysOfWeek } });
   }
+
+  function handleSelectedSeat(e){
+   
+
+    const isAlreadySelected = document.querySelector('.backgroundColor-seat');
+
+    // IF CLICKED ON SAME SEAT AGAIN THEN REMOVE SELECTION
+    if(isAlreadySelected === e.target){
+      isAlreadySelected.classList.remove('backgroundColor-seat');
+      setSeatNo('No seat selected');
+      return;
+    }
+    
+    // IF SELECTED DIFFERENT SEAT REMOVE PREVIOUS SELECTED SEAT
+    if(isAlreadySelected){
+        isAlreadySelected.classList.remove('backgroundColor-seat');
+
+    }
+   
+    // SELECTED SEAT
+    e.target.classList.add('backgroundColor-seat');
+    setSeatNo(e.target.innerText);
+   
+}
 
   return (
     <section className='selected-flight-page parent-container'>
@@ -61,12 +97,13 @@ export const SelectedFlight = () => {
 
         {selectedFlight ? <div className='selected-flight-content'>
 
+          {/* TRAVELLER COUNT AND DATE */}
           <div className='summary-header-div'>
             <div className='traveller-count'>
               <FontAwesomeIcon icon={faCircle} className='circle-icon' />
               <li>1 traveller</li>
               <FontAwesomeIcon icon={faCircle} className='circle-icon' />
-              <li>{daysOfWeek[startDate.getDay()]} {startDate.getDate()} {startDate.toLocaleString('default', {month: 'short'})}</li>
+              <li>{daysOfWeek[startDate.getDay()]} {startDate.getDate()} {startDate.toLocaleString('default', { month: 'short' })}</li>
             </div>
             <div className='summary-heading'>
               <h1>{departure} to {arrival}</h1>
@@ -75,20 +112,52 @@ export const SelectedFlight = () => {
           </div>
 
           <div className='summary-main'>
-            <h4>Ticket Summary</h4>
 
+            {/* SELECT SEAT */}
+            <h4>Select your seat</h4>
+
+            <section className='select-seat-container' >
+              <div className='select-seat-box' onClick={()=> setShowSeatModal(!showSeatModal)} >
+
+                <div className='seat-details-box'>
+                <h5>{departure} - {arrival}</h5>
+                <p>{selectedFlight.duration} hour</p>
+                <p>Seat number: {seatNo}</p>
+                </div>
+
+                <div>
+                <FontAwesomeIcon icon={faCircleChevronDown} className='dropdownArrow' />
+                </div>
+              </div>
+
+              {showSeatModal && <div className='flight-seat-modal'>
+
+                {allSeats.length > 0 && allSeats.map((seatNumber, index) => (
+
+                  <div className='flight-seats' key={index} onClick={handleSelectedSeat}>
+                    {seatNumber}
+                  </div>
+
+                ))}
+
+              </div>}
+            </section>
+
+            {/* TICKET SUMMARY */}
+            <h4>Ticket Summary</h4>
             <section className='ticket-summary-box'>
               <h5>{departure} - {arrival}</h5>
               <p>Flight Departure Time: <b>{selectedFlight.departureTime}</b> from {departure}</p>
               <p>Flight Arrival Time: <b>{selectedFlight.arrivalTime}</b> at {arrival}</p>
               <p>Duration: {selectedFlight.duration} hour</p>
               <p>Available Seats: {selectedFlight.availableSeats}</p>
-              <p>Amenities: {selectedFlight.amenities.map((facility, index)=>(
+              <p>Amenities: {selectedFlight.amenities.map((facility, index) => (
                 <span key={index}>{facility} </span>
               ))}</p>
               <p>Flight-ID: {selectedFlight.flightID}</p>
             </section>
 
+            {/* FARE SUMMARY */}
             <h4>Fare Summary</h4>
             <section className='fare-summary-box'>
 
@@ -115,7 +184,7 @@ export const SelectedFlight = () => {
 
           </div>
 
-        </div>: <h2>Loading...</h2>
+        </div> : <h2>Loading...</h2>
         }
 
 
