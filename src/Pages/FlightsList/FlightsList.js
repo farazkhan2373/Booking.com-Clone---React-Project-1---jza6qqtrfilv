@@ -61,22 +61,22 @@ export const FlightsList = () => {
   }
 
   function handleCheapest() {
-    const price = flights.map((flight)=>{
+    const price = flights.map((flight) => {
       return flight.ticketPrice;
     })
     const sortedPrice = price.sort();
     const cheapestFlight = []
-    for(let amount of sortedPrice){
-      for(let data of flights){
-        if(data.ticketPrice === amount){
+    for (let amount of sortedPrice) {
+      for (let data of flights) {
+        if (data.ticketPrice === amount) {
           // check for similar data
-          if(cheapestFlight.length > 0){
-            if(cheapestFlight[cheapestFlight.length-1]._id === data._id){
+          if (cheapestFlight.length > 0) {
+            if (cheapestFlight[cheapestFlight.length - 1]._id === data._id) {
               continue;
             }
           }
-             cheapestFlight.push(data);
-             break;
+          cheapestFlight.push(data);
+          break;
         }
       }
     }
@@ -89,26 +89,26 @@ export const FlightsList = () => {
   }
 
   function handleFastest() {
-    const allFlightDuration = flights.map((flight)=>{
+    const allFlightDuration = flights.map((flight) => {
       return flight.duration;
     })
     const sortedDuration = allFlightDuration.sort();
     const fastestFlight = [];
-    for(let duration of sortedDuration){
-      for(let data of flights){
-          if(data.duration === duration){
-            // below check is for similar data
-          if(fastestFlight.length > 0){
-            if(fastestFlight[fastestFlight.length-1]._id === data._id){
+    for (let duration of sortedDuration) {
+      for (let data of flights) {
+        if (data.duration === duration) {
+          // below check is for similar data
+          if (fastestFlight.length > 0) {
+            if (fastestFlight[fastestFlight.length - 1]._id === data._id) {
               continue;
             }
           }
-            fastestFlight.push(data);
-            break;
-          }
+          fastestFlight.push(data);
+          break;
+        }
       }
     }
-    console.log( "fastest flight",fastestFlight);
+    console.log("fastest flight", fastestFlight);
     setFlights(fastestFlight);
     setFastestClicked(true);
     setBestClicked(false);
@@ -131,57 +131,57 @@ export const FlightsList = () => {
 
           <div className='flight-results-div'>
             {/* DYNAMIC FLIGHTS DATA */}
-            {flights.length > 0 ?  flights.map((flight, index)=>(
+            {flights.length > 0 ? flights.map((flight, index) => (
 
-             <article className='flight-cards' key={index}>
+              <article className='flight-cards' key={index}>
 
-              <div className='flight-timing-div'>
+                <div className='flight-timing-div'>
 
-                <div className='left-div'>
-                  <div><FontAwesomeIcon icon={faPlaneDeparture} /></div>
-                  <div>
-                    <p>{flight.departureTime}</p>
-                    <span>{flight.source}. {startDate.getDate()} {startDate.toLocaleString('default', {month: 'short'})}</span>
+                  <div className='left-div'>
+                    <div><FontAwesomeIcon icon={faPlaneDeparture} /></div>
+                    <div>
+                      <p>{flight.departureTime}</p>
+                      <span>{flight.source}. {startDate.getDate()} {startDate.toLocaleString('default', { month: 'short' })}</span>
+                    </div>
+                  </div>
+
+                  <div className='center-div'>
+                    <p>{flight.duration}h</p>
+                    <span>-------------------------</span>
+                    <p>{flight.stops === 0 ? 'Direct' : flight.stops + ' stop'}</p>
+                  </div>
+
+                  <div className='right-div'>
+                    <div><FontAwesomeIcon icon={faPlaneArrival} /></div>
+                    <div>
+                      <p>{flight.arrivalTime}</p>
+                      <span>{flight.destination} {startDate.getDate()} {startDate.toLocaleString('default', { month: 'short' })}</span>
+                    </div>
                   </div>
                 </div>
 
-                <div className='center-div'>
-                  <p>{flight.duration}h</p>
-                  <span>-------------------------</span>
-                  <p>{flight.stops === 0 ? 'Direct' : flight.stops+' stop'}</p>
-                </div>
-
-                <div className='right-div'>
-                  <div><FontAwesomeIcon icon={faPlaneArrival} /></div>
+                <div className='flight-price-div'>
                   <div>
-                    <p>{flight.arrivalTime}</p>
-                    <span>{flight.destination} {startDate.getDate()} {startDate.toLocaleString('default', {month: 'short'})}</span>
+                    <FontAwesomeIcon icon={faSuitcaseRolling} className='bag-icon' />
+                    <FontAwesomeIcon icon={faPersonWalkingLuggage} className='bag-icon' />
+                    <p>Included cabin bag, checked bag</p>
                   </div>
-                </div>
-              </div>
+                  <div>
+                    <h2>INR {flight.ticketPrice}</h2>
+                    <p>Total price for all travellers</p>
+                  </div>
 
-              <div className='flight-price-div'>
-                <div>
-                  <FontAwesomeIcon icon={faSuitcaseRolling} className='bag-icon' />
-                  <FontAwesomeIcon icon={faPersonWalkingLuggage} className='bag-icon' />
-                  <p>Included cabin bag, checked bag</p>
-                </div>
-                <div>
-                  <h2>INR {flight.ticketPrice}</h2>
-                  <p>Total price for all travellers</p>
+                  <button className='white-btn' onClick={() => navigateTo(`/flights/${flight._id}`, { state: { departure, arrival, startDate, daysOfWeek } })}>See flight</button>
                 </div>
 
-                <button className='white-btn' onClick={()=> navigateTo(`/flights/${flight._id}`, {state: {departure, arrival, startDate, daysOfWeek}}) }>See flight</button>
-              </div>
-
-            </article> )): <h2>Loading...</h2> 
+              </article>)) : <h2>Loading...</h2>
             }
           </div>
 
         </div>
       </div>
 
-     
+
     </section>
   )
 }

@@ -4,6 +4,7 @@ import './browsebyproperty.css';
 export const BrowseByProperty = () => {
   return (
     <section className='browse-property-container'>
+        
         <h2>Browse by property type</h2>
         <div className='browse-property-content'>
             <div>

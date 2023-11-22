@@ -88,7 +88,7 @@ export const FlightSearchBar = () => {
                     />
                 </div>
 
-                <button className='same-btn' onClick={handleFlightSearch}>Search</button>
+                <button className='same-btn flight-search-btn' onClick={handleFlightSearch}>Search</button>
 
 
 

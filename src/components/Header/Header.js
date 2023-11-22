@@ -38,25 +38,25 @@ export const Header = () => {
 
     const navigateTo = useNavigate();
 
-    function handleHotelSearch(){
-        if(destination === ''){
+    function handleHotelSearch() {
+        if (destination === '') {
             destinationRef.current.focus();
             return;
         }
 
-       navigateTo('/hotelslist', {state: {destination, date, personCountInfo}})
+        navigateTo('/hotelslist', { state: { destination, date, personCountInfo } })
     }
 
-    useEffect(()=>{
-       if(destination === ''){
-        setShowCross(false);
-       }
-        else{
+    useEffect(() => {
+        if (destination === '') {
+            setShowCross(false);
+        }
+        else {
             setShowCross(true);
         }
-       
 
-    },[destination])
+
+    }, [destination])
 
     return (
         <header className='header-container parent-container'>
@@ -70,61 +70,64 @@ export const Header = () => {
                 {/* SEARCH BOX CONTAINER */}
                 <div id='header-SearchContainer'>
 
-                    {/* INPUT DIV */}
-                    <div className='headerSearchItem'>
-                        <div id='inputtext-div'>
-                            <FontAwesomeIcon icon={faHotel} className='header-icon' />
-                            <input
-                                type="text"
-                                placeholder='Where are you going?'
-                                id='input-text-bar'
-                                value={destination}
-                                onChange={(e)=>{
-                                    setDestination(e.target.value)
-                                    
-                                }}
-                                ref={destinationRef}
-                            />
-                           {showCross && <FontAwesomeIcon icon={faX} className='header-icon' id='crossX-icon' onClick={()=> setDestination('')} />}
+                    <div className='hotel-input-boxes'>
+
+                        {/* INPUT DIV */}
+                        <div className='headerSearchItem'>
+                            <div id='inputtext-div'>
+                                <FontAwesomeIcon icon={faHotel} className='header-icon' />
+                                <input
+                                    type="text"
+                                    placeholder='Where are you going?'
+                                    id='input-text-bar'
+                                    value={destination}
+                                    onChange={(e) => {
+                                        setDestination(e.target.value)
+
+                                    }}
+                                    ref={destinationRef}
+                                />
+                                {showCross && <FontAwesomeIcon icon={faX} className='header-icon' id='crossX-icon' onClick={() => setDestination('')} />}
+                            </div>
+                        </div>
+
+                        {/* DATE DIV */}
+                        <div className='headerSearchItem'>
+                            <FontAwesomeIcon icon={faCalendarDays} className='header-icon' />
+                            <span id='search-date'
+                                onClick={() => setShowCalender((oldstate) => !oldstate)}>
+                                {format(date[0].startDate, "MM/dd/yyyy") + " to " + format(date[0].endDate, "MM/dd/yyyy")}</span>
+                            {showCalender && <DateRange
+                                editableDateInputs={true}
+                                onChange={item => setDate([item.selection])}
+                                moveRangeOnFirstSelection={false}
+                                ranges={date}
+                                className='date'
+                            />}
+                        </div>
+
+                        {/* PERSON DIV */}
+                        <div className='headerSearchItem' >
+
+                            <FontAwesomeIcon icon={faPerson} className='header-icon' />
+
+                            <span id='person-count' onClick={() => setPersonModal((oldstate) => !oldstate)}>
+                                {`${personCountInfo.adult} Adult ${personCountInfo.children} Children ${personCountInfo.room} Room`}
+                            </span>
+
+                            {/* PERSON INFO MODAL */}
+                            {showPersonModal && <Personmodal personCountInfo={personCountInfo} setPersonCountInfo={setPersonCountInfo} setPersonModal={setPersonModal} />}
+
+
+                            <FontAwesomeIcon icon={faAngleDown} className='header-icon' />
+
                         </div>
                     </div>
 
-                    {/* DATE DIV */}
-                    <div className='headerSearchItem'>
-                        <FontAwesomeIcon icon={faCalendarDays} className='header-icon' />
-                        <span id='search-date'
-                            onClick={() => setShowCalender((oldstate) => !oldstate)}>
-                            {format(date[0].startDate, "MM/dd/yyyy") + " to " + format(date[0].endDate, "MM/dd/yyyy")}</span>
-                        {showCalender && <DateRange
-                            editableDateInputs={true}
-                            onChange={item => setDate([item.selection])}
-                            moveRangeOnFirstSelection={false}
-                            ranges={date}
-                            className='date'
-                        />}
-                    </div>
-
-                    {/* PERSON DIV */}
-                    <div className='headerSearchItem' >
-
-                        <FontAwesomeIcon icon={faPerson} className='header-icon' />
-
-                        <span id='person-count' onClick={()=> setPersonModal((oldstate)=> !oldstate)}>
-                            {`${personCountInfo.adult} Adult ${personCountInfo.children} Children ${personCountInfo.room} Room`}
-                        </span>
-
-                        {/* PERSON INFO MODAL */}
-                        {showPersonModal && <Personmodal personCountInfo={personCountInfo} setPersonCountInfo={setPersonCountInfo} setPersonModal={setPersonModal}/>}
-                        
-
-                        <FontAwesomeIcon icon={faAngleDown} className='header-icon' />
-
-                    </div>
-
                     {/* SEARCH BUTTON */}
-                 
-                        <button id='search-button' className='same-btn' onClick={handleHotelSearch} >Search</button>
-                 
+                    <div className=''>
+                    <button id='search-button' className='same-btn' onClick={handleHotelSearch} >Search</button>
+                    </div>
 
                 </div>
 

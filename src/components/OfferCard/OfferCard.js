@@ -7,9 +7,11 @@ export const OfferCard = () => {
     const navigateTo = useNavigate();
     return (
         <section className='offerCard-container'>
+
+            <div className='offer-heading'>
             <h2>Offers</h2>
             <p>Promotions, deals and special offers for you</p>
-
+            </div>
             <div className='all-offers'>
             <div className='offer-card'>
                 <article className='offer-card-details'>

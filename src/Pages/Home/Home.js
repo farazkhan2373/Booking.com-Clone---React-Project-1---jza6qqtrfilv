@@ -13,8 +13,11 @@ export const Home = () => {
     <main className='home-page parent-container'>
       {/* <Navbar /> */}
       <div className='homepage-content child-container'>
+
+        <div className='trending-destination'>
         <h2>Trending destinations</h2>
         <p>Most popular choices for traveller from India</p>
+        </div>
 
         <div className='cards-container'>
 

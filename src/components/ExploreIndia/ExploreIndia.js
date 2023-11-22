@@ -4,8 +4,10 @@ import './exploreindia.css'
 export const ExploreIndia = () => {
   return (
     <section className='explore-India-container'>
+        <div className='explore-India-heading'>
        <h2>Explore India</h2>
        <p>These popular destinations have a lot to offer</p>
+       </div>
        <div className='explore-India-content'>
 
         <div className='explore-India-details'>

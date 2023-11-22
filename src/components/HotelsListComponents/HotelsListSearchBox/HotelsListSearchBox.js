@@ -3,7 +3,7 @@ import './HotelsListSearchBox.css'
 import { format, max } from 'date-fns';
 import { DateRange } from 'react-date-range';
 
-export const HotelsListSearchBox = ({destination, setDestination, date, setDate, personCountInfo, setPersonCountInfo, fetchHotelsData}) => {
+export const HotelsListSearchBox = ({destination, setDestination, date, setDate, personCountInfo, setPersonCountInfo, fetchHotelsData, setHotelHeading}) => {
 
   const[showCalender, setShowCalender] = useState(false);
   const destinationRef = useRef();
@@ -73,6 +73,7 @@ export const HotelsListSearchBox = ({destination, setDestination, date, setDate,
                
                
                 fetchHotelsData(destination)
+                setHotelHeading(destination);
               }}>Search</button>
             </div>
 

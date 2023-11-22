@@ -11,7 +11,9 @@
     /* border: 2px solid red; */
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
 }
 
 .offer-card{
@@ -52,5 +54,11 @@
 
 .offer-img-div img{
     object-fit: cover;
+}
+
+@media screen and (max-width: 768px) {
+    .offer-heading{
+        text-align: center;
+    }
 }
 

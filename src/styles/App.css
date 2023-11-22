@@ -12,3 +12,11 @@
   width: 100%;
   max-width: 1024px;
 }
+
+.static-content{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}

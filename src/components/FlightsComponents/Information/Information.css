@@ -14,9 +14,9 @@
 
 .information-content{
     /* border: 2px solid black; */
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 16px; */
 }
 
 .info-item{

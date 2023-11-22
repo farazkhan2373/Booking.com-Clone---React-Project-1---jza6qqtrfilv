@@ -13,7 +13,9 @@
    margin-top: 16px;
    display: flex;
    flex-wrap: wrap;
-   justify-content: space-between;
+   gap: 12px;
+   justify-content: center;
+   align-items: center;
 }
 
 .explore-India-details img{
@@ -21,4 +23,10 @@
     width: 160px;
     object-fit: cover;
     height: 136px;
+}
+
+@media screen and (max-width: 768px) {
+    .explore-India-heading{
+        text-align: center;
+    }
 }

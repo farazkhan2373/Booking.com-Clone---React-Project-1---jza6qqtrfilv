@@ -14,8 +14,10 @@ export const FlightMain = () => {
 
                 <section className='popular-flights'>
                     <div className='popular-flight-heading'>
+                       
                         <h2>Popular flights near you</h2>
                         <p>Find deals on domestic and international flights</p>
+                    
                     </div>
 
                     <div className='popular-flight-buttons'>
@@ -40,7 +42,7 @@ export const FlightMain = () => {
 
                     </div>
 
-                    {intClicked && <div className='international-domestic-content'>
+                    {intClicked && <div className='international-domestic-content static-content'>
                         <article className='int-dom-item'>
                             <img src="https://q-xx.bstatic.com/xdata/images/city/square210/674773.jpg?k=f65fb36a6b12a3f09a07232ef7946deb46871c0d5a308d3e16ff127d61233f41&o=" alt="Male city"  />
                             <h4>Indore to Male City</h4>
@@ -59,7 +61,7 @@ export const FlightMain = () => {
                         </article>
                     </div>}
 
-                    {domesticClicked && <div className='international-domestic-content'>
+                    {domesticClicked && <div className='international-domestic-content static-content'>
                         <article className='int-dom-item'>
                             <img src="https://q-xx.bstatic.com/xdata/images/city/square210/684511.jpg?k=4ee759f0ea5c88e018f4e67af90dedaae2e34313d84b228b841bb2c8f3741875&o=" alt="Ahmedabad"  />
                             <h4>Indore to Ahmedabad</h4>
@@ -81,11 +83,11 @@ export const FlightMain = () => {
 
 
              <section className='flight-trending-cities'>
-
+               <div className='flight-trending-cities-heading'>
                 <h2>Trending cities</h2>
                 <p>Book flights to a destination popular with travellers from India</p>
-
-                <div className='trending-city-imgDiv'>
+                </div>
+                <div className='trending-city-imgDiv static-content'>
                   <article>
                     <img src="https://q-xx.bstatic.com/xdata/images/city/square210/684764.jpg?k=6c3c9e920a39ca4f9eddcdfaa916999ea5d2765844610dd59349f4271f7596b3&o=" alt="New Delhi" />
                     <h4>New Delhi, India</h4>

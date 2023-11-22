@@ -6,7 +6,7 @@ export const Information = () => {
         <section className='information-section parent-container '>
             <div className='information-container child-container' >
              
-               <div className='information-content'>
+               <div className='information-content static-content'>
 
                 <div className='info-item'>
                  <img src="https://t-cf.bstatic.com/design-assets/assets/v3.99.1/illustrations-traveller/MagnifyingGlassUsp.png" alt="Search img"/>

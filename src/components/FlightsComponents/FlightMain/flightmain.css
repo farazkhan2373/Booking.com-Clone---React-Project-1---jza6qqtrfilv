@@ -32,10 +32,10 @@
 }
 
 .international-domestic-content{
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; */
 }
 
 .int-dom-item img{
@@ -53,10 +53,10 @@
 }
 
 .trending-city-imgDiv{
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; */
     margin-top: 20px;
 }
 
@@ -65,6 +65,22 @@
     width: 240px;
     height: 197px;
     object-fit: cover;
+}
+
+@media screen and (max-width: 768px) {
+    .popular-flight-heading{
+        text-align: center;
+    }
+
+    .popular-flight-buttons{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .flight-trending-cities-heading{
+        text-align: center;
+    }
 }
 
 

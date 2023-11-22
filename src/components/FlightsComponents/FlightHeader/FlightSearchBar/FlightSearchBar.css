@@ -1,20 +1,17 @@
 .flight-search-bar{
     background-color: #febb02;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border-radius: 4px;
     height: auto;
-    padding: 4px 0px;
+    padding: 4px;
 
 }
 
 .flight-searchBar-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 4px;
     /* border: 1px solid red; */
+    display: grid;
+    grid-template-columns: 3.2fr 0.3fr 3.2fr 0.8fr 1fr;
+    gap: 4px;
+   
 }
 
 
@@ -32,21 +29,24 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    width: 100%;
 }
 
 .flight-input-bar{
-    width: 265px;
     height: 28px;
-    /* outline: none; */
     border: none;
+    width: 100%;
+    padding: 0px 4px;
 }
 
 .swap-flight-box{
    cursor: pointer;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
 .flight-exchange-div{
-    width: 24px;
     height: 36px;
     display: flex;
     align-items: center;
@@ -54,7 +54,7 @@
 }
 
 #flight-date-div{
-    width: 226px;
+    
     display: flex;
     align-items: center;
     gap: 12px;
@@ -64,6 +64,7 @@
     height: 32px;
     font-size: 14px;
     cursor: pointer;
+    border: none;
     
 }
 
@@ -71,6 +72,30 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .flight-searchBar-container{
+        /* border: 1px solid red; */
+       
+        grid-template-columns: 1fr;
+        
+       
+    }
+
+    .flight-exchange-div{
+        width: 24px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .flight-search-btn{
+        width: 100%;
+    }
+    
 }
 
 
