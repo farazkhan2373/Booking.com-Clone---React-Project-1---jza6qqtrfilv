@@ -12,6 +12,9 @@ export const FlightSearchBar = () => {
     const [departure, setDeparture] = useState('');
     const [arrival, setArrival] = useState('');
     const [startDate, setStartDate] = useState(new Date());
+
+    const whereFromRef = useRef();
+    const whereToRef = useRef();
    
 
 
@@ -19,8 +22,28 @@ export const FlightSearchBar = () => {
     const navigateTo = useNavigate()
 
     function handleFlightSearch() {
+        if(departure === ''){
+             whereFromRef.current.focus();
+             return;
+        }else if(arrival === ''){
+            whereToRef.current.focus();
+            return;
+        }
         console.log(departure, arrival, startDate);
        navigateTo('/flights/flightslist', {state: {departure, arrival, startDate}})
+    }
+
+    function swapFlightSearch(){
+        // IF BOTH ARE EMPTY THEN DON'T SWAP
+        if(departure === '' && arrival === ''){
+            return;
+        }
+        //  OTHER WISE SWAP
+        let temp = departure;
+        setDeparture(arrival);
+        setArrival(temp);
+
+        
     }
 
     
@@ -32,12 +55,14 @@ export const FlightSearchBar = () => {
                 <div className='flight-searchItem'>
                     <div className='flight-departure-input-div'>
                         <FontAwesomeIcon icon={faPlaneDeparture} />
-                        <input type="text" placeholder='Where from?' className='flight-input-bar' value={departure}
-                        onChange={(e) => setDeparture(e.target.value)} />
+                        <input type="text" placeholder='Where from?'
+                        className='flight-input-bar' value={departure}
+                        onChange={(e) => setDeparture(e.target.value)} 
+                        ref={whereFromRef}/>
                     </div>
                 </div>
 
-                <div className='flight-searchItem'>
+                <div className='flight-searchItem swap-flight-box' onClick={swapFlightSearch}>
                     <div className='flight-exchange-div'>
                         <FontAwesomeIcon icon={faArrowRightArrowLeft} />
                     </div>
@@ -48,7 +73,8 @@ export const FlightSearchBar = () => {
                         <FontAwesomeIcon icon={faPlaneArrival} />
                         <input type="text" placeholder='Where to?' className='flight-input-bar'
                         value={arrival}
-                        onChange={(e)=>setArrival(e.target.value)} />
+                        onChange={(e)=>setArrival(e.target.value)} 
+                        ref={whereToRef}/>
                     </div>
                 </div>
 

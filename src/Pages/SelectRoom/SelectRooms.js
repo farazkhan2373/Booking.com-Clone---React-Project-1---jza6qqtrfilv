@@ -8,13 +8,15 @@ import { BookingSuccessModal } from '../../components/BookingSuccessModal/Bookin
 export const SelectRooms = () => {
 
     const location = useLocation()
-    console.log(location);
+    console.log("select room page location", location);
 
     const hotelData = location.state.hotelData;
     const userData = location.state.userData;
+    console.log("rooms", userData.personCountInfo.room);
+    console.log(typeof userData.personCountInfo.room)
     
 
-    const [roomValues, setRoomValues] = useState(Array(userData.personCountInfo.room).fill(''));
+    const [roomValues, setRoomValues] = useState(Array(parseInt(userData.personCountInfo.room)).fill(''));
     const [errorMsg, setErrorMsg] = useState(false);
     const [totalAmmount, setTotalAmmount] = useState(false);
     const [hotelPaymentModal, setHotelPaymentModal] = useState(false);

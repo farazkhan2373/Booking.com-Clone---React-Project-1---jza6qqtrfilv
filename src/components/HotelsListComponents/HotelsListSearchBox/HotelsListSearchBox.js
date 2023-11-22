@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import './HotelsListSearchBox.css'
 import { format, max } from 'date-fns';
 import { DateRange } from 'react-date-range';
@@ -6,6 +6,7 @@ import { DateRange } from 'react-date-range';
 export const HotelsListSearchBox = ({destination, setDestination, date, setDate, personCountInfo, setPersonCountInfo, fetchHotelsData}) => {
 
   const[showCalender, setShowCalender] = useState(false);
+  const destinationRef = useRef();
  
   return (
     <div className='hotelslist-searchbox'>
@@ -16,7 +17,7 @@ export const HotelsListSearchBox = ({destination, setDestination, date, setDate,
 
             <div className='searchbox-items'>
               <p>Desitnation</p>
-              <input type="text" value={destination} placeholder='Where are you going?' onChange={(e) => setDestination(e.target.value)} />
+              <input type="text" value={destination} ref={destinationRef} placeholder='Where are you going?' onChange={(e) => setDestination(e.target.value)} />
             </div>
 
             <div className='searchbox-items searchBox-date-div'>
@@ -64,6 +65,13 @@ export const HotelsListSearchBox = ({destination, setDestination, date, setDate,
 
             <div className='searchbox-items'>
               <button className='hotels-list-SearchBtn' onClick={()=>{
+               if(destination === ''){
+                destinationRef.current.focus();
+                console.log('inside focus condition')
+                return;
+               }
+               
+               
                 fetchHotelsData(destination)
               }}>Search</button>
             </div>

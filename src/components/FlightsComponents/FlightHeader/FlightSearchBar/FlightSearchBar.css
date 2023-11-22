@@ -37,8 +37,12 @@
 .flight-input-bar{
     width: 265px;
     height: 28px;
-    outline: none;
+    /* outline: none; */
     border: none;
+}
+
+.swap-flight-box{
+   cursor: pointer;
 }
 
 .flight-exchange-div{

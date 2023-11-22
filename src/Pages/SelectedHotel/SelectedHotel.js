@@ -16,7 +16,7 @@ export const SelectedHotel = () => {
     const navigateTo = useNavigate();
 
     const location = useLocation();
-    console.log(location);
+    console.log("selected-hotel location",location);
 
     const getSelectedHotelData = async () => {
         const config = {
