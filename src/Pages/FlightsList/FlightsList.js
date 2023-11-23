@@ -161,12 +161,12 @@ export const FlightsList = () => {
                 </div>
 
                 <div className='flight-price-div'>
-                  <div>
+                  <div className='cabin-bag-div'>
                     <FontAwesomeIcon icon={faSuitcaseRolling} className='bag-icon' />
                     <FontAwesomeIcon icon={faPersonWalkingLuggage} className='bag-icon' />
                     <p>Included cabin bag, checked bag</p>
                   </div>
-                  <div>
+                  <div className='flight-price-content'>
                     <h2>INR {flight.ticketPrice}</h2>
                     <p>Total price for all travellers</p>
                   </div>

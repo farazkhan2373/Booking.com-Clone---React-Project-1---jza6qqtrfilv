@@ -99,3 +99,21 @@
     }
     
 }
+
+@media screen and (max-width: 480px){
+
+    .big-card-item img{
+        width: 300px;
+        height: 200px;
+        border-radius: 8px;
+        object-fit: cover;
+       
+    }
+
+    .small-card-item img{
+        width: 300px;
+        height: 200px;
+    
+    }
+
+} 

@@ -58,7 +58,7 @@ export const HotelsList = () => {
 
           <div className='hotels-list-div'>
 
-            {hotelsData && hotelsData.length > 0 &&  <h1>Hotels List</h1>}
+            {hotelsData && hotelsData.length > 0 && <h1>Hotels List</h1>}
 
             {hotelsData ? hotelsData.length > 0 ? hotelsData.map((hotel) => (
 

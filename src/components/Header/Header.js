@@ -62,7 +62,7 @@ export const Header = () => {
         <header className='header-container parent-container'>
             <div className='header-content child-container'>
 
-                <div>
+                <div className='next-stay-heading'>
                     <h1>Find your next stay</h1>
                     <p>Search low prices on hotels, homes and much more...</p>
                 </div>

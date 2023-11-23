@@ -11,6 +11,7 @@
 .child-container{
   width: 100%;
   max-width: 1024px;
+  padding: 0px 6px;
 }
 
 .static-content{
