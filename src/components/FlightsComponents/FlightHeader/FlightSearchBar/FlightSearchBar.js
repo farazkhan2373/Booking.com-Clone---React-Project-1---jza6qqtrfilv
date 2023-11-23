@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import './FlightSearchBar.css'
-import { faArrowRightArrowLeft, faCalendar, faPlaneArrival, faPlaneDeparture } from '@fortawesome/free-solid-svg-icons'
+import { faArrowDown, faArrowDownLong, faArrowRightArrowLeft, faArrowUp, faArrowUpLong, faArrowsUpDown, faCalendar, faPlaneArrival, faPlaneDeparture, faUpDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -64,7 +64,9 @@ export const FlightSearchBar = () => {
 
                 <div className='flight-searchItem swap-flight-box' onClick={swapFlightSearch}>
                     <div className='flight-exchange-div'>
-                        <FontAwesomeIcon icon={faArrowRightArrowLeft} />
+                        <FontAwesomeIcon icon={faArrowRightArrowLeft} className='right-left-arrow'/>
+                        <FontAwesomeIcon icon={faArrowUpLong} className='up-down-arrow'/>
+                        <FontAwesomeIcon icon={faArrowDownLong} className='up-down-arrow'/>
                     </div>
                 </div>
 

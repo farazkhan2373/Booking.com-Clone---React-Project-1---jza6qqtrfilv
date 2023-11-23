@@ -69,10 +69,26 @@
 }
 
 #reserve-now-btn{
+    margin-top: 8px;
     width: 100%;
 }
 
 #reserve-now-btn:hover{
     background-color: #003580;
+}
+
+@media screen and (max-width: 768px) {
+    .selected-hotel-details{
+        /* border: 2px solid red; */
+        gap: 12px;
+    }
+
+    .hotel-discription{
+        width: 100%;
+    }
+
+    .property-highlight-box{
+        width: 100%;
+    }
 }
 

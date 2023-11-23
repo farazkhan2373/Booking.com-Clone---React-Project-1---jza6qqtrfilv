@@ -67,3 +67,11 @@
 .total-ammount{
     font-weight: bold;
 }
+
+@media screen and (max-width: 768px) {
+    .room-inputBox-container{
+        margin-top: 30px;
+       
+        
+    }
+}

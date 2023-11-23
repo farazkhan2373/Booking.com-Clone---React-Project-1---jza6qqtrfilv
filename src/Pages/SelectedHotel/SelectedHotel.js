@@ -16,7 +16,7 @@ export const SelectedHotel = () => {
     const navigateTo = useNavigate();
 
     const location = useLocation();
-    console.log("selected-hotel location",location);
+    console.log("selected-hotel location", location);
 
     const getSelectedHotelData = async () => {
         const config = {
@@ -38,8 +38,8 @@ export const SelectedHotel = () => {
         getSelectedHotelData()
     }, [])
 
-    function handleReserveButton(){
-         navigateTo('/hotels/rooms', {state: {userData: location.state, hotelData, hotelId}})
+    function handleReserveButton() {
+        navigateTo('/hotels/rooms', { state: { userData: location.state, hotelData, hotelId } })
     }
     return (
         <div className='selected-hotel-page parent-container'>
@@ -98,7 +98,7 @@ export const SelectedHotel = () => {
 
                     </div>
 
-                   
+
                 </div> : <h3>Loading...</h3>
                 }
             </div>

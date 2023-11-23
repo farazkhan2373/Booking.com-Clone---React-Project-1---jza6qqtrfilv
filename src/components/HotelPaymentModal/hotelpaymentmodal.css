@@ -6,9 +6,9 @@
     z-index: 999;
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
     background-color: rgba(0, 0, 0, 0.5);
     align-items: center;
+   
 }
 
 .hotel-payment-box{
@@ -110,3 +110,4 @@
 .blue-btn:hover{
     background-color: #003580;
 }
+
