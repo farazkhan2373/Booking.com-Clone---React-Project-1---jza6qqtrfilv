@@ -11,7 +11,7 @@ export const FlightBookingAuth = ({children}) => {
   // const arrival = location.state.arrival;
   // const startDate = location.state.startDate;
   // const startDate = location.state.startDate;
-  // const daysOfWeek = location.state.daysOfWeek;
+  // const day = location.state.day;
   // const flightIdPathname = location.state.flightIdPathname;
   
   return isLoggedIn ? children : <Navigate to='/login' state={{...location.state, prevPath: location.state.flightIdPathname }}/>

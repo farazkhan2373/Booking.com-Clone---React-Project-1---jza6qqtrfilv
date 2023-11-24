@@ -69,7 +69,7 @@ export const FlightsList = () => {
     for (let amount of sortedPrice) {
       for (let data of flights) {
         if (data.ticketPrice === amount) {
-          // check for similar data
+          // check for similar data if same id is matched than don't push and move ahead
           if (cheapestFlight.length > 0) {
             if (cheapestFlight[cheapestFlight.length - 1]._id === data._id) {
               continue;
@@ -141,7 +141,7 @@ export const FlightsList = () => {
                     <div><FontAwesomeIcon icon={faPlaneDeparture} /></div>
                     <div>
                       <p>{flight.departureTime}</p>
-                      <span>{flight.source}. {startDate.getDate()} {startDate.toLocaleString('default', { month: 'short' })}</span>
+                      <span>{flight.source} {startDate.getDate()} {startDate.toLocaleString('default', { month: 'short' })}</span>
                     </div>
                   </div>
 
@@ -171,7 +171,7 @@ export const FlightsList = () => {
                     <p>Total price for all travellers</p>
                   </div>
 
-                  <button className='white-btn' onClick={() => navigateTo(`/flights/${flight._id}`, { state: { departure, arrival, startDate, daysOfWeek } })}>See flight</button>
+                  <button className='white-btn' onClick={() => navigateTo(`/flights/${flight._id}`, { state: { departure: flight.source, arrival: flight.destination, startDate, day } })}>See flight</button>
                 </div>
 
               </article>)) : <h2>Loading...</h2>

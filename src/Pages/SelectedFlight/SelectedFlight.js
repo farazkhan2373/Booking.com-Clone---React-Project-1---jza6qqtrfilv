@@ -13,7 +13,7 @@ export const SelectedFlight = () => {
   const departure = location.state.departure;
   const arrival = location.state.arrival;
   const startDate = location.state.startDate;
-  const daysOfWeek = location.state.daysOfWeek;
+  const day = location.state.day;
   const flightIdPathname = location.pathname;
 
   console.log("selectedFlight location object", location);
@@ -64,7 +64,7 @@ export const SelectedFlight = () => {
       alert('Please Select Seat');
       return;
     }
-    navigateTo('/flights/flightbooking', { state: { flightId, flightIdPathname, departure, arrival, startDate, daysOfWeek } });
+    navigateTo('/flights/flightbooking', { state: { flightId, flightIdPathname, departure, arrival, startDate, day } });
   }
 
   function handleSelectedSeat(e){
@@ -103,7 +103,7 @@ export const SelectedFlight = () => {
               <FontAwesomeIcon icon={faCircle} className='circle-icon' />
               <li>1 traveller</li>
               <FontAwesomeIcon icon={faCircle} className='circle-icon' />
-              <li>{daysOfWeek[startDate.getDay()]} {startDate.getDate()} {startDate.toLocaleString('default', { month: 'short' })}</li>
+              <li>{day} {startDate.getDate()} {startDate.toLocaleString('default', { month: 'short' })}</li>
             </div>
             <div className='summary-heading'>
               <h1>{departure} to {arrival}</h1>
