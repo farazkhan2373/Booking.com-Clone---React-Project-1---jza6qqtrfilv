@@ -11,7 +11,7 @@ export const FlightHeader = () => {
                 <h1>Compare and book flights with ease</h1>
                 <p>Discover your next dream destination</p>
 
-                <div className='user-input-div'>
+                {/* <div className='user-input-div'>
                     <input type="radio" name="trip" id="" /> <span>Round trip</span>
                     <input type="radio" name="trip" id="" /> <span>One way</span>
                     <input type="radio" name="trip" id="" /> <span>Multi-city</span>
@@ -23,7 +23,7 @@ export const FlightHeader = () => {
                     </select>
 
                     <input type="checkbox" name="" id="" />Directs Flights only
-                </div>
+                </div> */}
 
                 <FlightSearchBar/>
             </div>

@@ -147,7 +147,7 @@ export const FlightsList = () => {
 
                   <div className='center-div'>
                     <p>{flight.duration}h</p>
-                    <span>-------------------------</span>
+                    <span>---------</span>
                     <p>{flight.stops === 0 ? 'Direct' : flight.stops + ' stop'}</p>
                   </div>
 
