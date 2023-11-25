@@ -26,10 +26,12 @@
 }
 
 .flight-departure-input-div{
+    /* border: 1px solid black; */
     display: flex;
     align-items: center;
     gap: 8px;
     width: 100%;
+    position: relative;
 }
 
 .flight-input-bar{
@@ -37,6 +39,33 @@
     border: none;
     width: 100%;
     padding: 0px 4px;
+}
+
+.suggestion-modal{
+    border: 1px solid red;
+    position: absolute;
+    top: 40px;
+    left: 26px;
+    background-color: white;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+   
+}
+
+.suggestion-para{
+    cursor: pointer;
+    border-bottom: 1px solid grey;
+    padding: 4px;
+}
+
+.suggestion-para:hover{
+    background-color: rgb(245, 245, 255);
+}
+
+.flight-xmark{
+    cursor: pointer;
+    font-size: 20px;
 }
 
 .swap-flight-box{
@@ -77,6 +106,29 @@
     align-items: center;
     gap: 8px;
     width: 100%;
+    position: relative;
+}
+
+.arrival-suggestion-modal{
+    border: 1px solid red;
+    position: absolute;
+    top: 40px;
+    left: 26px;
+    background-color: white;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+   
+}
+
+.arrival-suggestion-para{
+    cursor: pointer;
+    border-bottom: 1px solid grey;
+    padding: 4px;
+}
+
+.arrival-suggestion-para:hover{
+    background-color: rgb(245, 245, 255);
 }
 
 @media screen and (max-width: 768px) {
