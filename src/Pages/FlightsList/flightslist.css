@@ -104,6 +104,12 @@
     font-size: 16px;
 }
 
+.flight-not-found{
+    color: grey;
+}
+
+
+
 @media screen and (max-width: 768px) {
 
 

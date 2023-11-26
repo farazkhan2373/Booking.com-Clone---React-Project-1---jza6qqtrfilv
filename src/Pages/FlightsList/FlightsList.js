@@ -19,7 +19,7 @@ export const FlightsList = () => {
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
   const day = daysOfWeek[startDate.getDay()];
 
-  const [flights, setFlights] = useState([]);
+  const [flights, setFlights] = useState(null);
 
   const getFlightsList = async () => {
     const config = {
@@ -134,7 +134,7 @@ export const FlightsList = () => {
 
           <div className='flight-results-div'>
             {/* DYNAMIC FLIGHTS DATA */}
-            {flights.length > 0 ? flights.map((flight, index) => (
+            {flights ? flights.length > 0 ? flights.map((flight, index) => (
 
               <article className='flight-cards' key={index}>
 
@@ -177,7 +177,7 @@ export const FlightsList = () => {
                   <button className='white-btn' onClick={() => navigateTo(`/flights/${flight._id}`, { state: { departure: flight.source, arrival: flight.destination, startDate, departureCity, arrivalCity, day } })}>See flight</button>
                 </div>
 
-              </article>)) : <h2>Loading...</h2>
+              </article>)) : <p className='flight-not-found'>We don't have any flights matching your search on our site. Try changing some details.</p> : <h2>Loading...</h2>
             }
           </div>
 
