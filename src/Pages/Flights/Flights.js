@@ -14,7 +14,7 @@ export const Flights = () => {
       <FlightHeader />
 
       <Routes>
-
+        
         <Route path='/' exact element={<>
           <FlightMain />
           <Information />
@@ -27,8 +27,6 @@ export const Flights = () => {
           <Route path=':flightId' element={<SelectedFlight/>}/>
           <Route path='flightbooking' element={<FlightBookingAuth><FlightBooking/></FlightBookingAuth> }/>
           
-
-
       </Routes>
     </section>
   )

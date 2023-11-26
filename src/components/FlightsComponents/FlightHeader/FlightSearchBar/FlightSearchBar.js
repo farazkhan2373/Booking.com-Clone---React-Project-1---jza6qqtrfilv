@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import './FlightSearchBar.css'
-import { faArrowDown, faArrowDownLong, faArrowRightArrowLeft, faArrowUp, faArrowUpLong, faArrowsUpDown, faCalendar, faPlaneArrival, faPlaneDeparture, faUpDown, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faArrowDownLong, faArrowRightArrowLeft, faArrowUpLong, faCalendar, faPlaneArrival, faPlaneDeparture, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -25,6 +25,9 @@ export const FlightSearchBar = () => {
 
     const [source, setSource] = useState('');
     const [destination, setDestination] = useState('');
+
+    const [departureCity, setDepartureCity] = useState('');
+    const [arrivalCity, setArrivalCity] = useState('');
 
 
     const whereFromRef = useRef();
@@ -56,12 +59,15 @@ export const FlightSearchBar = () => {
             return;
         }
 
-        console.log("source", source)
-        console.log("destination", destination)
+        // console.log("source", source)
+        // console.log("destination", destination)
+
+        console.log("departure city", departureCity);
+        console.log("arrival city", arrivalCity);
 
 
         console.log(departure, arrival, startDate);
-        navigateTo('/flights/flightslist', { state: { departure: source, arrival: destination, startDate } })
+        navigateTo('/flights/flightslist', { state: { departure: source, arrival: destination, startDate, arrivalCity, departureCity } })
 
         
     }
@@ -72,6 +78,18 @@ export const FlightSearchBar = () => {
             return;
         }
         //  SWAP INPUT FIELD
+        if(arrival !== ''){
+            setShowDepartureX(true);
+        }else{
+            setShowDepartureX(false);
+        }
+
+        if(departure !== ''){
+           setShowArrivalX(true);
+        }
+        else{
+            setShowArrivalX(false);
+        }
         let temp = departure;
         setDeparture(arrival);
         setArrival(temp);
@@ -81,6 +99,11 @@ export const FlightSearchBar = () => {
         let temp2 = source;
         setSource(destination);
         setDestination(temp2);
+
+        // SWAP CITIES
+        let tempCity = departureCity;
+        setDepartureCity(arrivalCity);
+        setArrivalCity(tempCity);
 
         // CLOSE SUGGESTION MODAL OF DEPARTURE AND ARRIVAL
         setArrivalSuggestionModal(false);
@@ -142,7 +165,6 @@ export const FlightSearchBar = () => {
       
     }
 
-    // e, 
     function suggestionClicked(e) {
         const selectedAirport = e.target.innerText;
         let airportCode = ''
@@ -171,8 +193,10 @@ export const FlightSearchBar = () => {
 
         if(e.target.className === "arrival-suggestion-para"){
             setDestination(airportCode);
+            setArrivalCity(cityName);
         }else{
             setSource(airportCode);
+            setDepartureCity(cityName);
         }
 
     }
@@ -182,6 +206,7 @@ export const FlightSearchBar = () => {
         setShowDepartureX(false);
         setShowSuggestionModal(false);
         setSource('');
+        setDepartureCity('');
         whereFromRef.current.focus();
 
     }
@@ -191,6 +216,7 @@ export const FlightSearchBar = () => {
         setShowArrivalX(false);
         setArrivalSuggestionModal(false);
         setDestination('');
+        setArrivalCity('');
         whereToRef.current.focus();
     }
 
@@ -210,7 +236,7 @@ export const FlightSearchBar = () => {
                         {showDepartureX && <FontAwesomeIcon icon={faXmark} className='flight-xmark'
                             onClick={handleDepartureXMark} />}
 
-                        {showSuggestionModal && <div className='suggestion-modal'>
+                        {showSuggestionModal && <div className='suggestion-modal box-shadow' >
                             {suggestionData.length > 0 && suggestionData.map((data, index) => (
                                 <p key={index} className='suggestion-para'
                                  onClick={(e)=>{
@@ -247,7 +273,7 @@ export const FlightSearchBar = () => {
                         {showArrivalX && <FontAwesomeIcon icon={faXmark} className='flight-xmark'
                             onClick={handleArrivalXMark} />}
 
-                           {showArrivalSuggestionModal && <div className='arrival-suggestion-modal'>
+                           {showArrivalSuggestionModal && <div className='arrival-suggestion-modal box-shadow'>
                                 {arrivalSuggestionData.length > 0 && arrivalSuggestionData.map((data, index)=>(
                                  <p key={index} className='arrival-suggestion-para'
                                  onClick={(e)=>{

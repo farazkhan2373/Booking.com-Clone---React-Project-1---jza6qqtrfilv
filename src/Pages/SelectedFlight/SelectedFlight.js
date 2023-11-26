@@ -10,11 +10,13 @@ export const SelectedFlight = () => {
   const location = useLocation();
 
 
+  const flightIdPathname = location.pathname;
   const departure = location.state.departure;
   const arrival = location.state.arrival;
   const startDate = location.state.startDate;
   const day = location.state.day;
-  const flightIdPathname = location.pathname;
+  const departureCity = location.state.departureCity;
+  const arrivalCity = location.state.arrivalCity;
 
   console.log("selectedFlight location object", location);
   console.log(departure, arrival, startDate);
@@ -64,7 +66,7 @@ export const SelectedFlight = () => {
       alert('Please Select Seat');
       return;
     }
-    navigateTo('/flights/flightbooking', { state: { flightId, flightIdPathname, departure, arrival, startDate, day } });
+    navigateTo('/flights/flightbooking', { state: { flightId, flightIdPathname, departure, arrival, startDate, departureCity, arrivalCity, day } });
   }
 
   function handleSelectedSeat(e){
@@ -106,7 +108,7 @@ export const SelectedFlight = () => {
               <li>{day} {startDate.getDate()} {startDate.toLocaleString('default', { month: 'short' })}</li>
             </div>
             <div className='summary-heading'>
-              <h1>{departure} to {arrival}</h1>
+              <h1>{departureCity} to {arrivalCity}</h1>
               <button className='same-btn' onClick={handleFlightBookBtn}>Book Ticket</button>
             </div>
           </div>
@@ -120,7 +122,7 @@ export const SelectedFlight = () => {
               <div className='select-seat-box' onClick={()=> setShowSeatModal(!showSeatModal)} >
 
                 <div className='seat-details-box'>
-                <h5>{departure} - {arrival}</h5>
+                <h5>{departureCity} - {arrivalCity}</h5>
                 <p>{selectedFlight.duration} hour</p>
                 <p>Seat number: {seatNo}</p>
                 </div>
@@ -146,9 +148,9 @@ export const SelectedFlight = () => {
             {/* TICKET SUMMARY */}
             <h4>Ticket Summary</h4>
             <section className='ticket-summary-box'>
-              <h5>{departure} - {arrival}</h5>
-              <p>Flight Departure Time: <b>{selectedFlight.departureTime}</b> from {departure}</p>
-              <p>Flight Arrival Time: <b>{selectedFlight.arrivalTime}</b> at {arrival}</p>
+              <h5>{departureCity} - {arrivalCity}</h5>
+              <p>Flight Departure Time: <b>{selectedFlight.departureTime}</b></p>
+              <p>Flight Arrival Time: <b>{selectedFlight.arrivalTime}</b></p>
               <p>Duration: {selectedFlight.duration} hour</p>
               <p>Available Seats: {selectedFlight.availableSeats}</p>
               <p>Amenities: {selectedFlight.amenities.map((facility, index) => (
@@ -168,7 +170,7 @@ export const SelectedFlight = () => {
               </div>
 
               <div>
-                <h1>Total: INR {selectedFlight.ticketPrice}</h1>
+                <h1>Total: INR {selectedFlight.ticketPrice.toLocaleString('en-IN')}</h1>
                 <p>Includes taxes and charges</p>
               </div>
 

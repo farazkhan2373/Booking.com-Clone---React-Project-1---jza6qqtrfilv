@@ -1,6 +1,7 @@
 import "../styles/App.css";
-
 import {BrowserRouter, Routes, Route} from "react-router-dom";
+import { createContext, useState } from "react";
+
 import { Navbar } from "./Navbar/Navbar";
 import { ComingSoon } from "../Pages/ComingSoon/ComingSoon";
 import { Footer } from "./Footer/Footer";
@@ -8,7 +9,6 @@ import {Flights} from "../Pages/Flights/Flights"
 import { Home } from "../Pages/Home/Home";
 import { Register } from "../Pages/Register/Register";
 import { Login } from "../Pages/Login/Login";
-import { createContext, useState } from "react";
 import { Profile } from "../Pages/Profile/Profile";
 import { HotelsList } from "../Pages/HotelsList/HotelsList";
 import { SelectedHotel } from "../Pages/SelectedHotel/SelectedHotel";
@@ -19,12 +19,6 @@ import { MyTrips } from "../Pages/MyTrips/MyTrips";
 export const AuthContext = createContext();
 
 function App() {
-  
-  // if(isTokenAvailable){
-  //   isUserLoggedIn = true;
-  // }else{
-  //   isUserLoggedIn = false;
-  // }
 
   let isUserLoggedIn =  sessionStorage.getItem('userToken') ? true : false;
   const [isLoggedIn, setIsLoggedIn] = useState(isUserLoggedIn);

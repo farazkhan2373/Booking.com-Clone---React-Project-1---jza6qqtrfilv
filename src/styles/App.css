@@ -3,6 +3,7 @@
   padding: 0;
 }
 .parent-container{
+  /* border: 2px solid red; */
   display: flex;
   height: auto;
   justify-content: center;
@@ -20,4 +21,9 @@
   gap: 16px;
   justify-content: center;
   align-items: center;
+}
+
+.box-shadow{
+  box-shadow: 0px 1px 7px -1px #888888;
+
 }

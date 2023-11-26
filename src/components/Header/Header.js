@@ -13,10 +13,10 @@ import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
 
-    const [showCross, setShowCross] = useState(false);
-
     const [destination, setDestination] = useState('');
-
+    const [showCross, setShowCross] = useState(false);
+    const destinationRef = useRef();
+    
     const [date, setDate] = useState([
         {
             startDate: new Date(),
@@ -24,18 +24,15 @@ export const Header = () => {
             key: 'selection'
         }
     ]);
-
-    const destinationRef = useRef();
-
+    const [showCalender, setShowCalender] = useState(false);
+    
     const [personCountInfo, setPersonCountInfo] = useState({
         adult: 1,
         children: 0,
         room: 1,
     })
-
-    const [showCalender, setShowCalender] = useState(false);
     const [showPersonModal, setPersonModal] = useState(false);
-
+    
     const navigateTo = useNavigate();
 
     function handleHotelSearch() {
@@ -43,7 +40,6 @@ export const Header = () => {
             destinationRef.current.focus();
             return;
         }
-
         navigateTo('/hotelslist', { state: { destination, date, personCountInfo } })
     }
 

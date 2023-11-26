@@ -91,7 +91,7 @@ export const HotelsList = () => {
                       <p className='rating-para'>{hotel.rating}</p>
                     </div>
                     <div className='hotels-price'>
-                      <h2>&#8377; {hotel.rooms[0].price}</h2>
+                      <h2>&#8377; {hotel.rooms[0].price.toLocaleString('en-IN')}</h2>
                       <p>include Taxes and fees</p>
                       <button onClick={() => {
                         navigateTo(`/hotels/${hotel._id}`, { state: { destination, date, personCountInfo } })

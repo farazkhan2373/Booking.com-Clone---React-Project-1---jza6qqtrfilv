@@ -14,6 +14,8 @@ export const FlightsList = () => {
   const departure = location.state.departure;
   const arrival = location.state.arrival;
   const startDate = location.state.startDate;
+  const departureCity = location.state.departureCity;
+  const arrivalCity = location.state.arrivalCity;
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
   const day = daysOfWeek[startDate.getDay()];
 
@@ -61,6 +63,7 @@ export const FlightsList = () => {
   }
 
   function handleCheapest() {
+    
     const price = flights.map((flight) => {
       return flight.ticketPrice;
     })
@@ -140,7 +143,7 @@ export const FlightsList = () => {
                   <div className='left-div'>
                     <div><FontAwesomeIcon icon={faPlaneDeparture} /></div>
                     <div>
-                      <p>{flight.departureTime}</p>
+                      <p><b>{flight.departureTime} </b></p>
                       <span>{flight.source} {startDate.getDate()} {startDate.toLocaleString('default', { month: 'short' })}</span>
                     </div>
                   </div>
@@ -154,7 +157,7 @@ export const FlightsList = () => {
                   <div className='right-div'>
                     <div><FontAwesomeIcon icon={faPlaneArrival} /></div>
                     <div>
-                      <p>{flight.arrivalTime}</p>
+                      <p><b>{flight.arrivalTime}</b></p>
                       <span>{flight.destination} {startDate.getDate()} {startDate.toLocaleString('default', { month: 'short' })}</span>
                     </div>
                   </div>
@@ -167,11 +170,11 @@ export const FlightsList = () => {
                     <p>Included cabin bag, checked bag</p>
                   </div>
                   <div className='flight-price-content'>
-                    <h2>INR {flight.ticketPrice}</h2>
+                    <h2>INR {flight.ticketPrice.toLocaleString('en-IN')}</h2>
                     <p>Total price for all travellers</p>
                   </div>
 
-                  <button className='white-btn' onClick={() => navigateTo(`/flights/${flight._id}`, { state: { departure: flight.source, arrival: flight.destination, startDate, day } })}>See flight</button>
+                  <button className='white-btn' onClick={() => navigateTo(`/flights/${flight._id}`, { state: { departure: flight.source, arrival: flight.destination, startDate, departureCity, arrivalCity, day } })}>See flight</button>
                 </div>
 
               </article>)) : <h2>Loading...</h2>
