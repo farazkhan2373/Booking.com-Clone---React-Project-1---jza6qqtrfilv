@@ -122,6 +122,13 @@
     border-radius: 8px;
 }
 
+@media screen and (max-width: 480px) {
+       #reg-div{
+        margin: 0px 8px;
+
+       }
+}
+
 
 
 

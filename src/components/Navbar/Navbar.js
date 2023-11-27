@@ -9,17 +9,17 @@ import { AuthContext } from '../App';
 
 export const Navbar = () => {
 
-   const [showProfileModal, setShowProfileModal] = useState(false);
-  const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext);
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const userName = JSON.parse(sessionStorage.getItem("loginUserDetails"));
 
   const navigate = useNavigate();
 
-  function toggleProfileModal(){
-     setShowProfileModal(!showProfileModal);
+  function toggleProfileModal() {
+    setShowProfileModal(!showProfileModal);
   }
 
-  function handleLogout(){
+  function handleLogout() {
 
     sessionStorage.clear();
     setShowProfileModal(false);
@@ -37,53 +37,53 @@ export const Navbar = () => {
             <NavLink to="/"><h2>Booking.com</h2></NavLink>
           </span>
 
-       {isLoggedIn ? 
-       <div className='profile-icon-container'>
+          {isLoggedIn ?
+            <div className='profile-icon-container'>
 
-        <FontAwesomeIcon id='user-icon' icon={faUser} onClick={toggleProfileModal}/>
-        <span >{userName.name}</span>
-         
-         {/* PROFILE MODAL */}
-       {showProfileModal && <div className='profile-modal'>
+              <FontAwesomeIcon id='user-icon' icon={faUser} onClick={toggleProfileModal} />
+              <span >{userName.name}</span>
 
-          <button className='white-btn' onClick={()=> {
-            setShowProfileModal(false);
-            navigate('/profile')
-            }}>Profile</button>
+              {/* PROFILE MODAL */}
+              {showProfileModal && <div className='profile-modal'>
 
-          <button className='white-btn' onClick={()=>{
-            setShowProfileModal(false);
-            navigate('/mytrips');
-          }}>My Trips</button>
+                <button className='white-btn' onClick={() => {
+                  setShowProfileModal(false);
+                  navigate('/profile')
+                }}>Profile</button>
 
-          <button className='white-btn' onClick={handleLogout}>Logout</button>
+                <button className='white-btn' onClick={() => {
+                  setShowProfileModal(false);
+                  navigate('/mytrips');
+                }}>My Trips</button>
 
-        </div>}
+                <button className='white-btn' onClick={handleLogout}>Logout</button>
 
-        </div> 
-        :
-        // REGISTER LOGIN BUTTONS DIV
-        <div id='btn-container'>
-          <button className='reg-btn' onClick={()=> navigate('/register')}>Register</button>
-          <button className='reg-btn' onClick={()=> navigate('/login')}>Sign in</button>
-        </div>}
+              </div>}
+
+            </div>
+            :
+            // REGISTER LOGIN BUTTONS DIV
+            <div id='btn-container'>
+              <button className='reg-btn' onClick={() => navigate('/register')}>Register</button>
+              <button className='reg-btn' onClick={() => navigate('/login')}>Sign in</button>
+            </div>}
 
 
-        </div> 
+        </div>
 
         {/* NAVIGATION LINKS */}
         <nav id='navigation-Links'>
-            <ul id='links-container'>
-              <li><NavLink to="/"><FontAwesomeIcon icon={faBed} /> Stays</NavLink></li>
-              <li><NavLink to="/flights"><FontAwesomeIcon icon={faPlane} /> Flights</NavLink></li>
-              <li><NavLink to="/carrentals"><FontAwesomeIcon icon={faCar} /> Car Rentals</NavLink></li>
-              <li><NavLink to="/attractions"><FontAwesomeIcon icon={faMapPin} /> Attractions</NavLink></li>
-              <li><NavLink to="/airporttaxis"><FontAwesomeIcon icon={faTaxi} /> Airport taxis</NavLink></li>
-              
-            </ul>
+          <ul id='links-container'>
+            <li><NavLink to="/"><FontAwesomeIcon icon={faBed} /> Stays</NavLink></li>
+            <li><NavLink to="/flights"><FontAwesomeIcon icon={faPlane} /> Flights</NavLink></li>
+            <li><NavLink to="/carrentals"><FontAwesomeIcon icon={faCar} /> Car Rentals</NavLink></li>
+            <li><NavLink to="/attractions"><FontAwesomeIcon icon={faMapPin} /> Attractions</NavLink></li>
+            <li><NavLink to="/airporttaxis"><FontAwesomeIcon icon={faTaxi} /> Airport taxis</NavLink></li>
+
+          </ul>
         </nav>
 
-      {/* <Header/> */}
+        {/* <Header/> */}
 
 
       </div>
