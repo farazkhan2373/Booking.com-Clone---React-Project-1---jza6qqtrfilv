@@ -48,7 +48,7 @@ export const FlightMain = () => {
                             <h4>Indore to Male City</h4>
                         </article>
                         <article className='int-dom-item'>
-                            <img src="https://q-xx.bstatic.com/xdata/images/city/square210/619923.jpg?k=4fb13225390240a51ee5aa1d76318d03dc0de8a046ddc06e4598f17b287bdcc9&o=" alt="Dubai"  />
+                            <img src="https://cdn.britannica.com/15/189715-050-4310222B/Dubai-United-Arab-Emirates-Burj-Khalifa-top.jpg" alt="Dubai"  />
                             <h4>Indore to Dubai</h4>
                         </article>
                         <article className='int-dom-item'>
