@@ -108,6 +108,24 @@
     color: grey;
 }
 
+.loading-modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-gif{
+    border-radius: 16px;
+    color: red;
+}
+
 
 
 @media screen and (max-width: 768px) {
@@ -172,5 +190,12 @@
 
     .cabin-bag-div{
         text-align: left;
+    }
+
+    .loading-gif{
+        width: 100vw;
+        border-radius: 0px;
+        height: 100vh;
+        object-fit: cover;
     }
 }

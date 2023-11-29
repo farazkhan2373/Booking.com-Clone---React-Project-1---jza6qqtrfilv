@@ -50,7 +50,6 @@ export const HotelPaymentModal = ({ setHotelPaymentModal, userData, hotelData, r
        }
        bookHotel(hotelBookingDetails);
 
-
     }
 
     function convertDate(date){

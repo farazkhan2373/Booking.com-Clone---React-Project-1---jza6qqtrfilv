@@ -56,14 +56,20 @@ export const FlightsList = () => {
 
 
   function handleBest() {
-    getFlightsList();
+
+    setFlights(null);
+    setTimeout(()=>{
+     getFlightsList();
+    }, 2000)
+   
+    
     setBestClicked(true);
     setCheapestClicked(false);
     setFastestClicked(false);
   }
 
   function handleCheapest() {
-    
+    setFlights(null);
     const price = flights.map((flight) => {
       return flight.ticketPrice;
     })
@@ -85,13 +91,16 @@ export const FlightsList = () => {
     }
 
     console.log("cheapestflight", cheapestFlight);
-    setFlights(cheapestFlight);
+    setTimeout(()=>{
+      setFlights(cheapestFlight);
+    }, 2000)
     setCheapestClicked(true);
     setBestClicked(false)
     setFastestClicked(false);
   }
 
   function handleFastest() {
+    setFlights(null);
     const allFlightDuration = flights.map((flight) => {
       return flight.duration;
     })
@@ -112,7 +121,9 @@ export const FlightsList = () => {
       }
     }
     console.log("fastest flight", fastestFlight);
-    setFlights(fastestFlight);
+    setTimeout(()=>{
+     setFlights(fastestFlight);
+    }, 2000)
     setFastestClicked(true);
     setBestClicked(false);
     setCheapestClicked(false)
@@ -177,7 +188,11 @@ export const FlightsList = () => {
                   <button className='white-btn' onClick={() => navigateTo(`/flights/${flight._id}`, { state: { departure: flight.source, arrival: flight.destination, startDate, departureCity, arrivalCity, day } })}>See flight</button>
                 </div>
 
-              </article>)) : <p className='flight-not-found'>We don't have any flights matching your search on our site. Try changing some details.</p> : <h2>Loading...</h2>
+              </article>)) : <p className='flight-not-found'>We don't have any flights matching your search on our site. Try changing some details.</p> 
+              :
+              <div className='loading-modal'>
+               <img src="https://i.pinimg.com/originals/eb/70/7a/eb707ae7096cc8df384f1bf87dab547a.gif" alt="loading" className='loading-gif' />
+               </div>
             }
           </div>
 

@@ -92,7 +92,7 @@ export const Header = () => {
                             <FontAwesomeIcon icon={faCalendarDays} className='header-icon' />
                             <span id='search-date'
                                 onClick={() => setShowCalender((oldstate) => !oldstate)}>
-                                {format(date[0].startDate, "MM/dd/yyyy") + " to " + format(date[0].endDate, "MM/dd/yyyy")}</span>
+                                {format(date[0].startDate, "dd/MM/yyyy") + " to " + format(date[0].endDate, "dd/MM/yyyy")}</span>
                             {showCalender && <DateRange
                                 editableDateInputs={true}
                                 onChange={item => setDate([item.selection])}
@@ -115,7 +115,7 @@ export const Header = () => {
                             {showPersonModal && <Personmodal personCountInfo={personCountInfo} setPersonCountInfo={setPersonCountInfo} setPersonModal={setPersonModal} />}
 
 
-                            <FontAwesomeIcon icon={faAngleDown} className='header-icon' />
+                            <FontAwesomeIcon icon={faAngleDown} className='header-icon' onClick={() => setPersonModal((oldstate) => !oldstate)} />
 
                         </div>
                     </div>

@@ -94,10 +94,18 @@
 
 /* DATE SECTION */
 
+#search-date{
+    color: black;
+}
+
 .date {
     position: absolute;
     top: 50px;
     z-index: 2;
+}
+
+#person-count{
+    color: black;
 }
 
 

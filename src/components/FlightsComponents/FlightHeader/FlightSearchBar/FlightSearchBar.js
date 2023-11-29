@@ -72,11 +72,14 @@ export const FlightSearchBar = () => {
         
     }
 
-    function swapFlightSearch() {
+    function swapFlightSearch(e) {
         // IF BOTH ARE EMPTY THEN DON'T SWAP
         if (departure === '' && arrival === '') {
             return;
         }
+      
+        
+
         //  SWAP INPUT FIELD
         if(arrival !== ''){
             setShowDepartureX(true);
