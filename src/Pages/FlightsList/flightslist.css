@@ -1,11 +1,5 @@
-.flights-list-page {
-    /* background-color: green; */
-}
-
-.flights-list-container {}
 
 .flights-list-content {
-    /* border: 2px solid black; */
     padding: 5px;
 }
 
@@ -52,7 +46,6 @@
 }
 
 .flight-timing-div {
-    /* border: 1px solid red; */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -83,7 +76,6 @@
 
 
 .flight-price-div {
-    /* border: 1px solid blue; */
     text-align: right;
     padding: 12px;
     display: flex;
@@ -138,20 +130,10 @@
 
 @media screen and (max-width: 480px) {
     .flight-cards {
-        /* border: 1px solid grey;
-        border-radius: 8px;
-        display: grid;
-        grid-template-columns: 3fr 1fr; */
         grid-template-columns: 1fr;
     }
 
     .flight-timing-div {
-        /* border: 1px solid red; */
-        /* display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        padding: 0px 8px;
-        align-items: center; */
         flex-wrap: nowrap;
         padding: 8px;
     }
@@ -170,13 +152,6 @@
 
 
     .flight-price-div {
-        /* text-align: right;
-        padding: 12px;
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-        border-left: 1px solid grey; */
-        /* text-align: center; */
         display: grid;
         gap: 8px;
         grid-template-areas:

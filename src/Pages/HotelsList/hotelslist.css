@@ -1,7 +1,6 @@
 
 
 .hotels-list-content{
-    /* border: 2px solid red; */
     margin-top: 20px;
     display: flex;
     gap: 12px;
@@ -11,7 +10,6 @@
 
 /* HOTELS LIST DIV */
 .hotels-list-div{
-    /* border: 2px solid black; */
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -21,7 +19,6 @@
 
 /* HOTELS CARD */
 .hotel-list-cards{
-    /* border: 2px solid blue; */
     display: flex;
     gap: 12px;
     padding: 8px;
@@ -39,7 +36,6 @@
 
 /* CARD -> DETAILS-PRICE-DIV */
 .details-price-div{
-    /* border: 2px solid red; */
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -47,7 +43,6 @@
 
 /* DETAILS-PRICE-DIV  -> DETAILS */
 .hotel-list-details-div{
-    /* border: 2px solid black; */
     font-size: 14px;
     display: flex;
     flex-direction: column;
@@ -87,7 +82,6 @@
 
 /* DETAILS-PRICE-DIV  -> RATTING AND PRICE */
 .ratings-price-div{
-   /* border: 2px solid yellow; */
    display: flex;
    flex-direction: column;
    justify-content: space-between;
@@ -138,28 +132,6 @@
     background-color: #003580;
 }
 
-
-@media screen and (max-width: 768px){
-
-    /* .hotel-list-cards{
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        
-        
-    }
-
-    .hotels-list-img-div{
-        width: 100%;
-    }
-    
-    .hotels-list-img-div > img{
-        width: 100%;
-        height: 240px;
-     } */
-
-    
-}
 
 @media screen and (max-width: 480px) {
     .hotel-list-cards{

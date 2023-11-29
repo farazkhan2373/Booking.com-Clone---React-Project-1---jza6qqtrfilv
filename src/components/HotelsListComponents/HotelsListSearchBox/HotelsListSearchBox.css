@@ -16,7 +16,6 @@
 
 .searchbox-items{
     /* border: 1px solid black; */
-    /* overflow: hidden; */
     display: flex;
     flex-direction: column;
     gap: 4px;

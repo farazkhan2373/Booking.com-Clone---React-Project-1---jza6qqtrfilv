@@ -31,12 +31,7 @@
     border-bottom: 2px solid #006CE4;
 }
 
-.international-domestic-content{
-    /* display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between; */
-}
+
 
 .int-dom-item img{
     border-radius: 8px;
@@ -53,10 +48,6 @@
 }
 
 .trending-city-imgDiv{
-    /* display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between; */
     margin-top: 20px;
 }
 

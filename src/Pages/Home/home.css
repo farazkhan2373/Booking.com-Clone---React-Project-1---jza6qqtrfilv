@@ -1,10 +1,7 @@
-.home-page{
-    /* border: 2px solid red; */
-   
+.home-page{   
 }
 
 .homepage-content{
-    /* border: 2px solid blue; */
     margin-top: 60px;
     display: flex;
     flex-direction: column;
@@ -17,7 +14,6 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    /* border: 2px solid black; */
 }
 
 /* BIG IMAGES */
@@ -55,7 +51,6 @@
 
 /* SMALL IMAGES*/
 .small-card-container{
-    /* border: 2px solid red; */
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
