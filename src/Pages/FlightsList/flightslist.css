@@ -116,6 +116,10 @@
 .loading-gif{
     border-radius: 16px;
     color: red;
+    width: 100px;
+    height: 100px;
+  
+    
 }
 
 

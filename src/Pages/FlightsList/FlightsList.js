@@ -191,7 +191,7 @@ export const FlightsList = () => {
               </article>)) : <p className='flight-not-found'>We don't have any flights matching your search on our site. Try changing some details.</p> 
               :
               <div className='loading-modal'>
-               <img src="https://i.pinimg.com/originals/eb/70/7a/eb707ae7096cc8df384f1bf87dab547a.gif" alt="loading" className='loading-gif' />
+               <img src="https://assets-v2.lottiefiles.com/a/ac5056c0-116d-11ee-827b-cb344459ad99/D7zi0V8We2.gif" alt="loading" className='loading-gif' />
                </div>
             }
           </div>
