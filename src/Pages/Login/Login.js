@@ -120,7 +120,7 @@ export const Login = () => {
             </div>
 
             <div>
-                <p>Don't have account? <NavLink to='/register'>Create an account</NavLink></p>
+                <p>Don't have account? <NavLink to='/register' >Create an account</NavLink></p>
             </div>
 
           </form>

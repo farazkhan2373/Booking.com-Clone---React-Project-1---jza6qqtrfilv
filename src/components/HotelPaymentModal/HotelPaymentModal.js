@@ -14,6 +14,13 @@ export const HotelPaymentModal = ({ setHotelPaymentModal, userData, hotelData, r
 
     const userBearerToken = sessionStorage.getItem('userToken');
     const [paymentFailMsg, setPaymentFailMsg] = useState(null);
+
+    const [formData, setFormData] = useState({
+        cardHolderName: '',
+        cardNumber: '',
+        expiryDate: '',
+        cvc: ''
+    })
    
 
     const bookHotel = async (hotelBookingDetails)=>{
@@ -57,6 +64,41 @@ export const HotelPaymentModal = ({ setHotelPaymentModal, userData, hotelData, r
         let readableDate = date.toLocaleString('en-IN', options);
         return readableDate;
 
+    }
+
+    const handleCardDetails = (e) =>{
+        const {name, value} = e.target; 
+         
+
+         const digits = value.replace(/[^\d]/g, '');
+         const formatCardNumber = (digits.match(/.{1,4}/g) || []).join('-').substr(0, 19);
+     
+         setFormData({ ...formData, [name]: formatCardNumber });
+       
+
+    }
+
+    
+    function handleExpiryDate(e){
+        const {name, value} = e.target;
+
+
+        const digits = value.replace(/[^\d]/g, '');
+          // Insert a "/" after the first 2 digits
+          const formatExpiryDate = digits.replace(/(\d{2})(?=\d)/, '$1/').substr(0, 5);
+        setFormData({ ...formData, [name]: formatExpiryDate });
+
+        
+    }
+    
+    function handleCVC(e){
+       const {name, value} = e.target;
+
+       if(isNaN(value)){
+           return;
+       }
+
+        setFormData({...formData, [name]: value});
     }
 
     
@@ -115,23 +157,24 @@ export const HotelPaymentModal = ({ setHotelPaymentModal, userData, hotelData, r
                     <form action="" className='hotel-payment-form' onSubmit={handleHotelPayment}>
                         <div>
                             <label htmlFor="payment-holder-name">Card Holder's Name</label>
-                            <input type="text" name="payment-holder-name" id="payment-holder-name" required />
+                            <input type="text" name="payment-holder-name" id="payment-holder-name" value={formData.cardHolderName} 
+                            onChange={(e)=> setFormData(e.target.value)} placeholder='Name on Card' required />
                         </div>
 
                         <div>
                             <label htmlFor="payment-card-number">Card Number</label>
-                            <input type="number" name="payment-card-number" id="payment-card-number" required />
+                            <input type="text" id="payment-card-number" name='cardNumber' value={formData.cardNumber} pattern="\d{4}-\d{4}-\d{4}-\d{4}" maxLength='19' onChange={handleCardDetails} placeholder='XXXX-XXXX-XXXX-XXXX' required />
                         </div>
 
                         <section>
 
                             <div>
                                 <label htmlFor="expiry-num">Expiry Number</label>
-                                <input type="number" name="expiry-num" id="expiry-num" required />
+                                <input type="text" id="expiry-num" pattern='\d{2}/\d{2}' name='expiryDate' value={formData.expiryDate} onChange={handleExpiryDate} placeholder='MM/YY' maxLength='5' required/>
                             </div>
                             <div>
                                 <label htmlFor="hpay-cvc">CVC</label>
-                                <input type="number" name="hpay-cvc" id="hpay-cvc" required />
+                                <input type="text" id="hpay-cvc" name='cvc' pattern='\d{3}' value={formData.cvc} onChange={handleCVC} maxLength='3' placeholder='XXX' required />
                             </div>
 
                         </section>

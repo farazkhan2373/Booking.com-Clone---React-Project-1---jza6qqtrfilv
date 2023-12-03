@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../App';
 
-export const RegisterForm = () => {
+export const RegisterForm = ({state}) => {
   const [errorMessage, setErrorMessage] = useState(null);
   const navigateTo = useNavigate();
   const {setIsLoggedIn} = useContext(AuthContext);
@@ -30,8 +30,11 @@ export const RegisterForm = () => {
       if(token){
         sessionStorage.setItem("userToken", token);
         sessionStorage.setItem('loginUserDetails', JSON.stringify(res.data.data.user));
-        navigateTo('/');
         setIsLoggedIn(true);
+
+       
+          navigateTo('/')
+        
       }
 
     } catch (error) {
