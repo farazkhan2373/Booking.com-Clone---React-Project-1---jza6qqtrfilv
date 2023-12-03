@@ -8,6 +8,33 @@
    
 }
 
+.hotelList-button-container{
+    /* border: 2px solid red; */
+    display: flex;
+    flex-wrap: wrap;
+   gap: 8px;
+}
+
+.hotel-sorting-btn{
+    border: none;
+    background-color: white;
+    border: 2px solid rgb(202, 202, 202);
+    padding: 6px 8px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+
+}
+
+.hotel-sorting-btn:hover{
+   border: 2px solid #006CE4;
+    color: #006CE4;
+}
+
 /* HOTELS LIST DIV */
 .hotels-list-div{
     display: flex;

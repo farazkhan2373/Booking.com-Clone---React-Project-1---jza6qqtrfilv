@@ -28,7 +28,7 @@ export const HotelsList = () => {
     }
     try {
       const response = await axios.get(`https://academics.newtonschool.co/api/v1/bookingportals/hotel?search={"location":"${location}"}`, config)
-      console.log(response.data.data.hotels);
+      console.log("Hotels List", response.data.data.hotels);
       setHotelsData(response.data.data.hotels)
     } catch (error) {
       console.log("error", error)
@@ -39,6 +39,61 @@ export const HotelsList = () => {
     fetchHotelsData(destination)
 
   }, [])
+
+  function handleLowestPrice(){
+
+  }
+
+  function handleHighestPrice(){
+
+  }
+
+  function handleRatings(){
+    
+    const allHotelsRating = hotelsData.map((hotel)=>{
+      return hotel.rating;
+    })
+    const sortedRatings = allHotelsRating.sort();
+    sortedRatings.reverse(); // it will reverse the array
+    console.log(sortedRatings)
+
+    const highestRatingHotels = [];
+
+    for (let rating of sortedRatings) {
+      for (let data of hotelsData) {
+        if(data.rating === rating){
+
+          // --------A check for same data-------------------
+          if (highestRatingHotels.length > 0) {
+            let sameData = false;
+           for(let newHotel of highestRatingHotels){
+             if(newHotel._id === data._id){
+               sameData = true;
+               break;
+             }
+           }
+           if(sameData){
+             continue;
+           }
+         }
+        //  -------------------------------------------------
+
+         highestRatingHotels.push(data);
+         break;
+        }
+      }
+    }
+
+    console.log("Top Rated", highestRatingHotels)
+    setHotelsData(null);
+    setTimeout(()=>{
+      setHotelsData(highestRatingHotels);
+    }, 1000)
+    
+
+
+}
+
 
 
   return (
@@ -54,11 +109,18 @@ export const HotelsList = () => {
             personCountInfo={personCountInfo} setPersonCountInfo={setPersonCountInfo}
             fetchHotelsData={fetchHotelsData}
             setHotelHeading={setHotelHeading} />
-
+           
+           
 
           <div className='hotels-list-div'>
 
             {hotelsData && hotelsData.length > 0 && <h1>Hotels List</h1>}
+
+            {hotelsData && hotelsData.length > 0 && <div className='hotelList-button-container'> 
+            <button className='hotel-sorting-btn' onClick={handleLowestPrice}>Lowest Price</button>
+            <button className='hotel-sorting-btn' onClick={handleHighestPrice}>Highest Price</button>
+            <button className='hotel-sorting-btn' onClick={handleRatings}>Top Rated</button>
+           </div>}
 
             {hotelsData ? hotelsData.length > 0 ? hotelsData.map((hotel) => (
 

@@ -69,7 +69,6 @@ export const FlightsList = () => {
   }
 
   function handleCheapest() {
-    setFlights(null);
     const price = flights.map((flight) => {
       return flight.ticketPrice;
     })
@@ -89,7 +88,8 @@ export const FlightsList = () => {
         }
       }
     }
-
+    
+    setFlights(null);
     console.log("cheapestflight", cheapestFlight);
     setTimeout(()=>{
       setFlights(cheapestFlight);
@@ -100,7 +100,6 @@ export const FlightsList = () => {
   }
 
   function handleFastest() {
-    setFlights(null);
     const allFlightDuration = flights.map((flight) => {
       return flight.duration;
     })
@@ -111,7 +110,14 @@ export const FlightsList = () => {
         if (data.duration === duration) {
           // below check is for similar data
           if (fastestFlight.length > 0) {
-            if (fastestFlight[fastestFlight.length - 1]._id === data._id) {
+             let sameData = false;
+            for(let newFlight of fastestFlight){
+              if(newFlight._id === data._id){
+                sameData = true;
+                break;
+              }
+            }
+            if(sameData){
               continue;
             }
           }
@@ -120,6 +126,7 @@ export const FlightsList = () => {
         }
       }
     }
+    setFlights(null);
     console.log("fastest flight", fastestFlight);
     setTimeout(()=>{
      setFlights(fastestFlight);
@@ -141,6 +148,7 @@ export const FlightsList = () => {
             <button className={`flight-sorting-btn ${cheapestClicked ? 'add-bottom-border' : ''}`} onClick={handleCheapest}>Cheapest</button>
             <button className={`flight-sorting-btn ${fastestClicked ? 'add-bottom-border' : ''}`} onClick={handleFastest}>Fastest</button>
           </div>
+         
 
 
           <div className='flight-results-div'>
