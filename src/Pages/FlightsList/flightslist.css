@@ -171,10 +171,5 @@
         text-align: left;
     }
 
-    .loading-gif{
-        width: 100vw;
-        border-radius: 0px;
-        height: 100vh;
-        object-fit: cover;
-    }
+    
 }
