@@ -40,16 +40,50 @@ export const HotelsList = () => {
 
   }, [])
 
-  function handleLowestPrice(){
 
-  }
+  function sortByPrice(highest = true){
+    const allHotelPrice = hotelsData.map((hotel)=>{
+      return hotel.rooms[0].price;
+    })
 
-  function handleHighestPrice(){
+    const sortedPrice = allHotelPrice.sort();
 
+    if(highest){
+      sortedPrice.reverse(); //IF CLICKED ON HIGHEST THAN ONLY REVERSE
+    }
+    
+    const hotelsSortedByPrice = [];
+    for(let price of sortedPrice){
+      for(let data of hotelsData){
+        if(data.rooms[0].price === price){
+
+          // -------Check for same data------------------
+          if(hotelsSortedByPrice.length > 0){
+             let sameData = false;
+             for(let newData of hotelsSortedByPrice){
+              if(newData._id === data._id){
+                sameData = true;
+                break;
+              }
+             }
+             if(sameData){
+              continue;     // if the is same then don't add again and continue 
+             }
+          }
+          // --------------------------------------------
+          hotelsSortedByPrice.push(data);
+          break;
+        }
+      }
+    }
+    console.log("Sort by price hotel data", hotelsSortedByPrice);
+    setHotelsData(null);
+    setTimeout(()=>{
+      setHotelsData(hotelsSortedByPrice);
+    }, 1000)
   }
 
   function handleRatings(){
-    
     const allHotelsRating = hotelsData.map((hotel)=>{
       return hotel.rating;
     })
@@ -117,8 +151,10 @@ export const HotelsList = () => {
             {hotelsData && hotelsData.length > 0 && <h1>Hotels List</h1>}
 
             {hotelsData && hotelsData.length > 0 && <div className='hotelList-button-container'> 
-            <button className='hotel-sorting-btn' onClick={handleLowestPrice}>Lowest Price</button>
-            <button className='hotel-sorting-btn' onClick={handleHighestPrice}>Highest Price</button>
+            <button className='hotel-sorting-btn' onClick={()=>{
+              sortByPrice(false);
+            }}>Lowest First</button>
+            <button className='hotel-sorting-btn' onClick={sortByPrice}>Highest First</button>
             <button className='hotel-sorting-btn' onClick={handleRatings}>Top Rated</button>
            </div>}
 
