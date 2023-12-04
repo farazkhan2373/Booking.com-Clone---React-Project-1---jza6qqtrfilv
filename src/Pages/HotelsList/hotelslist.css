@@ -16,7 +16,6 @@
 }
 
 .hotel-sorting-btn{
-    border: none;
     background-color: white;
     border: 2px solid rgb(202, 202, 202);
     padding: 6px 8px;
@@ -31,8 +30,21 @@
 }
 
 .hotel-sorting-btn:hover{
-   border: 2px solid #006CE4;
+    background-color: rgb(237, 237, 237);
+  
+}
+
+.sorting-btn-clicked{
+    border: 2px solid #006CE4;
     color: #006CE4;
+    padding: 6px 8px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
 }
 
 /* HOTELS LIST DIV */
@@ -157,6 +169,28 @@
 
 .hotels-price>button:hover{
     background-color: #003580;
+}
+
+.hotel-loading{
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.3);
+
+}
+
+.hotel-loading > img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+   
+
 }
 
 

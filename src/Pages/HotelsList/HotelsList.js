@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { format, max } from 'date-fns';
 import { HotelsListSearchBox } from '../../components/HotelsListComponents/HotelsListSearchBox/HotelsListSearchBox';
 import axios from 'axios';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 
 export const HotelsList = () => {
 
@@ -17,6 +18,10 @@ export const HotelsList = () => {
   const [hotelsData, setHotelsData] = useState(null);
 
   const [hotelHeading, setHotelHeading] = useState(destination);
+
+  const [hightestClicked, setHighestClicked] = useState(false);
+  const [lowestClicked, setLowestClicked] = useState(false);
+  const [ratingClicked, setRatingClicked] = useState(false);
 
   const navigateTo = useNavigate()
 
@@ -36,12 +41,31 @@ export const HotelsList = () => {
   }
 
   useEffect(() => {
-    fetchHotelsData(destination)
+    fetchHotelsData(destination);
+    setHighestClicked(false);
+    setLowestClicked(false);
+    setRatingClicked(false);
 
   }, [])
 
 
   function sortByPrice(highest = true){
+    
+    if(highest){
+      if(hightestClicked){  
+        return;        // IF HIGHEST ALREADY SELECTED CLICKED AGAIN RETURN
+      }
+      setLowestClicked(false);
+      setHighestClicked(true);
+      
+    }else{
+      if(lowestClicked){
+        return;        // IF LOWEST ALREADY SELECTED AND CLICKED AGAIN RETURN
+      }
+      setHighestClicked(false);
+      setLowestClicked(true);
+    }
+    setRatingClicked(false);
     const allHotelPrice = hotelsData.map((hotel)=>{
       return hotel.rooms[0].price;
     })
@@ -67,7 +91,7 @@ export const HotelsList = () => {
               }
              }
              if(sameData){
-              continue;     // if the is same then don't add again and continue 
+              continue;     // IF THE DATA IS SAME SO DON'T ADD AND CONTINUE 
              }
           }
           // --------------------------------------------
@@ -80,15 +104,23 @@ export const HotelsList = () => {
     setHotelsData(null);
     setTimeout(()=>{
       setHotelsData(hotelsSortedByPrice);
-    }, 1000)
+    }, 500)
   }
 
   function handleRatings(){
+
+    if(ratingClicked){
+      return;          //IF RATING ALREADY SELECTED AND CLICKED AGAIN RETURN
+    }
+    setLowestClicked(false);
+    setHighestClicked(false);
+    setRatingClicked(true);
+
     const allHotelsRating = hotelsData.map((hotel)=>{
       return hotel.rating;
     })
     const sortedRatings = allHotelsRating.sort();
-    sortedRatings.reverse(); // it will reverse the array
+    sortedRatings.reverse(); // REVERSING THE ARRAY
     console.log(sortedRatings)
 
     const highestRatingHotels = [];
@@ -122,7 +154,7 @@ export const HotelsList = () => {
     setHotelsData(null);
     setTimeout(()=>{
       setHotelsData(highestRatingHotels);
-    }, 1000)
+    }, 500)
     
 
 
@@ -151,11 +183,11 @@ export const HotelsList = () => {
             {hotelsData && hotelsData.length > 0 && <h1>Hotels List</h1>}
 
             {hotelsData && hotelsData.length > 0 && <div className='hotelList-button-container'> 
-            <button className='hotel-sorting-btn' onClick={()=>{
+            <button className={lowestClicked ? 'sorting-btn-clicked' : 'hotel-sorting-btn'} onClick={()=>{
               sortByPrice(false);
-            }}>Lowest First</button>
-            <button className='hotel-sorting-btn' onClick={sortByPrice}>Highest First</button>
-            <button className='hotel-sorting-btn' onClick={handleRatings}>Top Rated</button>
+            }}>Lowest Price</button>
+            <button className={hightestClicked ? 'sorting-btn-clicked' : 'hotel-sorting-btn'} onClick={sortByPrice}>Highest Price</button>
+            <button className={ratingClicked ? 'sorting-btn-clicked' : 'hotel-sorting-btn'} onClick={handleRatings}>Top Rated</button>
            </div>}
 
             {hotelsData ? hotelsData.length > 0 ? hotelsData.map((hotel) => (
@@ -200,7 +232,11 @@ export const HotelsList = () => {
                 </div>
 
               </article>
-            )) : <h1>Try different Search</h1> : <h1>Loading...</h1>
+            )) : <h1>Try different Search</h1> 
+            : 
+            <div className='hotel-loading'>
+              <img src='https://media.tenor.com/JBgYqrobdxsAAAAi/loading.gif' alt="loading" />
+              </div>
             }
 
 
