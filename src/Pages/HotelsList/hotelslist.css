@@ -193,6 +193,11 @@
 
 }
 
+.loading-comp{
+    width: 100%;
+    height: 100%;
+}
+
 
 @media screen and (max-width: 480px) {
     .hotel-list-cards{
@@ -210,6 +215,11 @@
      .hotels-price>button{
         height: auto;
         padding: 10px 0px;
+     }
+
+     .loading-comp{
+        width: 100vw;
+        height: 100vh;
      }
 }
 

@@ -49,50 +49,50 @@ export const HotelsList = () => {
   }, [])
 
 
-  function sortByPrice(highest = true){
-    
-    if(highest){
-      if(hightestClicked){  
+  function sortByPrice(highest = true) {
+
+    if (highest) {
+      if (hightestClicked) {
         return;        // IF HIGHEST ALREADY SELECTED CLICKED AGAIN RETURN
       }
       setLowestClicked(false);
       setHighestClicked(true);
-      
-    }else{
-      if(lowestClicked){
+
+    } else {
+      if (lowestClicked) {
         return;        // IF LOWEST ALREADY SELECTED AND CLICKED AGAIN RETURN
       }
       setHighestClicked(false);
       setLowestClicked(true);
     }
     setRatingClicked(false);
-    const allHotelPrice = hotelsData.map((hotel)=>{
+    const allHotelPrice = hotelsData.map((hotel) => {
       return hotel.rooms[0].price;
     })
 
     const sortedPrice = allHotelPrice.sort();
 
-    if(highest){
+    if (highest) {
       sortedPrice.reverse(); //IF CLICKED ON HIGHEST THAN ONLY REVERSE
     }
-    
+
     const hotelsSortedByPrice = [];
-    for(let price of sortedPrice){
-      for(let data of hotelsData){
-        if(data.rooms[0].price === price){
+    for (let price of sortedPrice) {
+      for (let data of hotelsData) {
+        if (data.rooms[0].price === price) {
 
           // -------Check for same data------------------
-          if(hotelsSortedByPrice.length > 0){
-             let sameData = false;
-             for(let newData of hotelsSortedByPrice){
-              if(newData._id === data._id){
+          if (hotelsSortedByPrice.length > 0) {
+            let sameData = false;
+            for (let newData of hotelsSortedByPrice) {
+              if (newData._id === data._id) {
                 sameData = true;
                 break;
               }
-             }
-             if(sameData){
+            }
+            if (sameData) {
               continue;     // IF THE DATA IS SAME SO DON'T ADD AND CONTINUE 
-             }
+            }
           }
           // --------------------------------------------
           hotelsSortedByPrice.push(data);
@@ -102,21 +102,21 @@ export const HotelsList = () => {
     }
     console.log("Sort by price hotel data", hotelsSortedByPrice);
     setHotelsData(null);
-    setTimeout(()=>{
+    setTimeout(() => {
       setHotelsData(hotelsSortedByPrice);
     }, 500)
   }
 
-  function handleRatings(){
+  function handleRatings() {
 
-    if(ratingClicked){
+    if (ratingClicked) {
       return;          //IF RATING ALREADY SELECTED AND CLICKED AGAIN RETURN
     }
     setLowestClicked(false);
     setHighestClicked(false);
     setRatingClicked(true);
 
-    const allHotelsRating = hotelsData.map((hotel)=>{
+    const allHotelsRating = hotelsData.map((hotel) => {
       return hotel.rating;
     })
     const sortedRatings = allHotelsRating.sort();
@@ -127,38 +127,53 @@ export const HotelsList = () => {
 
     for (let rating of sortedRatings) {
       for (let data of hotelsData) {
-        if(data.rating === rating){
+        if (data.rating === rating) {
 
           // --------A check for same data-------------------
           if (highestRatingHotels.length > 0) {
             let sameData = false;
-           for(let newHotel of highestRatingHotels){
-             if(newHotel._id === data._id){
-               sameData = true;
-               break;
-             }
-           }
-           if(sameData){
-             continue;
-           }
-         }
-        //  -------------------------------------------------
+            for (let newHotel of highestRatingHotels) {
+              if (newHotel._id === data._id) {
+                sameData = true;
+                break;
+              }
+            }
+            if (sameData) {
+              continue;
+            }
+          }
+          //  -------------------------------------------------
 
-         highestRatingHotels.push(data);
-         break;
+          highestRatingHotels.push(data);
+          break;
         }
       }
     }
 
     console.log("Top Rated", highestRatingHotels)
     setHotelsData(null);
-    setTimeout(()=>{
+    setTimeout(() => {
       setHotelsData(highestRatingHotels);
     }, 500)
-    
 
 
-}
+
+  }
+
+  function getRatingRemarks(rating) {
+    if (rating >= 5) {
+      return 'Excellent';
+    }
+    else if (rating >= 4) {
+      return 'Very Good';
+    }
+    else if (rating >= 3) {
+      return 'Good';
+    }
+    else if (rating < 3) {
+      return 'Poor';
+    }
+  }
 
 
 
@@ -175,20 +190,20 @@ export const HotelsList = () => {
             personCountInfo={personCountInfo} setPersonCountInfo={setPersonCountInfo}
             fetchHotelsData={fetchHotelsData}
             setHotelHeading={setHotelHeading} />
-           
-           
+
+
 
           <div className='hotels-list-div'>
 
             {hotelsData && hotelsData.length > 0 && <h1>Hotels List</h1>}
 
-            {hotelsData && hotelsData.length > 0 && <div className='hotelList-button-container'> 
-            <button className={lowestClicked ? 'sorting-btn-clicked' : 'hotel-sorting-btn'} onClick={()=>{
-              sortByPrice(false);
-            }}>Lowest Price</button>
-            <button className={hightestClicked ? 'sorting-btn-clicked' : 'hotel-sorting-btn'} onClick={sortByPrice}>Highest Price</button>
-            <button className={ratingClicked ? 'sorting-btn-clicked' : 'hotel-sorting-btn'} onClick={handleRatings}>Top Rated</button>
-           </div>}
+            {hotelsData && hotelsData.length > 0 && <div className='hotelList-button-container'>
+              <button className={lowestClicked ? 'sorting-btn-clicked' : 'hotel-sorting-btn'} onClick={() => {
+                sortByPrice(false);
+              }}>Lowest Price</button>
+              <button className={hightestClicked ? 'sorting-btn-clicked' : 'hotel-sorting-btn'} onClick={sortByPrice}>Highest Price</button>
+              <button className={ratingClicked ? 'sorting-btn-clicked' : 'hotel-sorting-btn'} onClick={handleRatings}>Top Rated</button>
+            </div>}
 
             {hotelsData ? hotelsData.length > 0 ? hotelsData.map((hotel) => (
 
@@ -217,7 +232,7 @@ export const HotelsList = () => {
                   {/* HOTEL RATING AND PRICE */}
                   <div className='ratings-price-div'>
                     <div className='hotels-rating'>
-                      <p>Ratings</p>
+                      <p>{getRatingRemarks(hotel.rating)}</p>
                       <p className='rating-para'>{hotel.rating}</p>
                     </div>
                     <div className='hotels-price'>
@@ -232,11 +247,15 @@ export const HotelsList = () => {
                 </div>
 
               </article>
-            )) : <h1>Try different Search</h1> 
-            : 
-            <div className='hotel-loading'>
-              <img src='https://media.tenor.com/JBgYqrobdxsAAAAi/loading.gif' alt="loading" />
-              </div>
+            )) : <h1>Try different Search</h1>
+              :
+              <>
+              <div className='loading-comp'></div>
+                <div className='hotel-loading'>
+                  <img src='https://media.tenor.com/JBgYqrobdxsAAAAi/loading.gif' alt="loading" />
+                </div>
+              </>
+
             }
 
 

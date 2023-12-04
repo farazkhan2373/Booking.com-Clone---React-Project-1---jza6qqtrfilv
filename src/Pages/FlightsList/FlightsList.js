@@ -79,7 +79,14 @@ export const FlightsList = () => {
         if (data.ticketPrice === amount) {
           // check for similar data if same id is matched than don't push and move ahead
           if (cheapestFlight.length > 0) {
-            if (cheapestFlight[cheapestFlight.length - 1]._id === data._id) {
+            let sameData = false;
+            for(let newFlight of cheapestFlight){
+              if(newFlight._id === data._id){
+                sameData = true;
+                break;
+              }
+            }
+            if(sameData){
               continue;
             }
           }
