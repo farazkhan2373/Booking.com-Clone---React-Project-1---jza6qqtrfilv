@@ -230,12 +230,12 @@ export const SelectedFlight = () => {
 
               <div>
                 <h5>Ticket(1 traveller)</h5>
-                <p>Flight Fare: INR {selectedFlight.ticketPrice - calculateTax(selectedFlight.ticketPrice)}</p>
-                <p>Taxes and Charges: INR {calculateTax(selectedFlight.ticketPrice)}</p>
+                <p>Flight Fare: INR {(parseInt(selectedFlight.ticketPrice) * parseInt(travellerCount)) - calculateTax((parseInt(selectedFlight.ticketPrice) * parseInt(travellerCount)))}</p>
+                <p>Taxes and Charges: INR {calculateTax((parseInt(selectedFlight.ticketPrice) * parseInt(travellerCount)))}</p>
               </div>
 
               <div>
-                <h1>Total: INR {selectedFlight.ticketPrice.toLocaleString('en-IN')}</h1>
+                <h1>Total: INR {(parseInt(selectedFlight.ticketPrice) * parseInt(travellerCount)).toLocaleString('en-IN')}</h1>
                 <p>Includes taxes and charges</p>
               </div>
 

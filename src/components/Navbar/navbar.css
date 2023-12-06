@@ -109,7 +109,7 @@
 
 .profile-modal{
     position: absolute;
-    z-index: 4; 
+    z-index: 1000; 
     right: 0px;
     top: 36px;
     display: flex;

@@ -15,6 +15,10 @@ export const FlightsList = () => {
   const {travellerCount} = useContext(TravellerDetailsContext);
   // console.log("traveller Count", travellerCount)
 
+  const totalTraveller = sessionStorage.getItem('flightTravellersCount')
+
+
+
 
   const departure = location.state.departure;
   const arrival = location.state.arrival;
@@ -202,7 +206,7 @@ export const FlightsList = () => {
                   </div>
                   <div className='flight-price-content'>
                     <h2>INR {flight.ticketPrice.toLocaleString('en-IN')}</h2>
-                    <p>Total price for all travellers</p>
+                    <p>INR {(parseInt(flight.ticketPrice) * parseInt(travellerCount)).toLocaleString('en-IN') } Total price for all travellers </p>
                   </div>
 
                   <button className='white-btn' onClick={() =>{ 

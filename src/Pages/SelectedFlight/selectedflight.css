@@ -4,6 +4,7 @@
  left: 0;
  background-color: white;
  width: 100vw;
+ z-index: 999;
 
 }
 

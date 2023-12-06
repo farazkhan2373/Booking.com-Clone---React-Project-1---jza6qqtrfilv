@@ -22,7 +22,7 @@ export const FlightHeader = () => {
                 <p>Discover your next dream destination</p>
 
                 <div className='user-input-div'>
-                    <input type="radio" name="trip" id="" /> <span>Round trip</span>
+                    {/* <input type="radio" name="trip" id="" /> <span>Round trip</span>
                     <input type="radio" name="trip" id="" /> <span>One way</span>
                     <input type="radio" name="trip" id="" /> <span>Multi-city</span>
                     <select name="" id="">
@@ -30,7 +30,7 @@ export const FlightHeader = () => {
                         <option value="Premium economy">Premium economy</option>
                         <option value="Business">Business</option>
                         <option value="First Class">First Class</option>
-                    </select>
+                    </select> */}
 
                     <div className='flight-traveller-count-container'>
                         <span className='flight-traveller-count-span'
@@ -45,7 +45,7 @@ export const FlightHeader = () => {
                             setChildCount={setChildCount}/>}
                     </div>
 
-                    <input type="checkbox" name="" id="" />Directs Flights only
+                    
                 </div>
 
                 <FlightSearchBar/>
