@@ -1,7 +1,6 @@
 .flight-booking-page{
     position: absolute;
-    top: 117px;
-    left: 0px;
+    top: 0;
     width: 100vw;
     background-color: white;
 }

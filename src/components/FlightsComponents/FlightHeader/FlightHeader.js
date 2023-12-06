@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import './FlightHeader.css'
 import { FlightSearchBar } from './FlightSearchBar/FlightSearchBar'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
+import { TravellerCountModal } from '../TravellerCountModal/TravellerCountModal'
+import { TravellerDetailsContext } from '../TravellerDetailsContext/TravellerDetailsContext'
 
 export const FlightHeader = () => {
+  
+    
+   const {travellerCount} = useContext(TravellerDetailsContext);
+    const [adultCount, setAdultCount] = useState(1);
+    const [childCount ,setChildCount] = useState(0);
+    const [showTravellerModal, setShowTravellerModal] = useState(false);
 
     
     return (
@@ -11,7 +21,7 @@ export const FlightHeader = () => {
                 <h1>Compare and book flights with ease</h1>
                 <p>Discover your next dream destination</p>
 
-                {/* <div className='user-input-div'>
+                <div className='user-input-div'>
                     <input type="radio" name="trip" id="" /> <span>Round trip</span>
                     <input type="radio" name="trip" id="" /> <span>One way</span>
                     <input type="radio" name="trip" id="" /> <span>Multi-city</span>
@@ -22,8 +32,21 @@ export const FlightHeader = () => {
                         <option value="First Class">First Class</option>
                     </select>
 
+                    <div className='flight-traveller-count-container'>
+                        <span className='flight-traveller-count-span'
+                         onClick={()=> setShowTravellerModal(!showTravellerModal)}>
+                            {travellerCount} Traveller <FontAwesomeIcon icon={faAngleDown} />
+                            </span>
+
+                            {showTravellerModal &&  <TravellerCountModal 
+                
+                            setShowTravellerModal={setShowTravellerModal}
+                            adultCount={adultCount} setAdultCount={setAdultCount} childCount={childCount}
+                            setChildCount={setChildCount}/>}
+                    </div>
+
                     <input type="checkbox" name="" id="" />Directs Flights only
-                </div> */}
+                </div>
 
                 <FlightSearchBar/>
             </div>

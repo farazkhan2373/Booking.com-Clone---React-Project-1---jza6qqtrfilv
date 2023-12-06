@@ -5,9 +5,12 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCircle, faCircleChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { AuthContext } from '../../components/App';
+import { TravellerDetailsContext } from '../../components/FlightsComponents/TravellerDetailsContext/TravellerDetailsContext';
+import { Footer } from '../../components/Footer/Footer';
 
 export const SelectedFlight = () => {
   const location = useLocation();
+
 
 
   const flightIdPathname = location.pathname;
@@ -18,8 +21,8 @@ export const SelectedFlight = () => {
   const departureCity = location.state.departureCity;
   const arrivalCity = location.state.arrivalCity;
 
-  console.log("selectedFlight location object", location);
-  console.log(departure, arrival, startDate);
+  // console.log("selectedFlight location object", location);
+  // console.log(departure, arrival, startDate);
 
   const navigateTo = useNavigate();
 
@@ -30,6 +33,10 @@ export const SelectedFlight = () => {
   const [seatNo, setSeatNo] = useState('No seat selected');
   const [showSeatModal, setShowSeatModal] = useState(false);
   const [totalSeats, setTotalSeats] = useState(0);
+  const [reservedSeats, setReservedSeats] = useState([]);
+  // console.log("in open reserved Seats", reservedSeats);
+  
+  const travellerCount =  sessionStorage.getItem('flightTravellersCount');
 
   const allSeats = Array.from({ length: totalSeats }, (_, index) => index + 1);
 
@@ -43,7 +50,7 @@ export const SelectedFlight = () => {
     }
     try {
       const response = await axios.get(`https://academics.newtonschool.co/api/v1/bookingportals/flight/${flightId}`, config)
-      console.log(response.data.data);
+      // console.log(response.data.data);
       setSelectedFlight(response.data.data);
       setTotalSeats(response.data.data.availableSeats);
     }
@@ -52,48 +59,106 @@ export const SelectedFlight = () => {
     }
   }
 
+  // BY DEFAULT DISPLAY THE FETCED DATA ON INITIAL RENDER
   useEffect(() => {
     getSelectedFlightData();
   }, [])
+
+  // WHEN FLIGHT-SEAT-MODAL IS OPEN MARK THE SEATS WHICH USER HAS ALREADY SELECTED
+  useEffect(()=>{
+      const flightSeats = document.getElementsByClassName('flight-seats');
+      if(flightSeats.length > 0){
+       for(let seats of flightSeats){
+        for(let num of reservedSeats){
+           if(seats.innerText === num){
+            seats.classList.add('backgroundColor-seat');
+           }
+        }
+      }
+      }
+  }, [showSeatModal])
 
   function calculateTax(number) {
     return ((5 / 100) * number).toFixed(2);
 
   }
 
+  // HANDLE FLIGHT BOOK BUTTON
   function handleFlightBookBtn() {
+
     if(seatNo === 'No seat selected'){
       alert('Please Select Seat');
       return;
     }
-    navigateTo('/flights/flightbooking', { state: { flightId, flightIdPathname, departure, arrival, startDate, departureCity, arrivalCity, day } });
-  }
-
-  function handleSelectedSeat(e){
-   
-
-    const isAlreadySelected = document.querySelector('.backgroundColor-seat');
-
-    // IF CLICKED ON SAME SEAT AGAIN THEN REMOVE SELECTION
-    if(isAlreadySelected === e.target){
-      isAlreadySelected.classList.remove('backgroundColor-seat');
-      setSeatNo('No seat selected');
+    let seatSelectedForAllTraveller = seatNo.split(',');
+    console.log(seatSelectedForAllTraveller.length);
+    console.log("type of travellerCount", typeof travellerCount);
+    if(seatSelectedForAllTraveller.length != travellerCount){ // travellerCount is string so to do implicit coercion '!='
+      alert('Please select seat for all travellers');
       return;
     }
-    
-    // IF SELECTED DIFFERENT SEAT REMOVE PREVIOUS SELECTED SEAT
-    if(isAlreadySelected){
-        isAlreadySelected.classList.remove('backgroundColor-seat');
+    navigateTo('/flights/flightbooking', { state: { flightId, flightIdPathname, departure, arrival, startDate, departureCity, arrivalCity, day } });
+  }
+ 
+  // HANDLE SELECTION OF SEATS
+  function handleSelectedSeat(e){
 
+    // GETTING ALL THE ELEMENT HAVING CLASS 'backgroundColor-seat'
+    const isAlreadySelected = document.getElementsByClassName('backgroundColor-seat');
+    // console.log("inside selection", isAlreadySelected);
+  
+  //  IF CLICKED AGAIN ON SAME SEAT THAN REMOVE SELECTION
+    let isClickedAgain = false;
+    if(isAlreadySelected.length > 0){
+
+       for(let seat of isAlreadySelected){
+         if(seat.innerText === e.target.innerText){
+           e.target.classList.remove('backgroundColor-seat');
+           isClickedAgain = true;
+
+         }
+       }
+
+       if(isClickedAgain){
+         setReservedSeats((oldSeats)=>{
+          return oldSeats.filter(item => item !== e.target.innerText);
+          
+         
+         })
+       }
+     
+      if(isAlreadySelected.length >= travellerCount){  // if seat selected for all traveller than return
+        // console.log("reserved Seats", reservedSeats);
+        return;
+      }
     }
-   
-    // SELECTED SEAT
+
+    // SEAT SELECTION -> ADD CLASS  'backgroundColor-seat'
+    if(!isClickedAgain){
     e.target.classList.add('backgroundColor-seat');
-    setSeatNo(e.target.innerText);
+    reservedSeats.push(e.target.innerText);
+    }
+
+    // DISPLAYING SEAT NUMBERS ON UI
+    if(isAlreadySelected.length > 0){
+      let selectedSeats = [];
+      for(let num of isAlreadySelected){
+        selectedSeats.push(num.innerText);
+      }
+      setSeatNo(()=>{
+        return selectedSeats.join(',');
+      })
+    }else{
+      setSeatNo('No seat selected');
+      setReservedSeats([]);
+    }
+
+    // console.log("reserved Seats", reservedSeats);
    
 }
 
   return (
+    
     <section className='selected-flight-page parent-container'>
       <div className='child-container'>
 
@@ -103,7 +168,7 @@ export const SelectedFlight = () => {
           <div className='summary-header-div'>
             <div className='traveller-count'>
               <FontAwesomeIcon icon={faCircle} className='circle-icon' />
-              <li>1 traveller</li>
+              <li>{travellerCount} Traveller</li>
               <FontAwesomeIcon icon={faCircle} className='circle-icon' />
               <li>{day} {startDate.getDate()} {startDate.toLocaleString('default', { month: 'short' })}</li>
             </div>
@@ -191,6 +256,8 @@ export const SelectedFlight = () => {
 
 
       </div>
+
     </section>
+    
   )
 }

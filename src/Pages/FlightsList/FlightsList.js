@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './flightslist.css'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { faPersonWalkingLuggage, faPlane, faPlaneArrival, faPlaneDeparture, faSuitcaseRolling } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
+import { TravellerDetailsContext } from '../../components/FlightsComponents/TravellerDetailsContext/TravellerDetailsContext';
 
 export const FlightsList = () => {
 
   const location = useLocation();
   const navigateTo = useNavigate();
+  
+  // SETTING TRAVELLER COUNT SESSION STORAGE WHEN CLICKING ON SEE FLIGHTS
+  const {travellerCount} = useContext(TravellerDetailsContext);
+  // console.log("traveller Count", travellerCount)
 
 
   const departure = location.state.departure;
@@ -200,7 +205,12 @@ export const FlightsList = () => {
                     <p>Total price for all travellers</p>
                   </div>
 
-                  <button className='white-btn' onClick={() => navigateTo(`/flights/${flight._id}`, { state: { departure: flight.source, arrival: flight.destination, startDate, departureCity, arrivalCity, day } })}>See flight</button>
+                  <button className='white-btn' onClick={() =>{ 
+                    navigateTo(`/flights/${flight._id}`, { state: { departure: flight.source, arrival: flight.destination, startDate, departureCity, arrivalCity, day } })
+                    sessionStorage.setItem('flightTravellersCount', travellerCount);
+                   
+                    
+                    }}>See flight</button>
                 </div>
 
               </article>)) : <p className='flight-not-found'>We don't have any flights matching your search on our site. Try changing some details.</p> 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createContext, useState } from 'react'
 import { FlightHeader } from '../../components/FlightsComponents/FlightHeader/FlightHeader'
 import { FlightMain } from '../../components/FlightsComponents/FlightMain/FlightMain'
 import { Information } from '../../components/FlightsComponents/Information/Information'
@@ -7,10 +7,17 @@ import { FlightsList } from '../FlightsList/FlightsList'
 import { SelectedFlight } from '../SelectedFlight/SelectedFlight'
 import { FlightBooking } from '../FlightBooking/FlightBooking'
 import { FlightBookingAuth } from '../../components/AuthNavigator/FlightBookingAuth'
+import { TravellerDetailsContext } from '../../components/FlightsComponents/TravellerDetailsContext/TravellerDetailsContext'
+import './flights.css';
 
 export const Flights = () => {
+
+  const [travellerCount, setTravellerCount] = useState(1);
+  
+
   return (
     <section className='flight-section'>
+      <TravellerDetailsContext.Provider value={{travellerCount, setTravellerCount}} >
       <FlightHeader />
 
       <Routes>
@@ -28,6 +35,7 @@ export const Flights = () => {
           <Route path='flightbooking' element={<FlightBookingAuth><FlightBooking/></FlightBookingAuth> }/>
           
       </Routes>
+      </TravellerDetailsContext.Provider>
     </section>
   )
 }
