@@ -37,6 +37,7 @@ export const SelectedFlight = () => {
   // console.log("in open reserved Seats", reservedSeats);
   
   const travellerCount =  sessionStorage.getItem('flightTravellersCount');
+  
 
   const allSeats = Array.from({ length: totalSeats }, (_, index) => index + 1);
 
@@ -53,6 +54,7 @@ export const SelectedFlight = () => {
       // console.log(response.data.data);
       setSelectedFlight(response.data.data);
       setTotalSeats(response.data.data.availableSeats);
+
     }
     catch (error) {
       console.log("selected flight api error", error)
@@ -229,7 +231,7 @@ export const SelectedFlight = () => {
             <section className='fare-summary-box'>
 
               <div>
-                <h5>Ticket(1 traveller)</h5>
+                <h5>Ticket({travellerCount} traveller)</h5>
                 <p>Flight Fare: INR {(parseInt(selectedFlight.ticketPrice) * parseInt(travellerCount)) - calculateTax((parseInt(selectedFlight.ticketPrice) * parseInt(travellerCount)))}</p>
                 <p>Taxes and Charges: INR {calculateTax((parseInt(selectedFlight.ticketPrice) * parseInt(travellerCount)))}</p>
               </div>

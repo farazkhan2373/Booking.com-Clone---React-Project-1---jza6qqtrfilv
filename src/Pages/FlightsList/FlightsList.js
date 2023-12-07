@@ -152,6 +152,12 @@ export const FlightsList = () => {
     setCheapestClicked(false)
   }
 
+  function handleSeeFlightBtn(flight){
+
+    sessionStorage.setItem('flightTravellersCount', travellerCount);
+    navigateTo(`/flights/${flight._id}`, { state: { departure: flight.source, arrival: flight.destination, startDate, departureCity, arrivalCity, day } })
+  }
+
 
   return (
     <section className='flights-list-page parent-container'>
@@ -210,8 +216,8 @@ export const FlightsList = () => {
                   </div>
 
                   <button className='white-btn' onClick={() =>{ 
-                    navigateTo(`/flights/${flight._id}`, { state: { departure: flight.source, arrival: flight.destination, startDate, departureCity, arrivalCity, day } })
-                    sessionStorage.setItem('flightTravellersCount', travellerCount);
+                
+                    handleSeeFlightBtn(flight);
                    
                     
                     }}>See flight</button>

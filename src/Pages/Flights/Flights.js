@@ -9,6 +9,7 @@ import { FlightBooking } from '../FlightBooking/FlightBooking'
 import { FlightBookingAuth } from '../../components/AuthNavigator/FlightBookingAuth'
 import { TravellerDetailsContext } from '../../components/FlightsComponents/TravellerDetailsContext/TravellerDetailsContext'
 import './flights.css';
+import { FlightPaymentPage } from '../FlightPaymentPage/FlightPaymentPage'
 
 export const Flights = () => {
 
@@ -33,6 +34,8 @@ export const Flights = () => {
           <Route path='flightslist' element={<FlightsList/>}/>
           <Route path=':flightId' element={<SelectedFlight/>}/>
           <Route path='flightbooking' element={<FlightBookingAuth><FlightBooking/></FlightBookingAuth> }/>
+          
+          
           
       </Routes>
       </TravellerDetailsContext.Provider>

@@ -26,12 +26,10 @@
 }
 
 .flight-traveller-count-container{
-    border: 2px solid red;
+    /* border: 2px solid red; */
     position: relative;
 
 }
 
-.flight-traveller-count-span{
-    
-}
+
 
