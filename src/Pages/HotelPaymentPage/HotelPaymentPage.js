@@ -1,12 +1,13 @@
+import React, { useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import './hotelpaymentpage.css';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom';
-import './flightPaymentpage.css'
 import { BookingSuccessModal } from '../../components/BookingSuccessModal/BookingSuccessModal';
-import { faCircle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export const FlightPaymentPage = () => {
+
+export const HotelPaymentPage = () => {
+   
+    const [isBookingSuccessful, setBookingSuccessModal] = useState(false);
 
     const [formData, setFormData] = useState({
         cardHolderName: '',
@@ -58,64 +59,17 @@ export const FlightPaymentPage = () => {
         setFormData({ ...formData, [name]: value });
     }
 
-    function calculateTax(number) {
-        return ((5 / 100) * number).toFixed(2);
+    function convertDate(date) {
+        const options = { day: 'numeric', month: 'short', year: 'numeric' };
+        let readableDate = date.toLocaleString('en-IN', options);
+        return readableDate;
 
     }
 
-
-    const [totalCost, setTotalCost] = useState(null);
-    const [baseCost, setBaseCost] = useState(null);
-    const [taxAndCharges, setTaxAndCharges] = useState(null);
-    const [showPriceDetails, setShowPriceDetails] = useState(false);
-    const travellerCount = sessionStorage.getItem('flightTravellersCount');
-
-
-    // TO SHOW THE TOTAL PRICE CALLING THE SELECTED FLIGHT API 
-    const getSelectedFlightData = async () => {
-
-        const config = {
-            headers: {
-                projectID: "jza6qqtrfilv"
-            }
-        }
-        try {
-            const response = await axios.get(`https://academics.newtonschool.co/api/v1/bookingportals/flight/${state.flightId}`, config)
-            console.log("selected flight data", response.data.data);
-
-            let flightPrice = response.data.data.ticketPrice;
-            setBaseCost(() => {
-                const basePrice = (flightPrice * (parseInt(travellerCount))) - calculateTax(flightPrice * (parseInt(travellerCount)));
-                return basePrice;
-            })
-
-            setTaxAndCharges(() => {
-                const charges = calculateTax(flightPrice * (parseInt(travellerCount)));
-                return charges;
-            })
-
-            setTotalCost(flightPrice * (parseInt(travellerCount)));
-
-            setShowPriceDetails(true);
-
-
-        }
-        catch (error) {
-            console.log("selected flight api error", error)
-        }
-    }
-
-    useEffect(() => {
-        getSelectedFlightData();
-    }, [])
-
-    const [isBookingSuccessful, setBookingSuccessful] = useState(false);
+ const [paymentFailMsg, setPaymentFailMsg] = useState(null);
     const userBearerToken = sessionStorage.getItem('userToken');
-    const loggedInUserDetails = JSON.parse(sessionStorage.getItem('loginUserDetails'));
-    const { state } = useLocation();
-    console.log("payment page state", state);
 
-    const bookFlightTicket = async (flightDetails) => {
+    const bookHotel = async (hotelBookingDetails) => {
 
         const config = {
             headers: {
@@ -125,83 +79,69 @@ export const FlightPaymentPage = () => {
         }
 
         try {
-            const response = await axios.post('https://academics.newtonschool.co/api/v1/bookingportals/booking', flightDetails, config)
+            const response = await axios.post('https://academics.newtonschool.co/api/v1/bookingportals/booking', hotelBookingDetails, config);
             console.log(response);
-            setBookingSuccessful(true);
+            setBookingSuccessModal(true);
+           
         }
         catch (error) {
-            console.log(error);
+            console.log('Error in booking hotel', error);
+            setPaymentFailMsg(true);
         }
-
     }
 
-    function handleFlightForm(e) {
+    function handleHotelPayment(e) {
         e.preventDefault();
-        console.log("Pay button triggered");
-
-
-        const flightDetails = {
-            bookingType: "flight",
-            userId: loggedInUserDetails._id,
+        setPaymentFailMsg(false);
+        const hotelBookingDetails = {
+            bookingType: "hotel",
             bookingDetails: {
-                flightId: state.flightId,
-                startDate: state.startDate,
+                hotelId: state.hotelData._id,
+                startDate: state.userData.date[0].startDate,
+                endDate: state.userData.date[0].endDate
             }
         }
+        bookHotel(hotelBookingDetails);
 
-        bookFlightTicket(flightDetails);
     }
 
-    return (
-        <section className='payment-page parent-container'>
-            <div className='child-container'>
+    const { state } = useLocation();
+    console.log("hotel payment page state", state);
 
-                <div className='flight-location-div'>
-                    <div className='payment-traveller-date-div'>
-                        
-                        <li>{travellerCount} Traveller</li>
-                       
-                        <li>{state.day} {state.startDate.getDate()} {state.startDate.toLocaleString('default', { month: 'short' })}</li>
+    return (
+        <section className='hotel-payment-page parent-container'>
+            <div className='child-container hotel-payment-page-content'>
+                 <h1 className='check-and-pay'>Check and Pay</h1>
+
+                <div className='hotel-final-details'>
+
+                    <div>
+                        <h1>Hotel {state.hotelData.name}</h1>
+                        <p>{state.hotelData.location}</p>
+                        <p>Room Number: {state.roomValues.join(', ')}</p>
                     </div>
 
                     <div>
-                        <h1>{state.departureCity} to {state.arrivalCity}</h1>
+                        <h3>Guest Details</h3>
+                        <div className='guest-list'>
+                            <li>{state.userData.personCountInfo.adult} Adult</li>
+                            <li>{state.userData.personCountInfo.children} Children</li>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3>Check In & Check Out Date</h3>
+                        <p>{convertDate(state.userData.date[0].startDate)} to {convertDate(state.userData.date[0].endDate)}</p>
+                    </div>
+
+                    <div>
+                        <h2>Total &#8377; {state.totalAmmount.toLocaleString('en-IN')}</h2>
                     </div>
                 </div>
 
-                {showPriceDetails && <div className='flight-cost-details-container'>
-                    <h1>Check and pay</h1>
-                    <div className='flight-price-detials'>
-
-                        <div>
-                            <b>Ticket ({travellerCount} Traveller)</b>
-                            <div className='base-tax-div'>
-                                <span>Flight Fare</span>
-                                <span>INR {baseCost.toLocaleString('en-IN')}</span>
-                            </div>
-                            <div className='base-tax-div'>
-                                <span>Tax and charges</span>
-                                <span>INR {taxAndCharges.toLocaleString('en-IN')}</span>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div className='base-tax-div'>
-                                <h2>Total</h2>
-                                <h2>INR {totalCost.toLocaleString('en-IN')}</h2>
-                            </div>
-                            <small>indudes taxes and charges</small>
-                        </div>
-
-                        <div>
-                            <p className='green-para'>No hidden fees</p>
-                        </div>
-                    </div>
-                </div>}
-
                 <div className='flight-payment-container'>
 
-                    <form action="" onSubmit={handleFlightForm}>
+                    <form action="" onSubmit={handleHotelPayment}>
                         <div className='payment-method-box'>
 
                             <div>
@@ -242,9 +182,12 @@ export const FlightPaymentPage = () => {
                                     <input type="text" id='cvc' name='cvc' pattern='\d{3}' value={formData.cvc} onChange={handleCVC} maxLength='3' placeholder='XXX' required />
                                 </div>
                             </div>
+                           
+                            {paymentFailMsg && <div>
+                            <p className='error-message'>Something Went Wrong</ p>
+                        </div>}
 
-
-
+ 
                             <div>
                                 <input type="submit" value="Pay Now" className='blue-btn' />
                             </div>
@@ -252,8 +195,6 @@ export const FlightPaymentPage = () => {
                         </div>
                     </form>
                 </div>
-
-
             </div>
             {isBookingSuccessful && <BookingSuccessModal />}
         </section>

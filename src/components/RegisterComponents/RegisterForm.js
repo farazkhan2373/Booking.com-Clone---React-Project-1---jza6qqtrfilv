@@ -70,6 +70,13 @@ export const RegisterForm = ({state}) => {
 
   function handleInputChange(e){
     const {name, value} = e.target;
+    
+    const regex = /[!@#$%^&*()_+{}\[\]:;<>,.?\/\\|`~0-9]/;
+    if(name == 'firstname' || name == 'lastname'){
+         if(regex.test(value)){
+           return;
+         }
+    }
     setUserInfo({...userInfo, [name]: value});
     setErrorMessage(null);
   }

@@ -1,0 +1,22 @@
+.hotel-payment-page-content{
+    margin-top: 20px;
+}
+
+.check-and-pay{
+    font-size: 30px;
+}
+
+.hotel-final-details{
+    /* border: 1px solid grey; */
+    margin-top: 30px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.guest-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}

@@ -21,24 +21,24 @@ export const HotelPaymentModal = ({ setHotelPaymentModal, userData, hotelData, r
         expiryDate: '',
         cvc: ''
     })
-   
 
-    const bookHotel = async (hotelBookingDetails)=>{
-        
-        const config ={
-            headers:{
+
+    const bookHotel = async (hotelBookingDetails) => {
+
+        const config = {
+            headers: {
                 Authorization: `Bearer ${userBearerToken}`,
                 projectID: "jza6qqtrfilv"
             }
         }
 
-        try{
+        try {
             const response = await axios.post('https://academics.newtonschool.co/api/v1/bookingportals/booking', hotelBookingDetails, config);
             console.log(response);
             setBookingSuccessModal(true);
             setHotelPaymentModal(false);
         }
-        catch(error){
+        catch (error) {
             console.log('Error in booking hotel', error);
             setPaymentFailMsg(true);
         }
@@ -47,61 +47,75 @@ export const HotelPaymentModal = ({ setHotelPaymentModal, userData, hotelData, r
     function handleHotelPayment(e) {
         e.preventDefault();
         setPaymentFailMsg(false);
-       const hotelBookingDetails = {
-        bookingType: "hotel",
-        bookingDetails:{
-            hotelId: hotelData._id,
-            startDate: userData.date[0].startDate,
-            endDate: userData.date[0].endDate
+        const hotelBookingDetails = {
+            bookingType: "hotel",
+            bookingDetails: {
+                hotelId: hotelData._id,
+                startDate: userData.date[0].startDate,
+                endDate: userData.date[0].endDate
+            }
         }
-       }
-       bookHotel(hotelBookingDetails);
+        bookHotel(hotelBookingDetails);
 
     }
 
-    function convertDate(date){
-        const options = {day: 'numeric', month: 'short', year: 'numeric'};
+    function convertDate(date) {
+        const options = { day: 'numeric', month: 'short', year: 'numeric' };
         let readableDate = date.toLocaleString('en-IN', options);
         return readableDate;
 
     }
 
-    const handleCardDetails = (e) =>{
-        const {name, value} = e.target; 
-         
-
-         const digits = value.replace(/[^\d]/g, '');
-         const formatCardNumber = (digits.match(/.{1,4}/g) || []).join('-').substr(0, 19);
-     
-         setFormData({ ...formData, [name]: formatCardNumber });
-       
-
-    }
-
-    
-    function handleExpiryDate(e){
-        const {name, value} = e.target;
+    const handleCardDetails = (e) => {
+        const { name, value } = e.target;
 
 
         const digits = value.replace(/[^\d]/g, '');
-          // Insert a "/" after the first 2 digits
-          const formatExpiryDate = digits.replace(/(\d{2})(?=\d)/, '$1/').substr(0, 5);
+        const formatCardNumber = (digits.match(/.{1,4}/g) || []).join('-').substr(0, 19);
+
+        setFormData({ ...formData, [name]: formatCardNumber });
+
+
+    }
+
+
+    function handleExpiryDate(e) {
+        const { name, value } = e.target;
+
+
+        const digits = value.replace(/[^\d]/g, '');
+        // Insert a "/" after the first 2 digits
+        const formatExpiryDate = digits.replace(/(\d{2})(?=\d)/, '$1/').substr(0, 5);
         setFormData({ ...formData, [name]: formatExpiryDate });
 
-        
-    }
-    
-    function handleCVC(e){
-       const {name, value} = e.target;
 
-       if(isNaN(value)){
-           return;
-       }
-
-        setFormData({...formData, [name]: value});
     }
 
-    
+    function handleCVC(e) {
+        const { name, value } = e.target;
+
+        if (isNaN(value)) {
+            return;
+        }
+
+        setFormData({ ...formData, [name]: value });
+    }
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+
+        const regex = /[!@#$%^&*()_+{}\[\]:;<>,.?\/\\|`~0-9]/;
+
+        if (regex.test(value)) {
+            return;
+        }
+
+        setFormData({ ...formData, [name]: value });
+
+
+    }
+
+
 
 
     return (
@@ -157,8 +171,8 @@ export const HotelPaymentModal = ({ setHotelPaymentModal, userData, hotelData, r
                     <form action="" className='hotel-payment-form' onSubmit={handleHotelPayment}>
                         <div>
                             <label htmlFor="payment-holder-name">Card Holder's Name</label>
-                            <input type="text" name="payment-holder-name" id="payment-holder-name" value={formData.cardHolderName} 
-                            onChange={(e)=> setFormData(e.target.value)} placeholder='Name on Card' required />
+                            <input type="text" name="payment-holder-name" id="payment-holder-name" value={formData.cardHolderName}
+                                onChange={(e) => setFormData(e.target.value)} placeholder='Name on Card' required />
                         </div>
 
                         <div>
@@ -170,7 +184,7 @@ export const HotelPaymentModal = ({ setHotelPaymentModal, userData, hotelData, r
 
                             <div>
                                 <label htmlFor="expiry-num">Expiry Number</label>
-                                <input type="text" id="expiry-num" pattern='\d{2}/\d{2}' name='expiryDate' value={formData.expiryDate} onChange={handleExpiryDate} placeholder='MM/YY' maxLength='5' required/>
+                                <input type="text" id="expiry-num" pattern='\d{2}/\d{2}' name='expiryDate' value={formData.expiryDate} onChange={handleExpiryDate} placeholder='MM/YY' maxLength='5' required />
                             </div>
                             <div>
                                 <label htmlFor="hpay-cvc">CVC</label>
@@ -179,9 +193,9 @@ export const HotelPaymentModal = ({ setHotelPaymentModal, userData, hotelData, r
 
                         </section>
 
-                       {paymentFailMsg &&  <div>
-                        <p className='error-message'>Something Went Wrong</ p>
-                       </div>}
+                        {paymentFailMsg && <div>
+                            <p className='error-message'>Something Went Wrong</ p>
+                        </div>}
 
                         <div>
                             <button className='blue-btn'>Pay Now</button>

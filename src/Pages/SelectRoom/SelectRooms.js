@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './selectroom.css'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { HotelPaymentModal } from '../../components/HotelPaymentModal/HotelPaymentModal'
 import { BookingSuccessModal } from '../../components/BookingSuccessModal/BookingSuccessModal'
 
@@ -8,12 +8,13 @@ import { BookingSuccessModal } from '../../components/BookingSuccessModal/Bookin
 export const SelectRooms = () => {
 
     const location = useLocation()
+    const navigateTo = useNavigate();
     console.log("select room page location", location);
 
     const hotelData = location.state.hotelData;
     const userData = location.state.userData;
     console.log("rooms", userData.personCountInfo.room);
-    console.log(typeof userData.personCountInfo.room)
+    console.log(typeof userData.personCountInfo.room);
     
 
     const [roomValues, setRoomValues] = useState(Array(parseInt(userData.personCountInfo.room)).fill(''));
@@ -97,7 +98,8 @@ export const SelectRooms = () => {
                  <button className='white-btn' onClick={totalPrice}>Get Total Price</button>
 
                 {totalAmmount && <button className='white-btn'
-                onClick={()=> setHotelPaymentModal(true)}>Proceed to Pay</button>}
+                onClick={()=> navigateTo('/hotelpayment', {state : {userData, hotelData, roomValues, totalAmmount}}) }>Proceed to Pay</button>}
+                {/* onClick={()=> setHotelPaymentModal(true)} */}
               </div>
               </div>
 
