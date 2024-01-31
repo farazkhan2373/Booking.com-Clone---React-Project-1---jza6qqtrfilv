@@ -2,6 +2,7 @@
 }
 
 .homepage-content{
+    /* border: 1px solid black; */
     margin-top: 60px;
     display: flex;
     flex-direction: column;

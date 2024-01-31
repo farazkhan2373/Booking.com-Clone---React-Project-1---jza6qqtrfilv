@@ -138,7 +138,8 @@ export const HotelPaymentPage = () => {
                         <h2>Total &#8377; {state.totalAmmount.toLocaleString('en-IN')}</h2>
                     </div>
                 </div>
-
+  
+              {/* Payment Box */}
                 <div className='flight-payment-container'>
 
                     <form action="" onSubmit={handleHotelPayment}>

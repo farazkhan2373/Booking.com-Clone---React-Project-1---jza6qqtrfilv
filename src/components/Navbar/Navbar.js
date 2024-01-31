@@ -36,7 +36,8 @@ export const Navbar = () => {
           <span id='booking-logo'>
             <NavLink to="/"><h2>Booking.com</h2></NavLink>
           </span>
-
+           
+           {/* IS LOGGED IN TRUE SHOW PROFILE ICON */}
           {isLoggedIn ?
             <div className='profile-icon-container'>
 
@@ -62,7 +63,7 @@ export const Navbar = () => {
 
             </div>
             :
-            // REGISTER LOGIN BUTTONS DIV
+            // IF ISLOGGED IN IS FALSE SHOW REGISTER AND LOGIN BUTTONS DIV
             <div id='btn-container'>
               <button className='reg-btn' onClick={() => navigate('/register')}>Register</button>
               <button className='reg-btn' onClick={() => navigate('/login')}>Sign in</button>
