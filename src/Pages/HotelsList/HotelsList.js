@@ -25,6 +25,7 @@ export const HotelsList = () => {
 
   const navigateTo = useNavigate()
 
+  //FETCH HOTELS LIST OF PARTICULAR LOCAION
   const fetchHotelsData = async (location) => {
     const config = {
       headers: {
@@ -48,7 +49,7 @@ export const HotelsList = () => {
 
   }, [])
 
-
+  // SORTY-BY-PRICE FUNCTION IF HIGHEST 'true' SORT 'high-to-low' ELSE 'low-to-high'
   function sortByPrice(highest = true) {
 
     if (highest) {
@@ -62,10 +63,12 @@ export const HotelsList = () => {
       if (lowestClicked) {
         return;        // IF LOWEST ALREADY SELECTED AND CLICKED AGAIN RETURN
       }
-      setHighestClicked(false);
+      setHighestClicked(false); 
       setLowestClicked(true);
     }
+
     setRatingClicked(false);
+
     const allHotelPrice = hotelsData.map((hotel) => {
       return hotel.rooms[0].price;
     })
@@ -100,13 +103,17 @@ export const HotelsList = () => {
         }
       }
     }
+
     console.log("Sort by price hotel data", hotelsSortedByPrice);
     setHotelsData(null);
     setTimeout(() => {
       setHotelsData(hotelsSortedByPrice);
     }, 500)
-  }
 
+  } // sort-by-price function ends
+
+
+  // SORT-BY-TOP-RATING FUNCTION  
   function handleRatings() {
 
     if (ratingClicked) {
@@ -158,7 +165,7 @@ export const HotelsList = () => {
 
 
 
-  }
+  } // TOP-RATING function ends
 
   function getRatingRemarks(rating) {
     if (rating >= 5) {
@@ -229,7 +236,8 @@ export const HotelsList = () => {
                     <p className='green-para'>Free Cancellation</p>
                     <p className='green-para'>{hotel.rooms[0].cancellationPolicy}</p>
                   </div>
-                  {/* HOTEL RATING AND PRICE */}
+
+                  {/* HOTEL RATING, PRICE AND SEE AVAILABILITY BUTTON*/}
                   <div className='ratings-price-div'>
                     <div className='hotels-rating'>
                       <p>{getRatingRemarks(hotel.rating)}</p>
@@ -250,7 +258,7 @@ export const HotelsList = () => {
             )) : <h1>Try different Search</h1>
               :
               <>
-              <div className='loading-comp'></div>
+                <div className='loading-comp'></div>
                 <div className='hotel-loading'>
                   <img src='https://media.tenor.com/JBgYqrobdxsAAAAi/loading.gif' alt="loading" />
                 </div>

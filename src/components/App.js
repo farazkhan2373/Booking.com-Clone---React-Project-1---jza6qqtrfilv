@@ -17,6 +17,7 @@ import { HotelBookingAuth } from "./AuthNavigator/HotelBookingAuth";
 import { MyTrips } from "../Pages/MyTrips/MyTrips";
 import { FlightPaymentPage } from "../Pages/FlightPaymentPage/FlightPaymentPage";
 import { HotelPaymentPage } from "../Pages/HotelPaymentPage/HotelPaymentPage";
+import { AuthUser } from "./AuthNavigator/AuthUser";
 
 export const AuthContext = createContext();
 
@@ -37,11 +38,11 @@ function App() {
       <Route path="/airporttaxis" element={<ComingSoon />}/>
       <Route path='/register' element={<Register/>}/>
       <Route path='/login' element={<Login/>}/>
-      <Route path='/profile' element={<Profile/>}/>
+      <Route path='/profile' element={<AuthUser> <Profile/> </AuthUser>}/>
       <Route path='/hotelslist' element={<HotelsList />}/>
       <Route path='/hotels/:hotelId' element={<SelectedHotel />}/>
       <Route path='/hotels/rooms' element={<HotelBookingAuth><SelectRooms/></HotelBookingAuth>}/>
-      <Route path='/mytrips' element={<MyTrips />}/>
+      <Route path='/mytrips' element={<AuthUser><MyTrips /> </AuthUser>}/>
       <Route path='/payment' element={<FlightPaymentPage/> }/>
       <Route path='/hotelpayment' element={<HotelPaymentPage/> }/>
      </Routes>

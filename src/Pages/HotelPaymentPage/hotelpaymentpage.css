@@ -7,9 +7,11 @@
 }
 
 .hotel-final-details{
-    /* border: 1px solid grey; */
+    border: 1px solid grey;
+    border-radius: 8px;
+    width: 80%;
     margin-top: 30px;
-    padding: 4px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 8px;

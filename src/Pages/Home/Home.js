@@ -22,11 +22,11 @@ export const Home = () => {
 
             <div className="big-card-container">
               <div className='big-card-item'>
-                <img src="https://cf2.bstatic.com/xdata/images/city/600x600/684765.jpg?k=3f7d20034c13ac7686520ac1ccf1621337a1e59860abfd9cbd96f8d66b4fc138&o=" alt="New-Delhi" />
-                <h2 className='big-item-title'>New Delhi </h2>
+                <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWdyYXxlbnwwfHwwfHx8MA%3D%3D" alt="Agra" />
+                <h2 className='big-item-title'>Agra</h2>
               </div>
               <div className='big-card-item'>
-                <img src="https://cf2.bstatic.com/xdata/images/city/600x600/684534.jpg?k=d1fe86c22f2433f4e2dda14ddcbe80feb024b0fb30305e5684a1241fba5d4cff&o=" alt="Banglore" />
+                <img src="https://images.unsplash.com/photo-1588416936097-41850ab3d86d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YmVuZ2FsdXJ1fGVufDB8fDB8fHww" alt="Banglore" />
                 <h2 className='big-item-title'>Banglore </h2>
               </div>
             </div>

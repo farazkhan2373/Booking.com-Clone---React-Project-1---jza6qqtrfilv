@@ -12,8 +12,12 @@
 }
 
 .flight-cost-details-container{
-    /* border: 2px solid black; */
-    margin-top: 50px;
+    border: 1px solid gray;
+    margin-top: 40px;
+    padding: 10px 0px;
+    padding-left: 10px;
+    border-radius: 8px;
+    width: 80%;
 }
 
 .flight-price-detials{
@@ -34,7 +38,7 @@
 
 .flight-payment-container{
     /* border: 1px solid grey; */
-    margin-top: 50px;
+    margin-top: 40px;
     padding: 8px;
 }
 .payment-method-box {
