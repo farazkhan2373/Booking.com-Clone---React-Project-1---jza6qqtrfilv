@@ -26,7 +26,7 @@ export const FlightsList = () => {
   const departureCity = location.state.departureCity;
   const arrivalCity = location.state.arrivalCity;
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-  const day = daysOfWeek[startDate.getDay()];
+  const day = daysOfWeek[startDate.getDay()]; // getDay() will return between 0-6
 
   const [flights, setFlights] = useState(null);
 
@@ -59,6 +59,7 @@ export const FlightsList = () => {
 
   }, [departure, arrival, startDate])
 
+  // FILTER BUTTON STATES (BEST, CHEAPEST, FASTEST)
   const [bestClicked, setBestClicked] = useState(true);
   const [cheapestClicked, setCheapestClicked] = useState(false);
   const [fastestClicked, setFastestClicked] = useState(false);
@@ -69,7 +70,7 @@ export const FlightsList = () => {
     setFlights(null);
     setTimeout(()=>{
      getFlightsList();
-    }, 2000)
+    }, 2000);
    
     
     setBestClicked(true);
@@ -180,7 +181,7 @@ export const FlightsList = () => {
               <article className='flight-cards' key={index}>
 
                 <div className='flight-timing-div'>
-
+                  {/* where from div */}
                   <div className='left-div'>
                     <div><FontAwesomeIcon icon={faPlaneDeparture} /></div>
                     <div>
@@ -188,13 +189,13 @@ export const FlightsList = () => {
                       <span>{flight.source} {startDate.getDate()} {startDate.toLocaleString('default', { month: 'short' })}</span>
                     </div>
                   </div>
-
+                  {/* flight duration div */}
                   <div className='center-div'>
                     <p>{flight.duration}h</p>
                     <span>---------</span>
                     <p>{flight.stops === 0 ? 'Direct' : flight.stops + ' stop'}</p>
                   </div>
-
+                  {/* where to div */}
                   <div className='right-div'>
                     <div><FontAwesomeIcon icon={faPlaneArrival} /></div>
                     <div>
@@ -203,7 +204,7 @@ export const FlightsList = () => {
                     </div>
                   </div>
                 </div>
-
+                {/* Price div */}
                 <div className='flight-price-div'>
                   <div className='cabin-bag-div'>
                     <FontAwesomeIcon icon={faSuitcaseRolling} className='bag-icon' />
@@ -214,7 +215,7 @@ export const FlightsList = () => {
                     <h2>INR {flight.ticketPrice.toLocaleString('en-IN')}</h2>
                     <p>INR {(parseInt(flight.ticketPrice) * parseInt(travellerCount)).toLocaleString('en-IN') } Total price for all travellers </p>
                   </div>
-
+                   {/* See flight button */}
                   <button className='white-btn' onClick={() =>{ 
                 
                     handleSeeFlightBtn(flight);

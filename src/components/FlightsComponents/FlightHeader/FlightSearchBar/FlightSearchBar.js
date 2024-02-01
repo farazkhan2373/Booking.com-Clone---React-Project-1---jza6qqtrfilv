@@ -41,16 +41,17 @@ export const FlightSearchBar = () => {
     const navigateTo = useNavigate()
 
     function handleFlightSearch() {
+        
         if (departure === '') {
-            whereFromRef.current.focus();
+            whereFromRef.current.focus(); // if departure is empty return
             return;
         } else if (arrival === '') {
-            whereToRef.current.focus();
+            whereToRef.current.focus(); // if arrival is empty return
             return;
         }
 
         if(departure === arrival){
-            alert("Source and destination can't be same");
+            alert("Source and destination can't be same"); // if dep or arr is same return
             return;
         }
 
@@ -65,7 +66,7 @@ export const FlightSearchBar = () => {
         console.log("departure city", departureCity);
         console.log("arrival city", arrivalCity);
 
-
+        // navigating to flight list page and sending the state
         console.log(departure, arrival, startDate);
         navigateTo('/flights/flightslist', { state: { departure: source, arrival: destination, startDate, arrivalCity, departureCity } })
 
@@ -230,7 +231,7 @@ export const FlightSearchBar = () => {
 
                     <div className='flight-departure-input-div'>
                         <FontAwesomeIcon icon={faPlaneDeparture} />
-
+                         {/* DEPARTURE INPUT */}
                         <input type="text" placeholder='Where from?'
                             className='flight-input-bar' value={departure}
                             onChange={handleDepartureInput}
@@ -238,7 +239,7 @@ export const FlightSearchBar = () => {
 
                         {showDepartureX && <FontAwesomeIcon icon={faXmark} className='flight-xmark'
                             onClick={handleDepartureXMark} />}
-
+                            {/* DEPARTURE SUGGESTION MODAL */}
                         {showSuggestionModal && <div className='suggestion-modal box-shadow' >
                             {suggestionData.length > 0 && suggestionData.map((data, index) => (
                                 <p key={index} className='suggestion-para'
@@ -256,7 +257,7 @@ export const FlightSearchBar = () => {
 
 
                 </div>
-
+                 {/* SWAP BUTTON */}
                 <div className='flight-searchItem swap-flight-box' onClick={swapFlightSearch}>
                     <div className='flight-exchange-div'>
                         <FontAwesomeIcon icon={faArrowRightArrowLeft} className='right-left-arrow' />
@@ -268,6 +269,7 @@ export const FlightSearchBar = () => {
                 <div className='flight-searchItem'>
                     <div className='flight-landing-input-div'>
                         <FontAwesomeIcon icon={faPlaneArrival} />
+                        {/* ARRIVAL INPUT */}
                         <input type="text" placeholder='Where to?' className='flight-input-bar'
                             value={arrival}
                             onChange={handleArrivalInput}
@@ -275,7 +277,7 @@ export const FlightSearchBar = () => {
 
                         {showArrivalX && <FontAwesomeIcon icon={faXmark} className='flight-xmark'
                             onClick={handleArrivalXMark} />}
-
+                           {/* ARRIVAL SUGGESION MODAL */}
                            {showArrivalSuggestionModal && <div className='arrival-suggestion-modal box-shadow'>
                                 {arrivalSuggestionData.length > 0 && arrivalSuggestionData.map((data, index)=>(
                                  <p key={index} className='arrival-suggestion-para'
@@ -290,7 +292,7 @@ export const FlightSearchBar = () => {
                             </div>}
                     </div>
                 </div>
-
+                 {/* FLIGHT DATE PICKER */}
                 <div className='flight-searchItem' id='flight-date-div'>
                     <FontAwesomeIcon icon={faCalendar} />
                     <DatePicker
@@ -300,7 +302,7 @@ export const FlightSearchBar = () => {
                         className='flight-calender-date'
                     />
                 </div>
-
+                {/* SEARCH BUTTON */}
                 <button className='same-btn flight-search-btn' onClick={handleFlightSearch}>Search</button>
 
 

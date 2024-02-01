@@ -21,7 +21,9 @@ export const MyTrips = () => {
         try{
             const response = await axios.get('https://academics.newtonschool.co/api/v1/bookingportals/booking/', config);
             console.log("my trips response", response.data.data);
-            setMyTripsData(response.data.data);
+            const tripsDetails = [...response.data.data];
+            tripsDetails.reverse();
+            setMyTripsData(tripsDetails);
         }
         catch(error){
             console.log("error fetching my trip",error)

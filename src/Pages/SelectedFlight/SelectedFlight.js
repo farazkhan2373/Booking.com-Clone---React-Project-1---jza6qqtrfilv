@@ -26,7 +26,7 @@ export const SelectedFlight = () => {
 
   const navigateTo = useNavigate();
 
-  const { flightId } = useParams();
+  const { flightId } = useParams(); // getting flight id from url
 
   const [selectedFlight, setSelectedFlight] = useState(null);
 
@@ -38,10 +38,11 @@ export const SelectedFlight = () => {
   
   const travellerCount =  sessionStorage.getItem('flightTravellersCount');
   
-
+  // CREATING ARRAY (arraylength === available seats) and inserting element starting from 1 to available seats 
   const allSeats = Array.from({ length: totalSeats }, (_, index) => index + 1);
 
-
+  
+  // GET SINGLE FLIGHT DATA
   const getSelectedFlightData = async () => {
 
     const config = {
@@ -66,7 +67,7 @@ export const SelectedFlight = () => {
     getSelectedFlightData();
   }, [])
 
-  // WHEN FLIGHT-SEAT-MODAL IS OPEN MARK THE SEATS WHICH USER HAS ALREADY SELECTED
+  // WHEN SEAT MODAL IS OPEN OR IS CLOSED RUN USE-EFFECT TO SHOW ALREADY SELECTED SEATS
   useEffect(()=>{
       const flightSeats = document.getElementsByClassName('flight-seats');
       if(flightSeats.length > 0){
@@ -182,7 +183,7 @@ export const SelectedFlight = () => {
 
           <div className='summary-main'>
 
-            {/* SELECT SEAT */}
+            {/* SELECT SEAT BOX */}
             <h4>Select your seat</h4>
 
             <section className='select-seat-container' >
@@ -198,7 +199,7 @@ export const SelectedFlight = () => {
                 <FontAwesomeIcon icon={faCircleChevronDown} className='dropdownArrow' />
                 </div>
               </div>
-
+               {/* SEAT SELECTION MODAL */}
               {showSeatModal && <div className='flight-seat-modal'>
 
                 {allSeats.length > 0 && allSeats.map((seatNumber, index) => (

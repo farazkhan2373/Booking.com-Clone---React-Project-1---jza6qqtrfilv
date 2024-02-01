@@ -79,11 +79,14 @@
 /* INPUT BAR */
 #input-text-bar {
     height: 24px;
-    width: 80%;
+    width: 100%;
     border: none;
     padding: 2px;
 
+}
 
+#input-text-bar:focus{
+    outline: 2px solid #006CE4;
 }
 
 /* input div -> x icon */

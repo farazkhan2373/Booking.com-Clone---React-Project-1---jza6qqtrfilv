@@ -12,8 +12,11 @@ export const FlightBooking = () => {
 
     const navigateTo = useNavigate();
 
+    const loginUserDetails = JSON.parse(sessionStorage.getItem('loginUserDetails'));
+
+
     const [formData, setFormData] = useState({
-        travellerEmail: '',
+        travellerEmail: loginUserDetails.email,
         travellerNumber: '',
         cardHolderName: '',
         cardNumber: '',
@@ -81,6 +84,7 @@ export const FlightBooking = () => {
 
     }
 
+    // TRAVELLER INPUT CHANGE FIRST NAME AND LAST NAME
     function handleTravellerInputChange(e) {
         const { value, name, id } = e.target;
         // console.log(id, name, value);
@@ -93,7 +97,8 @@ export const FlightBooking = () => {
         }
 
         setGenderError(null);
-
+      
+        // [{name: ""}, {}, {}]
 
         setTravellersDetailBox((oldDetails) => {
 
@@ -107,7 +112,7 @@ export const FlightBooking = () => {
     const travellerCount = sessionStorage.getItem("flightTravellersCount");
     const [travellersDetailBox, setTravellersDetailBox] = useState(null)
 
-
+//    CREATING ARRAY (arraylength === travellerCount) for travellers details
     useEffect(() => {
         setTravellersDetailBox(() => {
             const numberOfTravellers = Array.from({ length: parseInt(travellerCount) }, (_, index) => ({
@@ -142,7 +147,7 @@ export const FlightBooking = () => {
 
                     <div className='Who-flying-container'>
                         <h2>Who's flying?</h2>
-
+                          {/* CONTACT DETAILS BOX */}
                         <div className='flight-contact-details-container'>
                             <h3>Contact details</h3>
 
@@ -165,26 +170,26 @@ export const FlightBooking = () => {
 
                     </div>
 
-
+                     {/* TRAVELLERS DETAILS BOX */}
                     {travellersDetailBox && travellersDetailBox.length > 0 && travellersDetailBox.map((item, index) => (
 
                         <div className='flight-travellers-name-container' key={index}>
                             <h3>Traveller {index + 1}</h3>
-
+                             {/* first name input */}
                             <div className='travellers-info'>
                                 <div className='first-last-name-div'>
                                     <p>First name</p>
                                     <input type="text" name='firstName' id={index} value={item.firstName} onChange={handleTravellerInputChange} required />
                                     <small>Enter exactly what's written on this traveller's travel document</small>
                                 </div>
-
+                               {/* last name input */}
                                 <div className='first-last-name-div'>
                                     <p>Last name</p>
                                     <input type="text" name='lastName' id={index} value={item.lastName} onChange={handleTravellerInputChange} required />
                                     <small>Enter exactly what's written on this traveller's travel document</small>
                                 </div>
                             </div>
-
+                              {/* gender selection */}
                             <div className='flight-traveller-gender-div'>
                                 <p>Gender specified on your travel document </p>
                                 <select name="gender" id={index} onChange={handleTravellerInputChange} required>
@@ -201,6 +206,8 @@ export const FlightBooking = () => {
                     ))}
 
                     {genderError && <p className='error-message gender-error-msg'>{genderError}</p>}
+
+                    {/* NEXT BUTTON */}
                     <button className='same-btn flight-next-btn'>Next</button>
 
                 </form>
