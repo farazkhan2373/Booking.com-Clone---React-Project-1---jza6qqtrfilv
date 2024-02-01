@@ -78,34 +78,12 @@ export const FlightsList = () => {
     setFastestClicked(false);
   }
 
+  // SORT BY CHEAPEST PRICE (LOWEST TICKET PRICE FIRST)
   function handleCheapest() {
-    const price = flights.map((flight) => {
-      return flight.ticketPrice;
-    })
-    const sortedPrice = price.sort();
-    const cheapestFlight = []
-    for (let amount of sortedPrice) {
-      for (let data of flights) {
-        if (data.ticketPrice === amount) {
-          // check for similar data if same id is matched than don't push and move ahead
-          if (cheapestFlight.length > 0) {
-            let sameData = false;
-            for(let newFlight of cheapestFlight){
-              if(newFlight._id === data._id){
-                sameData = true;
-                break;
-              }
-            }
-            if(sameData){
-              continue;
-            }
-          }
-          cheapestFlight.push(data);
-          break;
-        }
-      }
-    }
-    
+   
+    const cheapestFlight = [...flights];
+    cheapestFlight.sort((a, b) => a.ticketPrice - b.ticketPrice); // cheapest first
+   
     setFlights(null);
     console.log("cheapestflight", cheapestFlight);
     setTimeout(()=>{
@@ -116,38 +94,18 @@ export const FlightsList = () => {
     setFastestClicked(false);
   }
 
+  // SORT BY LESS DURATION (FASTEST FLIGHT FIRST)
   function handleFastest() {
-    const allFlightDuration = flights.map((flight) => {
-      return flight.duration;
-    })
-    const sortedDuration = allFlightDuration.sort();
-    const fastestFlight = [];
-    for (let duration of sortedDuration) {
-      for (let data of flights) {
-        if (data.duration === duration) {
-          // below check is for similar data
-          if (fastestFlight.length > 0) {
-             let sameData = false;
-            for(let newFlight of fastestFlight){
-              if(newFlight._id === data._id){
-                sameData = true;
-                break;
-              }
-            }
-            if(sameData){
-              continue;
-            }
-          }
-          fastestFlight.push(data);
-          break;
-        }
-      }
-    }
+    
+    const fastestFlight = [...flights];
+    fastestFlight.sort((a, b) => a.duration - b.duration);
+
     setFlights(null);
     console.log("fastest flight", fastestFlight);
     setTimeout(()=>{
      setFlights(fastestFlight);
     }, 2000)
+
     setFastestClicked(true);
     setBestClicked(false);
     setCheapestClicked(false)

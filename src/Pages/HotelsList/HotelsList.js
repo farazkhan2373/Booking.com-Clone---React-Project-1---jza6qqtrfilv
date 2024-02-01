@@ -69,39 +69,13 @@ export const HotelsList = () => {
 
     setRatingClicked(false);
 
-    const allHotelPrice = hotelsData.map((hotel) => {
-      return hotel.rooms[0].price;
-    })
+    const hotelsSortedByPrice = [...hotelsData];
 
-    const sortedPrice = allHotelPrice.sort();
+    if(highest){
+      hotelsSortedByPrice.sort((a, b) => b.rooms[0].price -a.rooms[0].price); // highest first
 
-    if (highest) {
-      sortedPrice.reverse(); //IF CLICKED ON HIGHEST THAN ONLY REVERSE
-    }
-
-    const hotelsSortedByPrice = [];
-    for (let price of sortedPrice) {
-      for (let data of hotelsData) {
-        if (data.rooms[0].price === price) {
-
-          // -------Check for same data------------------
-          if (hotelsSortedByPrice.length > 0) {
-            let sameData = false;
-            for (let newData of hotelsSortedByPrice) {
-              if (newData._id === data._id) {
-                sameData = true;
-                break;
-              }
-            }
-            if (sameData) {
-              continue;     // IF THE DATA IS SAME SO DON'T ADD AND CONTINUE 
-            }
-          }
-          // --------------------------------------------
-          hotelsSortedByPrice.push(data);
-          break;
-        }
-      }
+    }else{
+      hotelsSortedByPrice.sort((a,b)=> a.rooms[0].price - b.rooms[0].price); // lowest first
     }
 
     console.log("Sort by price hotel data", hotelsSortedByPrice);
@@ -123,40 +97,9 @@ export const HotelsList = () => {
     setHighestClicked(false);
     setRatingClicked(true);
 
-    const allHotelsRating = hotelsData.map((hotel) => {
-      return hotel.rating;
-    })
-    const sortedRatings = allHotelsRating.sort();
-    sortedRatings.reverse(); // REVERSING THE ARRAY
-    console.log(sortedRatings)
-
-    const highestRatingHotels = [];
-
-    for (let rating of sortedRatings) {
-      for (let data of hotelsData) {
-        if (data.rating === rating) {
-
-          // --------A check for same data-------------------
-          if (highestRatingHotels.length > 0) {
-            let sameData = false;
-            for (let newHotel of highestRatingHotels) {
-              if (newHotel._id === data._id) {
-                sameData = true;
-                break;
-              }
-            }
-            if (sameData) {
-              continue;
-            }
-          }
-          //  -------------------------------------------------
-
-          highestRatingHotels.push(data);
-          break;
-        }
-      }
-    }
-
+    const highestRatingHotels = [...hotelsData];
+    highestRatingHotels.sort((a, b)=> b.rating - a.rating); // sorting by top rated
+    
     console.log("Top Rated", highestRatingHotels)
     setHotelsData(null);
     setTimeout(() => {
