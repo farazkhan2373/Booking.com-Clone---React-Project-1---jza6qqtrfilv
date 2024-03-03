@@ -11,11 +11,7 @@ import { AirportDetails } from '../../../AirportDetails/AirportDetails';
 export const FlightSearchBar = () => {
 
     const [departure, setDeparture] = useState('');
-    const [debounceDeparture, setDebounceDeparture] = useState('');
-
     const [arrival, setArrival] = useState('');
-    const [debounceArrival, setDebounceArrival] = useState('');
-
     const [startDate, setStartDate] = useState(new Date());
 
     const [showSuggestionModal, setShowSuggestionModal] = useState(false); // show departure Suggestion Modal
@@ -34,6 +30,9 @@ export const FlightSearchBar = () => {
     const [arrivalCity, setArrivalCity] = useState('');
 
 
+    const debounceTimeout = useRef(null);
+
+
     const whereFromRef = useRef();
     const whereToRef = useRef();
 
@@ -44,8 +43,9 @@ export const FlightSearchBar = () => {
 
     const navigateTo = useNavigate()
 
+    // My handleFlightSearch function is handled by throttling technique;
     function handleFlightSearch() {
-        
+       
         if (departure === '') {
             whereFromRef.current.focus(); // if departure is empty return
             return;
@@ -64,18 +64,42 @@ export const FlightSearchBar = () => {
             return;
         }
 
+        {
         // console.log("source", source)
         // console.log("destination", destination)
 
-        console.log("departure city", departureCity);
-        console.log("arrival city", arrivalCity);
+        // console.log("departure city", departureCity);
+        // console.log("arrival city", arrivalCity);
+        // console.log(departure, arrival, startDate);
 
-        // navigating to flight list page and sending the state
-        console.log(departure, arrival, startDate);
+        // navigating and passing states to flightList page (user collected data)
+        // departure: source (eg: BOM)
+        // arrival: destination (eg: AMD) -> to trigger api airport code
+        // startDate, departureCity and arrivalCity
+        } // comments
+
         navigateTo('/flights/flightslist', { state: { departure: source, arrival: destination, startDate, arrivalCity, departureCity } })
-
         
     }
+
+    let isClicked = useRef(false);
+
+    const throttling = (callback, delay)=>{
+       
+         return function (){
+            if(!isClicked.current){
+                
+                callback();
+                isClicked.current = true;
+                
+                setTimeout(()=>{
+                    isClicked.current = false;
+                }, delay)
+            }
+         }
+    }
+
+    const throttleFlightSearchButton = throttling(handleFlightSearch, 2000);
 
     function swapFlightSearch(e) {
         // IF BOTH ARE EMPTY THEN DON'T SWAP
@@ -118,7 +142,9 @@ export const FlightSearchBar = () => {
 
     }
 
+    // On departure and arrival input change getSuggestionList will triggered after pause of 200ms (expensive function)
     function getSuggestionList(keyword){
+        console.log("value", keyword);
         if(keyword == ''){
             return;
         }
@@ -135,45 +161,47 @@ export const FlightSearchBar = () => {
         return filterSearch;
     }
 
-    function handleDepartureInput(e) {
-   
-        const suggestionList = getSuggestionList(e.target.value);
+    function handleDepartureInput(e){
+    setDeparture(e.target.value); 
+    }
 
-        console.log("departure suggestion list", suggestionList)
-        setSuggestionData(suggestionList);
+    // Handling Debounce for Departure Input using useEffect hook (debouncing getSuggestionList());
+    useEffect(() => {
+        if (departure !== '') {
+            clearTimeout(debounceTimeout.current);
+            debounceTimeout.current = setTimeout(() => {
+                const suggestionList = getSuggestionList(departure);
+                setSuggestionData(suggestionList);
+                setShowSuggestionModal(true);
+                setShowDepartureX(true);
 
-        if (e.target.value === '') {
+            }, 200); // Adjusting the debounce delay of getSuggestionList for departure input
+        } else {
             setShowSuggestionModal(false);
             setShowDepartureX(false);
-        } else {
-            setShowSuggestionModal(true);
-            setShowDepartureX(true);
         }
-  
-        setDeparture(e.target.value);
-
-    }
+    }, [departure]);
 
 
     function handleArrivalInput(e){
-
-        const suggestionList = getSuggestionList(e.target.value);
-
-        console.log("arrival suggestion list", suggestionList);
-        setArrivalSuggestionData(suggestionList);
-
-        if(e.target.value === ''){
-           setArrivalSuggestionModal(false);
-            setShowArrivalX(false)
-
-        }else{
-            setArrivalSuggestionModal(true);
-            setShowArrivalX(true);
-        }
-
-      setArrival(e.target.value);
-      
+        setArrival(e.target.value);
     }
+
+    // Handling Debounce for Arrival Input using useEffect hook (debouncing getSuggestionList());
+    useEffect(()=>{
+      if(arrival !== ''){
+          clearTimeout(debounceTimeout.current);
+          debounceTimeout.current = setTimeout(()=>{
+           const suggestionList = getSuggestionList(arrival);
+           setArrivalSuggestionData(suggestionList);
+           setArrivalSuggestionModal(true);
+           setShowArrivalX(true);
+          }, 200); // Adjusting the debounce delay of getSuggestionList for departure input
+      }else{
+        setArrivalSuggestionModal(false);
+        setShowArrivalX(false);
+      }
+    }, [arrival])
 
     function suggestionClicked(e) {
         const selectedAirport = e.target.innerText;
@@ -317,7 +345,7 @@ export const FlightSearchBar = () => {
                     />
                 </div>
                 {/* SEARCH BUTTON */}
-                <button className='same-btn flight-search-btn' onClick={handleFlightSearch}>Search</button>
+                <button className='same-btn flight-search-btn' onClick={throttleFlightSearchButton}>Search</button>
 
 
 
