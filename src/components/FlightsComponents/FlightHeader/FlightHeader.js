@@ -37,7 +37,8 @@ export const FlightHeader = () => {
                          onClick={()=> setShowTravellerModal(!showTravellerModal)}>
                             {travellerCount} Traveller <FontAwesomeIcon icon={faAngleDown} />
                             </span>
-
+                             
+                             {/* FLIGHT TRAVELLER MODAL */}
                             {showTravellerModal &&  <TravellerCountModal 
                 
                             setShowTravellerModal={setShowTravellerModal}
@@ -47,7 +48,8 @@ export const FlightHeader = () => {
 
                     
                 </div>
-
+                 
+                 {/* FLIGHT SEARCH BAR */}
                 <FlightSearchBar/>
             </div>
         </header>

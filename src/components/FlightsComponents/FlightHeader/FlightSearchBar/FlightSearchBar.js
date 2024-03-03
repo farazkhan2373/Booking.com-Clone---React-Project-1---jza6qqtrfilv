@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './FlightSearchBar.css'
 import { faArrowDownLong, faArrowRightArrowLeft, faArrowUpLong, faCalendar, faPlaneArrival, faPlaneDeparture, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,11 +11,15 @@ import { AirportDetails } from '../../../AirportDetails/AirportDetails';
 export const FlightSearchBar = () => {
 
     const [departure, setDeparture] = useState('');
+    const [debounceDeparture, setDebounceDeparture] = useState('');
+
     const [arrival, setArrival] = useState('');
+    const [debounceArrival, setDebounceArrival] = useState('');
+
     const [startDate, setStartDate] = useState(new Date());
 
-    const [showSuggestionModal, setShowSuggestionModal] = useState(false);
-    const [suggestionData, setSuggestionData] = useState(null)
+    const [showSuggestionModal, setShowSuggestionModal] = useState(false); // show departure Suggestion Modal
+    const [suggestionData, setSuggestionData] = useState(null)             // departure suggestion data ([]);
 
     const [showArrivalSuggestionModal, setArrivalSuggestionModal] = useState(false);
     const [arrivalSuggestionData, setArrivalSuggestionData] = useState(null);
@@ -23,8 +27,8 @@ export const FlightSearchBar = () => {
     const [showDepartureX, setShowDepartureX] = useState(false);
     const [showArrivalX, setShowArrivalX] = useState(false);
 
-    const [source, setSource] = useState('');
-    const [destination, setDestination] = useState('');
+    const [source, setSource] = useState('');   // source state -> for storing departure airport code to call the api (eg: BOM)
+    const [destination, setDestination] = useState(''); // destination state -> for storing arrival airport code to call the api (eg: AMD)
 
     const [departureCity, setDepartureCity] = useState('');
     const [arrivalCity, setArrivalCity] = useState('');
@@ -78,8 +82,6 @@ export const FlightSearchBar = () => {
         if (departure === '' && arrival === '') {
             return;
         }
-      
-        
 
         //  SWAP INPUT FIELD
         if(arrival !== ''){
@@ -117,6 +119,9 @@ export const FlightSearchBar = () => {
     }
 
     function getSuggestionList(keyword){
+        if(keyword == ''){
+            return;
+        }
         let filterSearch = airportDetails.filter((data) => {
             let code = data.IATA_code.toLowerCase();
             let airportName = data.airport_name.toLowerCase();
@@ -131,7 +136,7 @@ export const FlightSearchBar = () => {
     }
 
     function handleDepartureInput(e) {
-
+   
         const suggestionList = getSuggestionList(e.target.value);
 
         console.log("departure suggestion list", suggestionList)
@@ -144,10 +149,11 @@ export const FlightSearchBar = () => {
             setShowSuggestionModal(true);
             setShowDepartureX(true);
         }
-
+  
         setDeparture(e.target.value);
 
     }
+
 
     function handleArrivalInput(e){
 
@@ -195,6 +201,7 @@ export const FlightSearchBar = () => {
         console.log("airport code", airportCode);
         console.log("city name", cityName);
 
+        //   setting state of aiport-code and city Name
         if(e.target.className === "arrival-suggestion-para"){
             setDestination(airportCode);
             setArrivalCity(cityName);
@@ -202,6 +209,8 @@ export const FlightSearchBar = () => {
             setSource(airportCode);
             setDepartureCity(cityName);
         }
+
+       
 
     }
 
@@ -224,6 +233,8 @@ export const FlightSearchBar = () => {
         whereToRef.current.focus();
     }
 
+    
+
     return (
         <div className='flight-search-bar'>
             <div className='flight-searchBar-container'>
@@ -233,8 +244,9 @@ export const FlightSearchBar = () => {
                         <FontAwesomeIcon icon={faPlaneDeparture} />
                          {/* DEPARTURE INPUT */}
                         <input type="text" placeholder='Where from?'
-                            className='flight-input-bar' value={departure}
-                            onChange={handleDepartureInput}
+                            className='flight-input-bar' 
+                            value={departure}
+                            onChange={handleDepartureInput}                   
                             ref={whereFromRef} />
 
                         {showDepartureX && <FontAwesomeIcon icon={faXmark} className='flight-xmark'
@@ -244,7 +256,9 @@ export const FlightSearchBar = () => {
                             {suggestionData.length > 0 && suggestionData.map((data, index) => (
                                 <p key={index} className='suggestion-para'
                                  onClick={(e)=>{
+                                    whereFromRef.current.value = e.target.innerText;
                                     suggestionClicked(e);
+                                    
                                     setDeparture(e.target.innerText);
                                     setShowSuggestionModal(false);
                                  }} >

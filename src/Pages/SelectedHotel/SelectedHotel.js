@@ -10,7 +10,7 @@ export const SelectedHotel = () => {
 
     const [hotelData, setHotelData] = useState(null)
     const { isLoggedIn } = useContext(AuthContext)
-    const { hotelId } = useParams();
+    const { hotelId } = useParams();  //particular hotel id
     console.log("hotelId", hotelId);
 
     const navigateTo = useNavigate();
