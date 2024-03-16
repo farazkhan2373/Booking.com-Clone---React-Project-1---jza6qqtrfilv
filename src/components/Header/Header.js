@@ -56,6 +56,7 @@ export const Header = () => {
 
     return (
         <header className='header-container parent-container'>
+           
             <div className='header-content child-container'>
 
                 <div className='next-stay-heading'>
@@ -121,13 +122,14 @@ export const Header = () => {
                     </div>
 
                     {/* SEARCH BUTTON */}
-                    <div className=''>
+                    <div className='stay-search-button-div'>
                     <button id='search-button' className='same-btn' onClick={handleHotelSearch} >Search</button>
                     </div>
 
                 </div>
 
             </div>
+
 
         </header>
     )
