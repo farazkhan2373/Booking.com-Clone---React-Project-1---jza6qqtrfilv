@@ -2,7 +2,7 @@
     /* border: 2px solid black; */
     color: white;
     background: rgb(255,250,252);
-    background: radial-gradient(circle, rgba(255,250,252,0) 78%, rgba(0,0,0,1) 100%);
+    background: radial-gradient(circle, rgba(255,250,252,0) 80%, rgba(0,0,0,1) 100%);
     position: relative;
 }
 
