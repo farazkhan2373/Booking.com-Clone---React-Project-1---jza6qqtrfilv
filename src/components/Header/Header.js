@@ -8,6 +8,12 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { format } from "date-fns";
 import { Personmodal } from './PersonModal/Personmodal';
 import { useNavigate } from 'react-router-dom';
+import { IoBedOutline } from "react-icons/io5";
+// import { FaRegCalendarAlt } from "react-icons/fa";
+import { VscCalendar } from "react-icons/vsc";
+import { IoPersonOutline } from "react-icons/io5";
+
+
 
 
 
@@ -72,7 +78,8 @@ export const Header = () => {
                         {/* INPUT DIV */}
                         <div className='headerSearchItem'>
                             <div id='inputtext-div'>
-                                <FontAwesomeIcon icon={faHotel} className='header-icon' />
+                                {/* <FontAwesomeIcon icon={faHotel} className='header-icon' /> */}
+                                <IoBedOutline className='header-icon' />
                                 <input
                                     type="text"
                                     placeholder='Where are you going?'
@@ -90,7 +97,9 @@ export const Header = () => {
 
                         {/* DATE DIV */}
                         <div className='headerSearchItem'>
-                            <FontAwesomeIcon icon={faCalendarDays} className='header-icon' />
+                            {/* <FontAwesomeIcon icon={faCalendarDays} className='header-icon' /> */}
+                            {/* <FaRegCalendarAlt className='header-icon'/> */}
+                            <VscCalendar className='header-icon'/>
                             <span id='search-date'
                                 onClick={() => setShowCalender((oldstate) => !oldstate)}>
                                 {format(date[0].startDate, "dd/MM/yyyy") + " to " + format(date[0].endDate, "dd/MM/yyyy")}</span>
@@ -106,7 +115,9 @@ export const Header = () => {
                         {/* PERSON DIV */}
                         <div className='headerSearchItem' >
 
-                            <FontAwesomeIcon icon={faPerson} className='header-icon' />
+                            {/* <FontAwesomeIcon icon={faPerson} className='header-icon' /> */}
+                            <IoPersonOutline className='header-icon'/>
+
 
                             <span id='person-count' onClick={() => setPersonModal((oldstate) => !oldstate)}>
                                 {`${personCountInfo.adult} Adult ${personCountInfo.children} Children ${personCountInfo.room} Room`}

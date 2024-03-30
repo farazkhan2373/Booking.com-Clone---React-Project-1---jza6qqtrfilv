@@ -5,7 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBed, faPlane, faCar, faTaxi, faMapPin, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Header } from '../Header/Header';
 import { AuthContext } from '../App';
-
+import { LiaBedSolid } from "react-icons/lia";
+import { PiAirplaneInFlight } from "react-icons/pi";
+import { LiaCarSolid } from "react-icons/lia";
+import { MdOutlineAttractions } from "react-icons/md";
+import { PiTaxi } from "react-icons/pi";
+import { HeadingTopIcons } from './HeadingTopIcons';
 
 export const Navbar = () => {
 
@@ -40,6 +45,7 @@ export const Navbar = () => {
            {/* IS LOGGED IN TRUE SHOW PROFILE ICON */}
           {isLoggedIn ?
             <div className='profile-icon-container'>
+              <HeadingTopIcons/>
 
               <FontAwesomeIcon id='user-icon' icon={faUser} onClick={toggleProfileModal} />
               <span >{userName.name}</span>
@@ -65,6 +71,7 @@ export const Navbar = () => {
             :
             // IF ISLOGGED IN IS FALSE SHOW REGISTER AND LOGIN BUTTONS DIV
             <div id='btn-container'>
+              <HeadingTopIcons/>
               <button className='reg-btn' onClick={() => navigate('/register')}>Register</button>
               <button className='reg-btn' onClick={() => navigate('/login')}>Sign in</button>
             </div>}
@@ -75,11 +82,12 @@ export const Navbar = () => {
         {/* NAVIGATION LINKS */}
         <nav id='navigation-Links'>
           <ul id='links-container'>
-            <li><NavLink to="/"><FontAwesomeIcon icon={faBed} /> Stays</NavLink></li>
-            <li><NavLink to="/flights"><FontAwesomeIcon icon={faPlane} /> Flights</NavLink></li>
-            <li><NavLink to="/carrentals"><FontAwesomeIcon icon={faCar} /> Car Rentals</NavLink></li>
-            <li><NavLink to="/attractions"><FontAwesomeIcon icon={faMapPin} /> Attractions</NavLink></li>
-            <li><NavLink to="/airporttaxis"><FontAwesomeIcon icon={faTaxi} /> Airport taxis</NavLink></li>
+            {/* <li><NavLink to="/"><FontAwesomeIcon icon={faBed} /> Stays</NavLink></li> */}
+            <li><NavLink to="/"><LiaBedSolid className='navLinkIcon'/> Stays</NavLink></li>
+            <li><NavLink to="/flights"><PiAirplaneInFlight className='navLinkIcon'/> Flights</NavLink></li>
+            <li><NavLink to="/carrentals"><LiaCarSolid className='navLinkIcon'/> Car Rentals</NavLink></li>
+            <li><NavLink to="/attractions"><MdOutlineAttractions className='navLinkIcon' /> Attractions</NavLink></li>
+            <li><NavLink to="/airporttaxis"><PiTaxi className='navLinkIcon'/> Airport taxis</NavLink></li>
 
           </ul>
         </nav>

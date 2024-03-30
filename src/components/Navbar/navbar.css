@@ -58,7 +58,7 @@
 #links-container{
     /* border: 2px solid yellow; */
     display: flex;
-    padding: 20px 0px;
+    padding: 18px 0px;
     gap: 4px;
     overflow-x: auto;
     white-space: nowrap;
@@ -68,17 +68,30 @@
     list-style: none;
 
 }
+
+
+
 #links-container li a{
     color: white;
     text-decoration: none;
-    padding: 8px 16px;
+    padding: 10px 16px;
     font-weight: 100;
-    border-radius: 20px;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
+
+.navLinkIcon{
+    font-size: 22px;
+}
+
 #links-container li a:hover{
-   /* border: 1px solid white; */
+    /* border: 1px solid white; */
    background-color: #0046a8;
 }
+
+
 
 #links-container li .active{
     background-color: #0046a8;
