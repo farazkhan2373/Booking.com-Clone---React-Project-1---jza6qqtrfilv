@@ -25,7 +25,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    height: 400px;
+    height: 430px;
 
 
 }
@@ -70,64 +70,121 @@
 /* SEARCH ELEMENTS */
 .headerSearchItem {
     border-radius: 4px;
-    /* width: 277px; */
     height: 40px;
     display: flex;
     align-items: center;
     color: grey;
-    gap: 12px;
-    padding: 4px 12px;
+    padding: 4px 6px;
     background-color: white;
-    cursor: pointer;
-    /* border: 2px solid black; */
+
 
 }
 
+
+
 /* INPUT DIV */
+
+
 #inputtext-div {
+    /* border: 1px solid red; */
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 4px;
+    padding: 0px;
     width: 100%;
+    position: relative;
 
 }
 
 /* INPUT BAR */
 #input-text-bar {
     height: 30px;
-    font-size: 16px;
+    font-size: 15px;
+    font-family: BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 500;
     width: 100%;
     border: none;
     padding: 2px;
+    padding-left: 4px;
 
 }
 
 #input-text-bar:focus{
-    outline: 2px solid #006CE4;
+   border : none;
+    /* outline: 1px solid #006CE4; */
+    outline: none;
+    /* border-radius: 4px; */
+}
+
+#ioBedOutline{
+    font-size: 28px;
 }
 
 /* input div -> x icon */
 #crossX-icon {
-    color: black;
+    /* background-color: yellow; */
+    color: grey;
+    font-size: 14px;
+    position: absolute;
+    top: 10px;
+    right: 8px;
+    cursor: pointer;
 }
 
 /* DATE SECTION */
 
 #search-date{
+    /* border: 1px solid black; */
     color: black;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
 }
 
+.hotelDateLineIcon{
+   /* display: inline-block; */
+   /* border: 1px solid black; */
+   margin-bottom: 13px;
+   padding: 0px 8px;
+   
+}
 .date {
     position: absolute;
     top: 50px;
     z-index: 2;
 }
 
+    
+
 #person-count{
+    /* border: 1px solid black; */
     color: black;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.personLuluDot{
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+#personDropDownIcon{
     font-size: 16px;
+    cursor: pointer;
+    margin-right: 4px;
 }
 
 

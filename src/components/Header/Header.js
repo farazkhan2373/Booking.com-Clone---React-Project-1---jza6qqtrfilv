@@ -5,13 +5,16 @@ import { faHotel, faCalendarDays, faPerson, faX, faAngleDown } from '@fortawesom
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import { format } from "date-fns";
+import { format, getDay } from "date-fns";
 import { Personmodal } from './PersonModal/Personmodal';
 import { useNavigate } from 'react-router-dom';
 import { IoBedOutline } from "react-icons/io5";
 // import { FaRegCalendarAlt } from "react-icons/fa";
 import { VscCalendar } from "react-icons/vsc";
 import { IoPersonOutline } from "react-icons/io5";
+import { LuDot } from "react-icons/lu";
+import { MdOutlineHorizontalRule } from "react-icons/md";
+
 
 
 
@@ -19,7 +22,7 @@ import { IoPersonOutline } from "react-icons/io5";
 
 export const Header = () => {
 
-    const [destination, setDestination] = useState('');
+    const [destination, setDestination] = useState('Mumbai');
     const [showCross, setShowCross] = useState(false);
     const destinationRef = useRef();
     
@@ -40,6 +43,18 @@ export const Header = () => {
     const [showPersonModal, setPersonModal] = useState(false);
     
     const navigateTo = useNavigate();
+
+    function formatDate(date){
+        const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+         
+         const day = daysOfWeek[date.getDay()];
+         const month = months[date.getMonth()];
+         const numericDate = date.getDate();
+
+
+         return `${day} ${numericDate} ${month}`;
+    }
 
     function handleHotelSearch() {
         if (destination === '') {
@@ -79,7 +94,7 @@ export const Header = () => {
                         <div className='headerSearchItem'>
                             <div id='inputtext-div'>
                                 {/* <FontAwesomeIcon icon={faHotel} className='header-icon' /> */}
-                                <IoBedOutline className='header-icon' />
+                                <IoBedOutline className='header-icon' id='ioBedOutline' />
                                 <input
                                     type="text"
                                     placeholder='Where are you going?'
@@ -91,7 +106,10 @@ export const Header = () => {
                                     }}
                                     ref={destinationRef}
                                 />
-                                {showCross && <FontAwesomeIcon icon={faX} className='header-icon' id='crossX-icon' onClick={() => setDestination('')} />}
+                                {showCross && <FontAwesomeIcon icon={faX} className='header-icon' id='crossX-icon' onClick={() => {
+                                    destinationRef.current.focus();
+                                    setDestination('')
+                                    }} />}
                             </div>
                         </div>
 
@@ -102,7 +120,9 @@ export const Header = () => {
                             <VscCalendar className='header-icon'/>
                             <span id='search-date'
                                 onClick={() => setShowCalender((oldstate) => !oldstate)}>
-                                {format(date[0].startDate, "dd/MM/yyyy") + " to " + format(date[0].endDate, "dd/MM/yyyy")}</span>
+                                {/* {format(date[0].startDate, "dd/MM/yyyy") + " to " + format(date[0].endDate, "dd/MM/yyyy")} */}
+                                { formatDate(date[0].startDate)} <span className='hotelDateLineIcon'>___</span> {formatDate(date[0].endDate)}
+                                </span>
                             {showCalender && <DateRange
                                 editableDateInputs={true}
                                 onChange={item => setDate([item.selection])}
@@ -120,14 +140,14 @@ export const Header = () => {
 
 
                             <span id='person-count' onClick={() => setPersonModal((oldstate) => !oldstate)}>
-                                {`${personCountInfo.adult} Adult ${personCountInfo.children} Children ${personCountInfo.room} Room`}
+                                {personCountInfo.adult} adult <LuDot className='personLuluDot' /> {personCountInfo.children}  children <LuDot className='personLuluDot' /> {personCountInfo.room} room
                             </span>
 
                             {/* PERSON INFO MODAL */}
                             {showPersonModal && <Personmodal personCountInfo={personCountInfo} setPersonCountInfo={setPersonCountInfo} setPersonModal={setPersonModal} />}
 
 
-                            <FontAwesomeIcon icon={faAngleDown} className='header-icon' onClick={() => setPersonModal((oldstate) => !oldstate)} />
+                            <FontAwesomeIcon icon={faAngleDown} className='header-icon' id='personDropDownIcon' onClick={() => setPersonModal((oldstate) => !oldstate)} />
 
                         </div>
                     </div>
